@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		// Disable telemetry
+		"telemetry.enableTelemetry": false,
+		// Set GitLab config
+		"gitlab.instanceUrl": "https://git.remote.sx",
+    "gitlab.showPipelineUpdateNotifications": true,
+    "gitlab.pipelineGitRemoteName": "origin",
+    "gitlab.remoteName": "origin",
+		"gitlab.enableExperimentalFeatures": true,
+		// Disable built in PHP suggestions
+		"php.suggest.basic": false
+	}
+}

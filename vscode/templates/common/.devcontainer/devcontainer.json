@@ -63,6 +63,12 @@
 		"mortenhenriksen.perl-debug",
 		// Perl Toolbox
 		"d9705996.perl-toolbox",
+		// PHP Intellisense
+		"felixfbecker.php-intellisense",
+		// PHP Intellisense Client
+		"bmewburn.vscode-intelephense-client",
+		// PHP debug
+		"felixfbecker.php-debug",
 		// Python
 		"ms-python.python",
 		// Ruby

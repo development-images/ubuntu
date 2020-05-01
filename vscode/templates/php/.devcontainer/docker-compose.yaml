@@ -6,20 +6,20 @@ version: '3.6'
 services:
 
   ## Main development container
-  vscode-perl:
-    image: git.remote.sx:4567/docker-base/ubuntu/vscode:perl
-    container_name: vscode-perl
+  vscode-php:
+    image: git.remote.sx:4567/docker-base/ubuntu/vscode:php
+    container_name: vscode-php
     restart: unless-stopped
     volumes:
       ## Mount the workspace files into /vscode
       - ..:/vscode
       ## Mount a volume containing the VS code extensions to prevent having to install them each rebuild
       ## A volume will be created for both VS Code and VS Code Insiders edition
-      - vscode-perl-ext:/home/vscode/.vscode-server
-      - vscode-perl-ext-insiders:/home/vscode/.vscode-server-insiders
+      - vscode-php-ext:/home/vscode/.vscode-server
+      - vscode-php-ext-insiders:/home/vscode/.vscode-server-insiders
     tty: true
 
 ## Define the named volumes that are used for the above services
 volumes:
-  vscode-perl-ext:
-  vscode-perl-ext-insiders:
+  vscode-php-ext:
+  vscode-php-ext-insiders:

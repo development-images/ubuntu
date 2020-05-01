@@ -36,6 +36,8 @@
 		// Use rubocop for formatting of Ruby
 		"ruby.format": "rubocop",
 		// Set JDK path for sonarlint
-		"sonarlint.ls.javaHome": "/usr/lib/jvm/java-11-openjdk-amd64"
+		"sonarlint.ls.javaHome": "/usr/lib/jvm/java-11-openjdk-amd64",
+		// Disable built in PHP suggestions
+		"php.suggest.basic": false
 	}
 }

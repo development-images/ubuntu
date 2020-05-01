@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
 // https://github.com/microsoft/vscode-dev-containers/tree/master/containers/alpine-3.10-git
 {
-	"name": "Common Development Environment Template",
+	"name": "Common Development Environment Template - Perl",
 
 	// Use bash as the shell
 	"settings": {
@@ -43,8 +43,6 @@
 		"eamodio.gitlens",
 		// GitLab Workflow
 		"fatihacet.gitlab-workflow",
-		// HTML Preview
-		"tht13.html-preview-vscode",
 		// Markdown All in One
 		"yzhang.markdown-all-in-one",
 		// Markdown Preview Enhanced
@@ -57,8 +55,6 @@
 		"mortenhenriksen.perl-debug",
 		// Perl Toolbox
 		"d9705996.perl-toolbox",
-		// Shellcheck
-		"timonwong.shellcheck",
 		// Table Formatter
 		"shuworks.vscode-table-formatter",
 		// Todo Tree

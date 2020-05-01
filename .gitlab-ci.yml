@@ -3,10 +3,10 @@
 stages:
   - build-base
   - push-base
-  - build-variants
-  - push-variants
   - build-vscode
   - push-vscode
+  - build-vscode-lang
+  - push-vscode-lang
 
 build-focal:
   stage: build-base
@@ -24,23 +24,24 @@ build-eoan:
     - docker build -t $CI_REGISTRY_IMAGE/eoan:latest ./eoan/
 
 build-vscode:
-  stage: build-variants
+  stage: build-vscode
   before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode:base --target base ./vscode/
 
-build-vscode-variants:
-  stage: build-vscode
+build-vscode-lang:
+  stage: build-vscode-lang
   before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker info
   script:
     ## Container with most language support
     - docker build -t $CI_REGISTRY_IMAGE/vscode:latest --target full ./vscode/
-    ## Container with Python language support
-    - docker build -t $CI_REGISTRY_IMAGE/vscode:python --target python ./vscode/
-    ## Container with Perl language support
-    - docker build -t $CI_REGISTRY_IMAGE/vscode:perl --target perl ./vscode/
+    ## Language specifics
+    - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:python --target python ./vscode/
+    - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:perl --target perl ./vscode/
+    - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:php --target php ./vscode/
+    - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
 
 push-focal:
   stage: push-base
@@ -58,17 +59,19 @@ push-eoan:
     - docker push $CI_REGISTRY_IMAGE/eoan:latest
 
 push-vscode:
-  stage: push-variants
+  stage: push-vscode
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE/vscode:base
 
-push-vscode-variants:
-  stage: push-vscode
+push-vscode-lang:
+  stage: push-vscode-lang
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE/vscode:latest
-    - docker push $CI_REGISTRY_IMAGE/vscode:python
-    - docker push $CI_REGISTRY_IMAGE/vscode:perl
+    - docker push $CI_REGISTRY_IMAGE/vscode/lang:python
+    - docker push $CI_REGISTRY_IMAGE/vscode/lang:perl
+    - docker push $CI_REGISTRY_IMAGE/vscode/lang:shell
+    - docker push $CI_REGISTRY_IMAGE/vscode/lang:php

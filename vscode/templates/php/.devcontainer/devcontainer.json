@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
 // https://github.com/microsoft/vscode-dev-containers/tree/master/containers/alpine-3.10-git
 {
-	"name": "Common Development Environment Template - Python",
+	"name": "Common Development Environment Template - PHP",
 
 	// Use bash as the shell
 	"settings": {
@@ -16,11 +16,11 @@
 	],
 
 	// Connect to the VS Code container for development
-	"service": "vscode-python",
+	"service": "vscode-php",
 
 	// If multiple containers are defined in docker-compose.yaml you may define the list of services to run here
 	"runServices": [
-		"vscode-python"
+		"vscode-php"
 	],
 
 	// The workspace files are mounted to /vscode
@@ -53,14 +53,12 @@
 		"alanwalk.markdown-toc",
 		// markdownlint
 		"davidanson.vscode-markdownlint",
-		// Microsoft Intellicode
-		"visualstudioexptteam.vscodeintellicode",
-		// Magic Python
-		"magicstack.magicpython",
-		// Python
-		"ms-python.python",
-		// Sonarlint
-		"sonarsource.sonarlint-vscode",
+		// PHP Intellisense
+		"felixfbecker.php-intellisense",
+		// PHP Intellisense Client
+		"bmewburn.vscode-intelephense-client",
+		// PHP debug
+		"felixfbecker.php-debug",
 		// Table Formatter
 		"shuworks.vscode-table-formatter",
 		// Todo Tree

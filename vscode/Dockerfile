@@ -24,10 +24,6 @@ RUN echo \
         screen tmux \
         #### Sudo
         sudo \
-      ### Install common language files
-      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
-        #### Shell
-        shellcheck \
       ### Add work around for error with sudo 1.8.31
       ### https://github.com/sudo-project/sudo/issues/42
       ### Without this fix, every sudo command gives this error:
@@ -95,6 +91,10 @@ RUN echo \
         python3 python3-pip \
         #### Ruby
         rubocop bundler \
+        #### PHP
+        php-cli \
+        #### Shell
+        shellcheck \
       ### Install JDK/JRE (needed for Sonarlint)
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         openjdk-11-jdk-headless openjdk-11-jre-headless \
@@ -161,6 +161,42 @@ RUN echo \
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         #### Perl
         perl perl-doc libperl-critic-perl perltidy libyaml-perl \
+      ### Cleanup temporary files
+      && rm -rf \
+        /tmp/* \
+        /var/cache/* \
+        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
+        /var/tmp/*
+
+## Build PHP variant
+FROM base AS php
+
+## Install requirements
+RUN echo \
+      ### Update current sources list
+      && apt-get update \
+      ### Install common language files
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        #### PHP
+        php-cli \
+      ### Cleanup temporary files
+      && rm -rf \
+        /tmp/* \
+        /var/cache/* \
+        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
+        /var/tmp/*
+
+## Build Shell variant
+FROM base AS shell
+
+## Install requirements
+RUN echo \
+      ### Update current sources list
+      && apt-get update \
+      ### Install common language files
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        #### Shell
+        shellcheck \
       ### Cleanup temporary files
       && rm -rf \
         /tmp/* \
