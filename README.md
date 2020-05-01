@@ -23,4 +23,4 @@ RUN ...
 
 ## Variants
 
-VS Code development containers are available with various language support. For further information see [the README.md file](/vscode/README.md).
+VS Code development containers are available with various language support. For further information see the [VS Code README.md](/vscode/README.md) file.
