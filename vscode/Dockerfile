@@ -160,7 +160,7 @@ RUN echo \
       ### Install common language files
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         #### Perl
-        perl perl-doc libperl-critic-perl perltidy libyaml-perl
+        perl perl-doc libperl-critic-perl perltidy libyaml-perl \
       ### Cleanup temporary files
       && rm -rf \
         /tmp/* \
