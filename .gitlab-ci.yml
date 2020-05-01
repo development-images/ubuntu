@@ -32,17 +32,39 @@ build-vscode:
   script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode:base --target base ./vscode/
 
-build-vscode-lang:
+build-vscode-full:
   stage: build-vscode-lang
   before_script:
     - docker info
   script:
-    ## Container with most language support
     - docker build -t $CI_REGISTRY_IMAGE/vscode:latest --target full ./vscode/
-    ## Language specifics
+
+build-vscode-python:
+  stage: build-vscode-lang
+  before_script:
+    - docker info
+  script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:python --target python ./vscode/
+
+build-vscode-perl:
+  stage: build-vscode-lang
+  before_script:
+    - docker info
+  script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:perl --target perl ./vscode/
+
+build-vscode-php:
+  stage: build-vscode-lang
+  before_script:
+    - docker info
+  script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:php --target php ./vscode/
+
+build-vscode-shell:
+  stage: build-vscode-lang
+  before_script:
+    - docker info
+  script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
 
 push-focal:
