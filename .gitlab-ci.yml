@@ -62,7 +62,7 @@ push-vscode:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker push $CI_REGISTRY_IMAGE/vscode:latest
+    - docker push $CI_REGISTRY_IMAGE/vscode/base:latest
 
 push-vscode-variants:
   stage: push-vscode
