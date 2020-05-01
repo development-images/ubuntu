@@ -1,9 +1,7 @@
 ## Based on latest Ubuntu image
 FROM git.remote.sx:4567/docker-base/ubuntu:latest as base
 
-LABEL maintainer="Chris <mail@gbe0.com>" \
-      repository="https://git.remote.sx/docker-base/ubuntu" \
-      description="Latest Ubuntu release with common development environment setup for VS Code"
+LABEL description="Latest Ubuntu release with common development environment setup for VS Code"
 
 ## Configure the Node repository name
 ## This will be appended to the URL like https://deb.nodesource.com/node_${NODE_VERSION}.x
@@ -74,10 +72,13 @@ RUN echo \
       && chmod 0440 /etc/sudoers.d/vscode
 
 ## Add the bash aliases file
-COPY bash_aliases /home/vscode/.bash_aliases
+COPY .bash_aliases /home/vscode/.bash_aliases
 
 ## Build common language support
 FROM base AS full
+
+## Update tag
+LABEL description="Latest Ubuntu release with setup for development with Perl, Python, Shell, PHP and Ruby for VS Code"
 
 ## Install requirements
 RUN echo \
@@ -120,6 +121,9 @@ RUN echo \
 ## Build Python variant
 FROM base AS python
 
+## Update tag
+LABEL description="Latest Ubuntu release with setup for development with Python for VS Code"
+
 ## Install requirements
 RUN echo \
       ### Update current sources list
@@ -153,6 +157,9 @@ RUN echo \
 ## Build Perl variant
 FROM base AS perl
 
+## Update tag
+LABEL description="Latest Ubuntu release with setup for development with Perl for VS Code"
+
 ## Install requirements
 RUN echo \
       ### Update current sources list
@@ -171,6 +178,9 @@ RUN echo \
 ## Build PHP variant
 FROM base AS php
 
+## Update tag
+LABEL description="Latest Ubuntu release with setup for development with PHP for VS Code"
+
 ## Install requirements
 RUN echo \
       ### Update current sources list
@@ -188,6 +198,9 @@ RUN echo \
 
 ## Build Shell variant
 FROM base AS shell
+
+## Update tag
+LABEL description="Latest Ubuntu release with setup for development with Shell for VS Code"
 
 ## Install requirements
 RUN echo \
