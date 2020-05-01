@@ -1,0 +1,10 @@
+# Ignore vim swap files and other temp files
+*.swp
+*.DS_Store
+*.log
+*.tmp
+*.bak
+*.swp
+
+## Ignore logs
+*.log
