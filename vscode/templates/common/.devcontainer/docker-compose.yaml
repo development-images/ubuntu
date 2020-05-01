@@ -7,7 +7,8 @@ services:
 
   ## Main development container
   vscode:
-    image: git.remote.sx:4567/docker-base/ubuntu/vscode:latest
+    build:
+      context: ./docker
     container_name: vscode
     restart: unless-stopped
     volumes:

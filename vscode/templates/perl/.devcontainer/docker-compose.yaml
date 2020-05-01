@@ -7,7 +7,8 @@ services:
 
   ## Main development container
   vscode-perl:
-    image: git.remote.sx:4567/docker-base/ubuntu/vscode:perl
+    build:
+      context: ./docker
     container_name: vscode-perl
     restart: unless-stopped
     volumes:
