@@ -1,12 +1,15 @@
 ---
 
 stages:
-  - build
+  - build-base
+  - push-base
+  - build-variants
+  - push-variants
   - build-vscode
-  - push
+  - push-vscode
 
 build-focal:
-  stage: build
+  stage: build-base
   before_script:
     - docker info
   script:
@@ -14,21 +17,33 @@ build-focal:
     - docker build -t $CI_REGISTRY_IMAGE/focal:latest --no-cache --pull ./focal/
 
 build-eoan:
-  stage: build
+  stage: build-base
   before_script:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE/eoan:latest --no-cache --pull ./eoan/
 
 build-vscode:
+  stage: build-variants
+  before_script:
+    - docker info
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE/vscode/base:latest --no-cache --pull --target base ./vscode/
+
+build-vscode-variants:
   stage: build-vscode
   before_script:
     - docker info
   script:
-    - docker built -t $CI_REGISTRY_IMAGE:vscode --no-cache --pull ./vscode/
+    ## Container with most language support
+    - docker build -t $CI_REGISTRY_IMAGE/vscode:latest --no-cache --pull --target full ./vscode/
+    ## Container with Python language support
+    - docker build -t $CI_REGISTRY_IMAGE/vscode/python:latest --no-cache --pull --target python ./vscode/
+    ## Container with Perl language support
+    - docker build -t $CI_REGISTRY_IMAGE/vscode/perl:latest --no-cache --pull --target perl ./vscode/
 
 push-focal:
-  stage: push
+  stage: push-base
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
@@ -36,15 +51,24 @@ push-focal:
     - docker push $CI_REGISTRY_IMAGE/focal:latest
 
 push-eoan:
-  stage: push
+  stage: push-base
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE/eoan:latest
 
 push-vscode:
-  stage: push
+  stage: push-variants
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE/vscode:latest
+
+push-vscode-variants:
+  stage: push-vscode
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker push $CI_REGISTRY_IMAGE/vscode:latest
+    - docker push $CI_REGISTRY_IMAGE/vscode/python:latest
+    - docker push $CI_REGISTRY_IMAGE/vscode/perl:latest

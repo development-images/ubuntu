@@ -1,5 +1,5 @@
 ## Based on focal image
-FROM git.remote.sx:4567/docker-base/ubuntu:latest
+FROM git.remote.sx:4567/docker-base/ubuntu:latest as base
 
 LABEL maintainer="Chris <mail@gbe0.com>" \
       repository="https://git.remote.sx/docker-base/ubuntu" \
@@ -26,17 +26,8 @@ RUN echo \
         sudo \
       ### Install common language files
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
-        #### Perl
-        perl perl-doc libperl-critic-perl perltidy libyaml-perl \
-        #### Python
-        python3 python3-pip \
         #### Shell
         shellcheck \
-        #### Ruby
-        rubocop bundler \
-      ### Install JDK/JRE (needed for Sonarlint)
-      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
-        openjdk-11-jdk-headless openjdk-11-jre-headless \
       ### Add work around for error with sudo 1.8.31
       ### https://github.com/sudo-project/sudo/issues/42
       ### Without this fix, every sudo command gives this error:
@@ -48,18 +39,6 @@ RUN echo \
         /var/cache/* \
         /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
         /var/tmp/*
-
-## Install common Python extensions with pip
-RUN echo \
-      pip3 --no-cache-dir install \
-        #### For docker extensions
-        docker docker-compose \
-        #### Unit testing
-        pytest pytest-html \
-        #### Linting tools
-        pylint autopep8 flake8 pipenv \
-        #### Misc
-        dnspython requests
 
 ## Install Node
 RUN echo \
@@ -100,3 +79,91 @@ RUN echo \
 
 ## Add the bash aliases file
 COPY bash_aliases /home/vscode/.bash_aliases
+
+## Build common language support
+FROM base AS full
+
+## Install requirements
+RUN echo \
+      ### Update current sources list
+      && apt-get update \
+      ### Install common language files
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        #### Perl
+        perl perl-doc libperl-critic-perl perltidy libyaml-perl \
+        #### Python
+        python3 python3-pip \
+        #### Ruby
+        rubocop bundler \
+      ### Install JDK/JRE (needed for Sonarlint)
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        openjdk-11-jdk-headless openjdk-11-jre-headless \
+      ### Cleanup temporary files
+      && rm -rf \
+        /tmp/* \
+        /var/cache/* \
+        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
+        /var/tmp/*
+
+## Install common Python extensions with pip
+RUN echo \
+      pip3 --no-cache-dir install \
+        #### For docker extensions
+        docker docker-compose \
+        #### Unit testing
+        pytest pytest-html \
+        #### Linting tools
+        pylint autopep8 flake8 pipenv \
+        #### Misc
+        dnspython requests
+
+## Build Python variant
+FROM base AS python
+
+## Install requirements
+RUN echo \
+      ### Update current sources list
+      && apt-get update \
+      ### Install common language files
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        #### Python
+        python3 python3-pip \
+      ### Install JDK/JRE (needed for Sonarlint)
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        openjdk-11-jdk-headless openjdk-11-jre-headless \
+      ### Cleanup temporary files
+      && rm -rf \
+        /tmp/* \
+        /var/cache/* \
+        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
+        /var/tmp/*
+
+## Install common Python extensions with pip
+RUN echo \
+      pip3 --no-cache-dir install \
+        #### For docker extensions
+        docker docker-compose \
+        #### Unit testing
+        pytest pytest-html \
+        #### Linting tools
+        pylint autopep8 flake8 pipenv \
+        #### Misc
+        dnspython requests
+
+## Build Perl variant
+FROM base AS perl
+
+## Install requirements
+RUN echo \
+      ### Update current sources list
+      && apt-get update \
+      ### Install common language files
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        #### Perl
+        perl perl-doc libperl-critic-perl perltidy libyaml-perl
+      ### Cleanup temporary files
+      && rm -rf \
+        /tmp/* \
+        /var/cache/* \
+        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
+        /var/tmp/*

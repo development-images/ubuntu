@@ -2,7 +2,8 @@
 FROM ubuntu:eoan
 
 LABEL maintainer="Chris <mail@gbe0.com>" \
-      repository="https://git.remote.sx/docker-base/ubuntu"
+      repository="https://git.remote.sx/docker-base/ubuntu" \
+      description="Updated Ubuntu Eoan container with common utilities installed"
 
 ## Configure the mirror to download all packages from (will be inserted to sources list)
 ARG APT_MIRROR="archive.ubuntu.com"
