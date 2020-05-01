@@ -1,0 +1,25 @@
+---
+
+# Docker compose VS Code development file
+version: '3.6'
+
+services:
+
+  ## Main development container
+  vscode:
+    image: git.remote.sx:4567/docker-base/ubuntu/vscode:latest
+    container_name: vscode
+    restart: unless-stopped
+    volumes:
+      ## Mount the workspace files into /vscode
+      - ..:/vscode
+      ## Mount a volume containing the VS code extensions to prevent having to install them each rebuild
+      ## A volume will be created for both VS Code and VS Code Insiders edition
+      - vscode-ext:/home/vscode/.vscode-server
+      - vscode-ext-insiders:/home/vscode/.vscode-server-insiders
+    tty: true
+
+## Define the named volumes that are used for the above services
+volumes:
+  vscode-ext:
+  vscode-ext-insiders:

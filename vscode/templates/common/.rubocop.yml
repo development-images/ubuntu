@@ -1,0 +1,17 @@
+# Configure rubocop linter to disable some styling rules that are not critical
+
+## Global config
+AllCops:
+ TargetRubyVersion: 2.4
+
+## Ignore blocks of code that are too long
+Metrics/BlockLength:
+  Enabled: false
+
+## Ignore lines that are too long
+Metrics/LineLength:
+  Enabled: false
+
+## Ignore too many lines for a method
+Metrics/MethodLength:
+  Enabled: false

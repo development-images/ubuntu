@@ -1,0 +1,41 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		// Disable telemetry
+		"telemetry.enableTelemetry": false,
+		// Set GitLab config
+		"gitlab.instanceUrl": "https://git.remote.sx",
+    "gitlab.showPipelineUpdateNotifications": true,
+    "gitlab.pipelineGitRemoteName": "origin",
+    "gitlab.remoteName": "origin",
+		"gitlab.enableExperimentalFeatures": true,
+		// Configure Perl toolbox linting settings
+		"perl-toolbox.lint.severity": "cruel",
+		// The following policies will be disabled from Perl linting due to them not being required for this project
+		"perl-toolbox.lint.excludedPolicies": [
+			"Documentation::RequirePodSections",
+			"RequireVersionVar",
+			"ProhibitNoWarnings",
+			"RequireArgUnpacking",
+			"ProhibitPackageVars"
+		],
+		// Use bundler
+		"ruby.useBundler": false,
+		// Configure Ruby extension to use the internal language server
+		"ruby.useLanguageServer": true,
+		// Configure Ruby linting settings
+		"ruby.lint": {
+			"rubocop": {
+				"useBundler": false
+			}
+		},
+		// Use rubocop for formatting of Ruby
+		"ruby.format": "rubocop",
+		// Set JDK path for sonarlint
+		"sonarlint.ls.javaHome": "/usr/lib/jvm/java-11-openjdk-amd64"
+	}
+}
