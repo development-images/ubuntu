@@ -1,0 +1,50 @@
+---
+
+stages:
+  - build
+  - build-vscode
+  - push
+
+build-focal:
+  stage: build
+  before_script:
+    - docker info
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:latest --no-cache --pull ./focal/
+    - docker build -t $CI_REGISTRY_IMAGE/focal:latest --no-cache --pull ./focal/
+
+build-eoan:
+  stage: build
+  before_script:
+    - docker info
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE/eoan:latest --no-cache --pull ./eoan/
+
+build-vscode:
+  stage: build-vscode
+  before_script:
+    - docker info
+  script:
+    - docker built -t $CI_REGISTRY_IMAGE:vscode --no-cache --pull ./vscode/
+
+push-focal:
+  stage: push
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker push $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE/focal:latest
+
+push-eoan:
+  stage: push
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker push $CI_REGISTRY_IMAGE/eoan:latest
+
+push-vscode:
+  stage: push
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker push $CI_REGISTRY_IMAGE/vscode:latest
