@@ -1,4 +1,4 @@
-## Based on focal image
+## Based on latest Ubuntu image
 FROM git.remote.sx:4567/docker-base/ubuntu:latest as base
 
 LABEL maintainer="Chris <mail@gbe0.com>" \
