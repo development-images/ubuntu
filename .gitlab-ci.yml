@@ -14,14 +14,16 @@ build-focal:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE:latest ./focal/
-    - docker build -t $CI_REGISTRY_IMAGE/focal:latest ./focal/
+    - docker build -t $CI_REGISTRY_IMAGE/focal:minimal --target minimal ./focal/
+    - docker build -t $CI_REGISTRY_IMAGE/focal:latest --target full ./focal/
 
 build-eoan:
   stage: build-base
   before_script:
     - docker info
   script:
-    - docker build -t $CI_REGISTRY_IMAGE/eoan:latest ./eoan/
+    - docker build -t $CI_REGISTRY_IMAGE/eoan:minimal --target minimal ./eoan/
+    - docker build -t $CI_REGISTRY_IMAGE/eoan:latest --target full ./eoan/
 
 build-vscode:
   stage: build-vscode
@@ -49,6 +51,7 @@ push-focal:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE/focal:minimal
     - docker push $CI_REGISTRY_IMAGE/focal:latest
 
 push-eoan:
@@ -56,6 +59,7 @@ push-eoan:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
+    - docker push $CI_REGISTRY_IMAGE/eoan:minimal
     - docker push $CI_REGISTRY_IMAGE/eoan:latest
 
 push-vscode:

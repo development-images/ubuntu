@@ -1,9 +1,9 @@
 ## Based on official Ubuntu image
-FROM ubuntu:focal
+FROM ubuntu:focal AS minimal
 
 LABEL maintainer="Chris <mail@gbe0.com>" \
       repository="https://git.remote.sx/docker-base/ubuntu" \
-      description="Updated Ubuntu Focal container with common utilities installed"
+      description="Updated Ubuntu Focal container"
 
 ## Configure the mirror to download all packages from (will be inserted to sources list)
 ARG APT_MIRROR="archive.ubuntu.com"
@@ -46,6 +46,21 @@ RUN echo \
       && apt-get update \
       ### Perform full system upgrade
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y dist-upgrade \
+      ### Cleanup temporary files
+      && rm -rf \
+        /tmp/* \
+        /var/cache/* \
+        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
+        /var/tmp/*
+
+## Create layer for common utilities
+FROM minimal AS full
+
+## Set new label
+LABEL description="Updated Ubuntu Focal container with common utilities installed"
+
+## Add standard toolset
+RUN echo \
       ### Install standard utils
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         #### Editors/pager
@@ -56,8 +71,6 @@ RUN echo \
         dnsutils net-tools iputils-ping tcptraceroute telnet netcat-openbsd \
         #### Shell
         bash bash-completion \
-        #### Git
-        git \
       ### Install requirements for trusting GPG keys and HTTPS repositories
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         apt-transport-https gnupg \
