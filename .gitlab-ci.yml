@@ -26,14 +26,14 @@ build-eoan:
 build-vscode:
   stage: build-variants
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode/base:latest --no-cache --pull --target base ./vscode/
 
 build-vscode-variants:
   stage: build-vscode
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     ## Container with most language support
     - docker build -t $CI_REGISTRY_IMAGE/vscode:latest --no-cache --pull --target full ./vscode/
