@@ -28,7 +28,7 @@ build-vscode:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker build -t $CI_REGISTRY_IMAGE/vscode/base:latest --target base ./vscode/
+    - docker build -t $CI_REGISTRY_IMAGE/vscode:base --target base ./vscode/
 
 build-vscode-variants:
   stage: build-vscode
@@ -38,9 +38,9 @@ build-vscode-variants:
     ## Container with most language support
     - docker build -t $CI_REGISTRY_IMAGE/vscode:latest --target full ./vscode/
     ## Container with Python language support
-    - docker build -t $CI_REGISTRY_IMAGE/vscode/python:latest --target python ./vscode/
+    - docker build -t $CI_REGISTRY_IMAGE/vscode:python --target python ./vscode/
     ## Container with Perl language support
-    - docker build -t $CI_REGISTRY_IMAGE/vscode/perl:latest --target perl ./vscode/
+    - docker build -t $CI_REGISTRY_IMAGE/vscode:perl --target perl ./vscode/
 
 push-focal:
   stage: push-base
@@ -62,7 +62,7 @@ push-vscode:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker push $CI_REGISTRY_IMAGE/vscode/base:latest
+    - docker push $CI_REGISTRY_IMAGE/vscode:base
 
 push-vscode-variants:
   stage: push-vscode
@@ -70,5 +70,5 @@ push-vscode-variants:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE/vscode:latest
-    - docker push $CI_REGISTRY_IMAGE/vscode/python:latest
-    - docker push $CI_REGISTRY_IMAGE/vscode/perl:latest
+    - docker push $CI_REGISTRY_IMAGE/vscode:python
+    - docker push $CI_REGISTRY_IMAGE/vscode:perl

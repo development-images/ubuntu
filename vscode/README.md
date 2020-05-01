@@ -2,9 +2,10 @@
 
 The following images are for use as VS Code base containers:
 
+* `git.remote.sx:4567/docker-base/ubuntu/vscode:base`: Minimal VS Code image without additional language support
 * `git.remote.sx:4567/docker-base/ubuntu/vscode:latest`: Common language support (Perl, Python and Ruby)
-* `git.remote.sx:4567/docker-base/ubuntu/vscode/python:latest`: Python language support
-* `git.remote.sx:4567/docker-base/ubuntu/vscode/perl:latest`: Perl language support
+* `git.remote.sx:4567/docker-base/ubuntu/vscode:python`: Python language support
+* `git.remote.sx:4567/docker-base/ubuntu/vscode:perl`: Perl language support
 
 ## Dev Container Templates
 
