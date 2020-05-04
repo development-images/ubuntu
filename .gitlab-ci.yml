@@ -7,6 +7,7 @@ stages:
   - push-vscode
   - build-vscode-lang
   - push-vscode-lang
+  - clean
 
 build-focal:
   stage: build-base
@@ -15,12 +16,12 @@ build-focal:
   before_script:
     - docker info
   script:
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE:latest ./focal/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY:latest ./focal/
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/focal:minimal --target minimal ./focal/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/focal:minimal --target minimal ./focal/
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/focal:latest --target full ./focal/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/focal:latest --target full ./focal/
+    - docker build --pull -t $CI_REGISTRY_IMAGE:latest ./focal/
+    - docker build --pull -t $GITLAB_CI_REGISTRY:latest ./focal/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/focal:minimal --target minimal ./focal/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/focal:minimal --target minimal ./focal/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/focal:latest --target full ./focal/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/focal:latest --target full ./focal/
 
 build-eoan:
   stage: build-base
@@ -29,10 +30,10 @@ build-eoan:
   before_script:
     - docker info
   script:
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/eoan:minimal --target minimal ./eoan/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/eoan:minimal --target minimal ./eoan/
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/eoan:latest --target full ./eoan/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/eoan:latest --target full ./eoan/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:minimal --target minimal ./eoan/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:minimal --target minimal ./eoan/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:latest --target full ./eoan/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:latest --target full ./eoan/
 
 build-vscode:
   stage: build-vscode
@@ -41,8 +42,8 @@ build-vscode:
   before_script:
     - docker info
   script:
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/vscode:base --target base ./vscode/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/vscode:base --target base ./vscode/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode:base --target base ./vscode/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode:base --target base ./vscode/
 
 build-vscode-full:
   stage: build-vscode-lang
@@ -51,8 +52,8 @@ build-vscode-full:
   before_script:
     - docker info
   script:
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/vscode:latest --target full ./vscode/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/vscode:latest --target full ./vscode/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode:latest --target full ./vscode/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode:latest --target full ./vscode/
 
 build-vscode-python:
   stage: build-vscode-lang
@@ -61,8 +62,8 @@ build-vscode-python:
   before_script:
     - docker info
   script:
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/vscode/lang:python --target python ./vscode/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/vscode/lang:python --target python ./vscode/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:python --target python ./vscode/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:python --target python ./vscode/
 
 build-vscode-perl:
   stage: build-vscode-lang
@@ -71,8 +72,8 @@ build-vscode-perl:
   before_script:
     - docker info
   script:
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/vscode/lang:perl --target perl ./vscode/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/vscode/lang:perl --target perl ./vscode/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:perl --target perl ./vscode/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:perl --target perl ./vscode/
 
 build-vscode-php:
   stage: build-vscode-lang
@@ -81,8 +82,8 @@ build-vscode-php:
   before_script:
     - docker info
   script:
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/vscode/lang:php --target php ./vscode/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/vscode/lang:php --target php ./vscode/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:php --target php ./vscode/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:php --target php ./vscode/
 
 build-vscode-shell:
   stage: build-vscode-lang
@@ -91,8 +92,18 @@ build-vscode-shell:
   before_script:
     - docker info
   script:
-    - docker build --pull --no-cache -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
-    - docker build --pull --no-cache -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
+
+build-vscode-ansible:
+  stage: build-vscode-lang
+  only:
+    - production
+  before_script:
+    - docker info
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
 
 push-focal:
   stage: push-base
@@ -151,3 +162,31 @@ push-vscode-lang:
     - docker push $GITLAB_CI_REGISTRY/vscode/lang:shell
     - docker push $CI_REGISTRY_IMAGE/vscode/lang:php
     - docker push $GITLAB_CI_REGISTRY/vscode/lang:php
+
+  clean:
+    stage: clean
+    only:
+      - production
+    script:
+      - docker image rm $CI_REGISTRY_IMAGE:latest
+      - docker image rm $GITLAB_CI_REGISTRY:latest
+      - docker image rm $CI_REGISTRY_IMAGE/focal:minimal
+      - docker image rm $GITLAB_CI_REGISTRY/focal:minimal
+      - docker image rm $CI_REGISTRY_IMAGE/focal:latest
+      - docker image rm $GITLAB_CI_REGISTRY/focal:latest  
+      - docker image rm $CI_REGISTRY_IMAGE/eoan:minimal
+      - docker image rm $GITLAB_CI_REGISTRY/eoan:minimal
+      - docker image rm $CI_REGISTRY_IMAGE/eoan:latest
+      - docker image rm $GITLAB_CI_REGISTRY/eoan:latest
+      - docker image rm $CI_REGISTRY_IMAGE/vscode:base
+      - docker image rm $GITLAB_CI_REGISTRY/vscode:base
+      - docker image rm $CI_REGISTRY_IMAGE/vscode:latest
+      - docker image rm $GITLAB_CI_REGISTRY/vscode:latest
+      - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:python
+      - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:python
+      - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:perl
+      - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:perl
+      - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:shell
+      - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:shell
+      - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:php
+      - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:php
