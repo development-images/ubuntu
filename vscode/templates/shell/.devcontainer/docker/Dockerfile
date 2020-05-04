@@ -1,4 +1,4 @@
-# Dockerfile tempate - Shell language
+# Dockerfile template - Shell language
 
 ## Load base image
 FROM registry.gitlab.com/development-images/ubuntu/vscode/lang:shell
