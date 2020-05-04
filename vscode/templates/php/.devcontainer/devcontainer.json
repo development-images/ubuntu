@@ -39,6 +39,8 @@
 		"alefragnani.bookmarks",
 		// Bracket Pair Colorizer 2
 		"coenraads.bracket-pair-colorizer-2",
+		// Code Runner
+		"formulahendry.code-runner",
 		// GitLens
 		"eamodio.gitlens",
 		// GitLab Workflow
