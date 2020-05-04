@@ -103,17 +103,6 @@ build-vscode-shell:
     - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
     - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
 
-build-vscode-ansible:
-  stage: build-vscode-lang
-  retry: 2
-  only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
-
 push-focal:
   stage: push-base
   retry: 2
