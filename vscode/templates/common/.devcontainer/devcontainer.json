@@ -33,12 +33,18 @@
 
 	// Install the below vscode extensions into the development container
 	"extensions": [
+		// Auto Doc String
+		"njpwerner.autodocstring",
 		// Better Comments
 		"aaron-bond.better-comments",
 		// Bookmarks
 		"alefragnani.bookmarks",
 		// Bracket Pair Colorizer 2
 		"coenraads.bracket-pair-colorizer-2",
+		// Code Runner
+		"formulahendry.code-runner",
+		// Djaneiro
+		"thebarkman.vscode-djaneiro",
 		// Docker
 		"ms-azuretools.vscode-docker",
 		// GitLens
