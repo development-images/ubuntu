@@ -2,3 +2,5 @@
 *.md
 ## Ignore Dockerfile
 Dockerfile
+## Ignore examples
+examples

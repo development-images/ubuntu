@@ -61,6 +61,8 @@ LABEL description="Updated Ubuntu Focal container with common utilities installe
 
 ## Add standard toolset
 RUN echo \
+      ### Update package cache
+      && apt-get update \
       ### Install standard utils
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         #### Editors/pager
@@ -84,5 +86,34 @@ RUN echo \
         /var/tmp/*
 
 ## Add editor configuration files
-COPY vimrc /root/.vimrc
-COPY neovimrc /root/.config/nvim/init.vim
+COPY ./vimrc /root/.vimrc
+COPY ./neovimrc /root/.config/nvim/init.vim
+
+## Create layer for supervisor support
+FROM full AS supervisor
+
+## Add startup script
+ADD ./start.sh /start.sh
+
+## Add supervisor
+RUN echo \
+      ### Update package cache
+      && apt-get update \
+      ### Install pip
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        python3-pip \
+      ### Install supervisor
+      && pip3 install supervisor \
+      ### Create supervisor service include directory
+      && mkdir /etc/supervisord.d \
+      ### Fix startup script permissions
+      && chmod +x /start.sh \
+      ### Cleanup temporary files
+      && rm -rf \
+        /tmp/* \
+        /var/cache/* \
+        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
+        /var/tmp/*
+
+## Add the supervisor main configuration file
+ADD ./supervisord.conf /etc/supervisord.conf
