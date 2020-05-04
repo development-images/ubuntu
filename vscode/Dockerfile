@@ -124,7 +124,7 @@ RUN echo \
         #### Network
         paramiko \
         #### Misc
-        dnspython requests numpy cerberus
+        dnspython requests numpy cerberus PyYAML
 
 ## Build Python variant
 FROM base AS python
@@ -168,7 +168,7 @@ RUN echo \
         #### Network
         paramiko \
         #### Misc
-        dnspython requests numpy cerberus
+        dnspython requests numpy cerberus PyYAML
 
 ## Build Perl variant
 FROM base AS perl
