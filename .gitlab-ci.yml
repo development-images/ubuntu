@@ -14,7 +14,7 @@ build-focal:
   only:
     - production
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE:latest ./focal/
     - docker build --pull -t $GITLAB_CI_REGISTRY:latest ./focal/
@@ -28,7 +28,7 @@ build-eoan:
   only:
     - production
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:minimal --target minimal ./eoan/
     - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:minimal --target minimal ./eoan/
@@ -40,7 +40,7 @@ build-vscode:
   only:
     - production
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE/vscode:base --target base ./vscode/
     - docker build --pull -t $GITLAB_CI_REGISTRY/vscode:base --target base ./vscode/
@@ -50,7 +50,7 @@ build-vscode-full:
   only:
     - production
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE/vscode:latest --target full ./vscode/
     - docker build --pull -t $GITLAB_CI_REGISTRY/vscode:latest --target full ./vscode/
@@ -60,7 +60,7 @@ build-vscode-python:
   only:
     - production
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:python --target python ./vscode/
     - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:python --target python ./vscode/
@@ -70,7 +70,7 @@ build-vscode-perl:
   only:
     - production
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:perl --target perl ./vscode/
     - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:perl --target perl ./vscode/
@@ -80,7 +80,7 @@ build-vscode-php:
   only:
     - production
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:php --target php ./vscode/
     - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:php --target php ./vscode/
@@ -90,7 +90,7 @@ build-vscode-shell:
   only:
     - production
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
     - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
@@ -100,7 +100,7 @@ build-vscode-ansible:
   only:
     - production
   before_script:
-    - docker info
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
     - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
