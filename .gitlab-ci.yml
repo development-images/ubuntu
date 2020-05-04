@@ -23,6 +23,8 @@ build-focal:
     - docker build --pull -t $GITLAB_CI_REGISTRY/focal:minimal --target minimal ./focal/
     - docker build --pull -t $CI_REGISTRY_IMAGE/focal:latest --target full ./focal/
     - docker build --pull -t $GITLAB_CI_REGISTRY/focal:latest --target full ./focal/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/focal:supervisor --target supervisor ./focal/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/focal:supervisor --target supervisor ./focal/
 
 build-eoan:
   stage: build-base
@@ -36,6 +38,8 @@ build-eoan:
     - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:minimal --target minimal ./eoan/
     - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:latest --target full ./eoan/
     - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:latest --target full ./eoan/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:supervisor --target supervisor ./focal/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:supervisor --target supervisor ./focal/
 
 build-vscode:
   stage: build-vscode
@@ -132,6 +136,8 @@ push-eoan:
     - docker push $GITLAB_CI_REGISTRY/eoan:minimal
     - docker push $CI_REGISTRY_IMAGE/eoan:latest
     - docker push $GITLAB_CI_REGISTRY/eoan:latest
+    - docker push $CI_REGISTRY_IMAGE/eoan:supervisor
+    - docker push $GITLAB_CI_REGISTRY/eoan:supervisor
 
 push-vscode:
   stage: push-vscode
@@ -177,10 +183,14 @@ clean:
     - docker image rm $GITLAB_CI_REGISTRY/focal:minimal
     - docker image rm $CI_REGISTRY_IMAGE/focal:latest
     - docker image rm $GITLAB_CI_REGISTRY/focal:latest  
+    - docker image rm $CI_REGISTRY_IMAGE/focal:supervisor
+    - docker image rm $GITLAB_CI_REGISTRY/focal:supervisor
     - docker image rm $CI_REGISTRY_IMAGE/eoan:minimal
     - docker image rm $GITLAB_CI_REGISTRY/eoan:minimal
     - docker image rm $CI_REGISTRY_IMAGE/eoan:latest
     - docker image rm $GITLAB_CI_REGISTRY/eoan:latest
+    - docker image rm $CI_REGISTRY_IMAGE/eoan:supervisor
+    - docker image rm $GITLAB_CI_REGISTRY/eoan:supervisor
     - docker image rm $CI_REGISTRY_IMAGE/vscode:base
     - docker image rm $GITLAB_CI_REGISTRY/vscode:base
     - docker image rm $CI_REGISTRY_IMAGE/vscode:latest
