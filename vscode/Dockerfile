@@ -1,5 +1,5 @@
 ## Based on latest Ubuntu image
-FROM git.remote.sx:4567/docker-base/ubuntu:latest as base
+FROM registry.gitlab.com/development-images/ubuntu:latest as base
 
 LABEL description="Latest Ubuntu release with common development environment setup for VS Code"
 

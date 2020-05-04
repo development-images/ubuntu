@@ -1,7 +1,7 @@
 # Dockerfile tempate - Perl language
 
 ## Load base image
-FROM git.remote.sx:4567/docker-base/ubuntu/vscode/lang:perl
+FROM registry.gitlab.com/development-images/ubuntu/vscode/lang:perl
 
 ## Run custom steps here
 

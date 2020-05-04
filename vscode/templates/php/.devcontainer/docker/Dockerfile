@@ -1,7 +1,7 @@
 # Dockerfile tempate - PHP language
 
 ## Load base image
-FROM git.remote.sx:4567/docker-base/ubuntu/vscode/lang:php
+FROM registry.gitlab.com/development-images/ubuntu/vscode/lang:php
 
 ## Run custom steps here
 

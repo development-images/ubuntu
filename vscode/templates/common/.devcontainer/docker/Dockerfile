@@ -1,7 +1,7 @@
 # Dockerfile tempate - Multiple language
 
 ## Load base image
-FROM git.remote.sx:4567/docker-base/ubuntu/vscode:latest
+FROM registry.gitlab.com/development-images/ubuntu/vscode:latest
 
 ## Run custom steps here
 

@@ -1,7 +1,7 @@
 # Dockerfile tempate - Python language
 
 ## Load base image
-FROM git.remote.sx:4567/docker-base/ubuntu/vscode/lang:python
+FROM registry.gitlab.com/development-images/ubuntu/vscode/lang:python
 
 ## Run custom steps here
 

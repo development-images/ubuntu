@@ -2,7 +2,7 @@
 FROM ubuntu:focal AS minimal
 
 LABEL maintainer="Chris <mail@gbe0.com>" \
-      repository="https://git.remote.sx/docker-base/ubuntu" \
+      repository="https://gitlab.com/development-images/ubuntu" \
       description="Updated Ubuntu Focal container"
 
 ## Configure the mirror to download all packages from (will be inserted to sources list)
