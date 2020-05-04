@@ -163,30 +163,30 @@ push-vscode-lang:
     - docker push $CI_REGISTRY_IMAGE/vscode/lang:php
     - docker push $GITLAB_CI_REGISTRY/vscode/lang:php
 
-  clean:
-    stage: clean
-    only:
-      - production
-    script:
-      - docker image rm $CI_REGISTRY_IMAGE:latest
-      - docker image rm $GITLAB_CI_REGISTRY:latest
-      - docker image rm $CI_REGISTRY_IMAGE/focal:minimal
-      - docker image rm $GITLAB_CI_REGISTRY/focal:minimal
-      - docker image rm $CI_REGISTRY_IMAGE/focal:latest
-      - docker image rm $GITLAB_CI_REGISTRY/focal:latest  
-      - docker image rm $CI_REGISTRY_IMAGE/eoan:minimal
-      - docker image rm $GITLAB_CI_REGISTRY/eoan:minimal
-      - docker image rm $CI_REGISTRY_IMAGE/eoan:latest
-      - docker image rm $GITLAB_CI_REGISTRY/eoan:latest
-      - docker image rm $CI_REGISTRY_IMAGE/vscode:base
-      - docker image rm $GITLAB_CI_REGISTRY/vscode:base
-      - docker image rm $CI_REGISTRY_IMAGE/vscode:latest
-      - docker image rm $GITLAB_CI_REGISTRY/vscode:latest
-      - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:python
-      - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:python
-      - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:perl
-      - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:perl
-      - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:shell
-      - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:shell
-      - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:php
-      - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:php
+clean:
+  stage: clean
+  only:
+    - production
+  script:
+    - docker image rm $CI_REGISTRY_IMAGE:latest
+    - docker image rm $GITLAB_CI_REGISTRY:latest
+    - docker image rm $CI_REGISTRY_IMAGE/focal:minimal
+    - docker image rm $GITLAB_CI_REGISTRY/focal:minimal
+    - docker image rm $CI_REGISTRY_IMAGE/focal:latest
+    - docker image rm $GITLAB_CI_REGISTRY/focal:latest  
+    - docker image rm $CI_REGISTRY_IMAGE/eoan:minimal
+    - docker image rm $GITLAB_CI_REGISTRY/eoan:minimal
+    - docker image rm $CI_REGISTRY_IMAGE/eoan:latest
+    - docker image rm $GITLAB_CI_REGISTRY/eoan:latest
+    - docker image rm $CI_REGISTRY_IMAGE/vscode:base
+    - docker image rm $GITLAB_CI_REGISTRY/vscode:base
+    - docker image rm $CI_REGISTRY_IMAGE/vscode:latest
+    - docker image rm $GITLAB_CI_REGISTRY/vscode:latest
+    - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:python
+    - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:python
+    - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:perl
+    - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:perl
+    - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:shell
+    - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:shell
+    - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:php
+    - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:php
