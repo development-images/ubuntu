@@ -1,0 +1,9 @@
+{
+  "python.testing.pytestArgs": [
+    "tests",
+    "-o", "junit_family=xunit1"
+  ],
+  "python.testing.unittestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "python.testing.pytestEnabled": true,
+}
