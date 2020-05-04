@@ -11,7 +11,7 @@ stages:
 build-focal:
   stage: build-base
   only:
-    - exec-ci
+    - production
   before_script:
     - docker info
   script:
@@ -25,7 +25,7 @@ build-focal:
 build-eoan:
   stage: build-base
   only:
-    - exec-ci
+    - production
   before_script:
     - docker info
   script:
@@ -37,7 +37,7 @@ build-eoan:
 build-vscode:
   stage: build-vscode
   only:
-    - exec-ci
+    - production
   before_script:
     - docker info
   script:
@@ -47,7 +47,7 @@ build-vscode:
 build-vscode-full:
   stage: build-vscode-lang
   only:
-    - exec-ci
+    - production
   before_script:
     - docker info
   script:
@@ -57,7 +57,7 @@ build-vscode-full:
 build-vscode-python:
   stage: build-vscode-lang
   only:
-    - exec-ci
+    - production
   before_script:
     - docker info
   script:
@@ -67,7 +67,7 @@ build-vscode-python:
 build-vscode-perl:
   stage: build-vscode-lang
   only:
-    - exec-ci
+    - production
   before_script:
     - docker info
   script:
@@ -77,7 +77,7 @@ build-vscode-perl:
 build-vscode-php:
   stage: build-vscode-lang
   only:
-    - exec-ci
+    - production
   before_script:
     - docker info
   script:
@@ -87,7 +87,7 @@ build-vscode-php:
 build-vscode-shell:
   stage: build-vscode-lang
   only:
-    - exec-ci
+    - production
   before_script:
     - docker info
   script:
@@ -97,7 +97,7 @@ build-vscode-shell:
 push-focal:
   stage: push-base
   only:
-    - exec-ci
+    - production
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
@@ -112,7 +112,7 @@ push-focal:
 push-eoan:
   stage: push-base
   only:
-    - exec-ci
+    - production
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
@@ -125,7 +125,7 @@ push-eoan:
 push-vscode:
   stage: push-vscode
   only:
-    - exec-ci
+    - production
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
@@ -136,7 +136,7 @@ push-vscode:
 push-vscode-lang:
   stage: push-vscode-lang
   only:
-    - exec-ci
+    - production
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
