@@ -16,8 +16,11 @@ build-focal:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE:latest ./focal/
+    - docker build -t $GITLAB_CI_REGISTRY:latest ./focal/
     - docker build -t $CI_REGISTRY_IMAGE/focal:minimal --target minimal ./focal/
+    - docker build -t $GITLAB_CI_REGISTRY/focal:minimal --target minimal ./focal/
     - docker build -t $CI_REGISTRY_IMAGE/focal:latest --target full ./focal/
+    - docker build -t $GITLAB_CI_REGISTRY/focal:latest --target full ./focal/
 
 build-eoan:
   stage: build-base
@@ -27,7 +30,9 @@ build-eoan:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE/eoan:minimal --target minimal ./eoan/
+    - docker build -t $GITLAB_CI_REGISTRY/eoan:minimal --target minimal ./eoan/
     - docker build -t $CI_REGISTRY_IMAGE/eoan:latest --target full ./eoan/
+    - docker build -t $GITLAB_CI_REGISTRY/eoan:latest --target full ./eoan/
 
 build-vscode:
   stage: build-vscode
@@ -37,6 +42,7 @@ build-vscode:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode:base --target base ./vscode/
+    - docker build -t $GITLAB_CI_REGISTRY/vscode:base --target base ./vscode/
 
 build-vscode-full:
   stage: build-vscode-lang
@@ -46,6 +52,7 @@ build-vscode-full:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode:latest --target full ./vscode/
+    - docker build -t $GITLAB_CI_REGISTRY/vscode:latest --target full ./vscode/
 
 build-vscode-python:
   stage: build-vscode-lang
@@ -55,6 +62,7 @@ build-vscode-python:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:python --target python ./vscode/
+    - docker build -t $GITLAB_CI_REGISTRY/vscode/lang:python --target python ./vscode/
 
 build-vscode-perl:
   stage: build-vscode-lang
@@ -64,6 +72,7 @@ build-vscode-perl:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:perl --target perl ./vscode/
+    - docker build -t $GITLAB_CI_REGISTRY/vscode/lang:perl --target perl ./vscode/
 
 build-vscode-php:
   stage: build-vscode-lang
@@ -73,6 +82,7 @@ build-vscode-php:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:php --target php ./vscode/
+    - docker build -t $GITLAB_CI_REGISTRY/vscode/lang:php --target php ./vscode/
 
 build-vscode-shell:
   stage: build-vscode-lang
@@ -82,6 +92,7 @@ build-vscode-shell:
     - docker info
   script:
     - docker build -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
+    - docker build -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
 
 push-focal:
   stage: push-base
@@ -89,10 +100,14 @@ push-focal:
     - exec-ci
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE:latest
+    - docker push $GITLAB_CI_REGISTRY:latest
     - docker push $CI_REGISTRY_IMAGE/focal:minimal
+    - docker push $GITLAB_CI_REGISTRY/focal:minimal
     - docker push $CI_REGISTRY_IMAGE/focal:latest
+    - docker push $GITLAB_CI_REGISTRY/focal:latest
 
 push-eoan:
   stage: push-base
@@ -100,9 +115,12 @@ push-eoan:
     - exec-ci
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE/eoan:minimal
+    - docker push $GITLAB_CI_REGISTRY/eoan:minimal
     - docker push $CI_REGISTRY_IMAGE/eoan:latest
+    - docker push $GITLAB_CI_REGISTRY/eoan:latest
 
 push-vscode:
   stage: push-vscode
@@ -110,8 +128,10 @@ push-vscode:
     - exec-ci
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE/vscode:base
+    - docker push $GITLAB_CI_REGISTRY/vscode:base
 
 push-vscode-lang:
   stage: push-vscode-lang
@@ -119,9 +139,15 @@ push-vscode-lang:
     - exec-ci
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
   script:
     - docker push $CI_REGISTRY_IMAGE/vscode:latest
+    - docker push $GITLAB_CI_REGISTRY/vscode:latest
     - docker push $CI_REGISTRY_IMAGE/vscode/lang:python
+    - docker push $GITLAB_CI_REGISTRY/vscode/lang:python
     - docker push $CI_REGISTRY_IMAGE/vscode/lang:perl
+    - docker push $GITLAB_CI_REGISTRY/vscode/lang:perl
     - docker push $CI_REGISTRY_IMAGE/vscode/lang:shell
+    - docker push $GITLAB_CI_REGISTRY/vscode/lang:shell
     - docker push $CI_REGISTRY_IMAGE/vscode/lang:php
+    - docker push $GITLAB_CI_REGISTRY/vscode/lang:php
