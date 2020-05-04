@@ -115,8 +115,16 @@ RUN echo \
         pytest pytest-html \
         #### Linting tools
         pylint autopep8 flake8 pipenv \
+        #### Web
+        flask falcon Django tornado \
+        #### Database
+        mysql-connector \
+        #### Templating
+        jinja2 \
+        #### Network
+        paramiko \
         #### Misc
-        dnspython requests
+        dnspython requests numpy
 
 ## Build Python variant
 FROM base AS python
@@ -151,8 +159,16 @@ RUN echo \
         pytest pytest-html \
         #### Linting tools
         pylint autopep8 flake8 pipenv \
+        #### Web
+        flask falcon Django tornado \
+        #### Database
+        mysql-connector \
+        #### Templating
+        jinja2 \
+        #### Network
+        paramiko \
         #### Misc
-        dnspython requests
+        dnspython requests numpy
 
 ## Build Perl variant
 FROM base AS perl
