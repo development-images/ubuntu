@@ -71,6 +71,8 @@ RUN echo \
         dnsutils net-tools iputils-ping tcptraceroute telnet netcat-openbsd \
         #### Shell
         bash bash-completion \
+        #### Other
+        git \
       ### Install requirements for trusting GPG keys and HTTPS repositories
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         apt-transport-https gnupg \
