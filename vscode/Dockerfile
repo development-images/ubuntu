@@ -108,7 +108,7 @@ RUN echo \
 
 ## Install common Python extensions with pip
 RUN echo \
-      pip3 --no-cache-dir install \
+      && pip3 --no-cache-dir install \
         #### For docker extensions
         docker docker-compose \
         #### Unit testing
@@ -158,7 +158,7 @@ RUN echo \
 
 ## Install common Python extensions with pip
 RUN echo \
-      pip3 --no-cache-dir install \
+      && pip3 --no-cache-dir install \
         #### For docker extensions
         docker docker-compose \
         #### Unit testing
