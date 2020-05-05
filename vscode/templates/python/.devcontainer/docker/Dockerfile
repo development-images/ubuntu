@@ -1,4 +1,4 @@
-# Dockerfile tempate - Python language
+# Dockerfile template - Python language
 
 ## Load base image
 FROM registry.gitlab.com/development-images/ubuntu/vscode/lang:python

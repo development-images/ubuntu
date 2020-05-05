@@ -1,0 +1,26 @@
+---
+
+# Docker compose VS Code development file
+version: '3.6'
+
+services:
+
+  ## Main development container
+  vscode-ansible:
+    build:
+      context: ./docker
+    container_name: vscode-ansible
+    restart: unless-stopped
+    volumes:
+      ## Mount the workspace files into /vscode
+      - ..:/vscode
+      ## Mount a volume containing the VS code extensions to prevent having to install them each rebuild
+      ## A volume will be created for both VS Code and VS Code Insiders edition
+      - vscode-ansible-ext:/home/vscode/.vscode-server
+      - vscode-ansible-ext-insiders:/home/vscode/.vscode-server-insiders
+    tty: true
+
+## Define the named volumes that are used for the above services
+volumes:
+  vscode-ansible-ext:
+  vscode-ansible-ext-insiders:
