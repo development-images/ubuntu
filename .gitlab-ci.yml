@@ -38,8 +38,8 @@ build-eoan:
     - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:minimal --target minimal ./eoan/
     - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:latest --target full ./eoan/
     - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:latest --target full ./eoan/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:supervisor --target supervisor ./focal/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:supervisor --target supervisor ./focal/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:supervisor --target supervisor ./eoan/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:supervisor --target supervisor ./eoan/
 
 build-vscode:
   stage: build-vscode

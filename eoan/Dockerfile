@@ -17,31 +17,32 @@ RUN echo \
       && apt-get update \
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         lsb-release \
+      && RELEASE=$(lsb_release -sc) \
       ### Configure package sources list
-      && echo "deb http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc) main restricted" > /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-updates main restricted" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc) universe" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-updates universe" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc) multiverse" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-updates multiverse" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list \
-      && echo "deb http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-proposed main restricted universe multiverse" >> /etc/apt/sources.list \
-      && echo "deb http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" >> /etc/apt/sources.list \
-      && echo "deb http://security.ubuntu.com/ubuntu/ $(lsb_release -sc)-security main restricted" >> /etc/apt/sources.list \
-      && echo "deb http://security.ubuntu.com/ubuntu/ $(lsb_release -sc)-security universe" >> /etc/apt/sources.list \
-      && echo "deb http://security.ubuntu.com/ubuntu/ $(lsb_release -sc)-security multiverse" >> /etc/apt/sources.list \
-      && echo "deb-src http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc) main restricted" >> /etc/apt/sources.list \
-      && echo "deb-src http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-updates main restricted" >> /etc/apt/sources.list \
-      && echo "deb-src http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc) universe" >> /etc/apt/sources.list \
-      && echo "deb-src http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-updates universe" >> /etc/apt/sources.list \
-      && echo "deb-src http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc) multiverse" >> /etc/apt/sources.list \
-      && echo "deb-src http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-updates multiverse" >> /etc/apt/sources.list \
-      && echo "deb-src http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-backports main restricted universe multiverse" >> /etc/apt/sources.list \
-      && echo "deb-src http://${APT_MIRROR}/ubuntu/ $(lsb_release -sc)-proposed main restricted universe multiverse" >> /etc/apt/sources.list \
-      && echo "deb-src http://archive.canonical.com/ubuntu $(lsb_release -sc) partner" >> /etc/apt/sources.list \
-      && echo "deb-src http://security.ubuntu.com/ubuntu/ $(lsb_release -sc)-security main restricted" >> /etc/apt/sources.list \
-      && echo "deb-src http://security.ubuntu.com/ubuntu/ $(lsb_release -sc)-security universe" >> /etc/apt/sources.list \
-      && echo "deb-src http://security.ubuntu.com/ubuntu/ $(lsb_release -sc)-security multiverse" >> /etc/apt/sources.list \
+      && echo "deb http://${APT_MIRROR}/ubuntu/ ${RELEASE} main restricted" > /etc/apt/sources.list \
+      && echo "deb http://${APT_MIRROR}/ubuntu/ ${RELEASE}-updates main restricted" >> /etc/apt/sources.list \
+      && echo "deb http://${APT_MIRROR}/ubuntu/ ${RELEASE} universe" >> /etc/apt/sources.list \
+      && echo "deb http://${APT_MIRROR}/ubuntu/ ${RELEASE}-updates universe" >> /etc/apt/sources.list \
+      && echo "deb http://${APT_MIRROR}/ubuntu/ ${RELEASE} multiverse" >> /etc/apt/sources.list \
+      && echo "deb http://${APT_MIRROR}/ubuntu/ ${RELEASE}-updates multiverse" >> /etc/apt/sources.list \
+      && echo "deb http://${APT_MIRROR}/ubuntu/ ${RELEASE}-backports main restricted universe multiverse" >> /etc/apt/sources.list \
+      && echo "deb http://${APT_MIRROR}/ubuntu/ ${RELEASE}-proposed main restricted universe multiverse" >> /etc/apt/sources.list \
+      && echo "deb http://archive.canonical.com/ubuntu ${RELEASE} partner" >> /etc/apt/sources.list \
+      && echo "deb http://security.ubuntu.com/ubuntu/ ${RELEASE}-security main restricted" >> /etc/apt/sources.list \
+      && echo "deb http://security.ubuntu.com/ubuntu/ ${RELEASE}-security universe" >> /etc/apt/sources.list \
+      && echo "deb http://security.ubuntu.com/ubuntu/ ${RELEASE}-security multiverse" >> /etc/apt/sources.list \
+      && echo "deb-src http://${APT_MIRROR}/ubuntu/ ${RELEASE} main restricted" >> /etc/apt/sources.list \
+      && echo "deb-src http://${APT_MIRROR}/ubuntu/ ${RELEASE}-updates main restricted" >> /etc/apt/sources.list \
+      && echo "deb-src http://${APT_MIRROR}/ubuntu/ ${RELEASE} universe" >> /etc/apt/sources.list \
+      && echo "deb-src http://${APT_MIRROR}/ubuntu/ ${RELEASE}-updates universe" >> /etc/apt/sources.list \
+      && echo "deb-src http://${APT_MIRROR}/ubuntu/ ${RELEASE} multiverse" >> /etc/apt/sources.list \
+      && echo "deb-src http://${APT_MIRROR}/ubuntu/ ${RELEASE}-updates multiverse" >> /etc/apt/sources.list \
+      && echo "deb-src http://${APT_MIRROR}/ubuntu/ ${RELEASE}-backports main restricted universe multiverse" >> /etc/apt/sources.list \
+      && echo "deb-src http://${APT_MIRROR}/ubuntu/ ${RELEASE}-proposed main restricted universe multiverse" >> /etc/apt/sources.list \
+      && echo "deb-src http://archive.canonical.com/ubuntu ${RELEASE} partner" >> /etc/apt/sources.list \
+      && echo "deb-src http://security.ubuntu.com/ubuntu/ ${RELEASE}-security main restricted" >> /etc/apt/sources.list \
+      && echo "deb-src http://security.ubuntu.com/ubuntu/ ${RELEASE}-security universe" >> /etc/apt/sources.list \
+      && echo "deb-src http://security.ubuntu.com/ubuntu/ ${RELEASE}-security multiverse" >> /etc/apt/sources.list \
       ### Update package cache
       && apt-get update \
       ### Perform full system upgrade
