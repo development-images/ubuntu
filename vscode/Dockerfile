@@ -123,8 +123,10 @@ RUN echo \
         jinja2 \
         #### Network
         paramiko \
+        #### Logging/output
+        colorlog prettyprinter \
         #### Misc
-        dnspython requests numpy cerberus PyYAML
+        dnspython requests numpy cerberus pyyaml
 
 ## Build Python variant
 FROM base AS python
@@ -143,6 +145,10 @@ RUN echo \
       ### Install JDK/JRE (needed for Sonarlint)
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         openjdk-11-jdk-headless openjdk-11-jre-headless \
+      ### Fix symlinks so that Python 3 is always used
+      && rm -f /usr/bin/pip /usr/bin/python \
+      && ln -s /usr/bin/python3 /usr/bin/python \
+      && ln -s /usr/bin/pip3 /usr/bin/pip \
       ### Cleanup temporary files
       && rm -rf \
         /tmp/* \
@@ -167,8 +173,10 @@ RUN echo \
         jinja2 \
         #### Network
         paramiko \
+        #### Logging/output
+        colorlog prettyprinter \
         #### Misc
-        dnspython requests numpy cerberus PyYAML
+        dnspython requests numpy cerberus pyyaml
 
 ## Build Perl variant
 FROM base AS perl
