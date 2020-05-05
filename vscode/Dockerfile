@@ -22,6 +22,8 @@ RUN echo \
         screen tmux \
         #### Sudo
         sudo \
+        #### Other useful utils
+        mlocate \
       ### Add work around for error with sudo 1.8.31
       ### https://github.com/sudo-project/sudo/issues/42
       ### Without this fix, every sudo command gives this error:
