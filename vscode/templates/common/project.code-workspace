@@ -9,9 +9,9 @@
 		"telemetry.enableTelemetry": false,
 		// Set GitLab config
 		"gitlab.instanceUrl": "https://git.remote.sx",
-    "gitlab.showPipelineUpdateNotifications": true,
-    "gitlab.pipelineGitRemoteName": "origin",
-    "gitlab.remoteName": "origin",
+		"gitlab.showPipelineUpdateNotifications": true,
+		"gitlab.pipelineGitRemoteName": "origin",
+		"gitlab.remoteName": "origin",
 		"gitlab.enableExperimentalFeatures": true,
 		// Configure Perl toolbox linting settings
 		"perl-toolbox.lint.severity": "cruel",
