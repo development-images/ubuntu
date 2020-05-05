@@ -118,7 +118,7 @@ RUN echo \
         #### Linting tools
         pylint autopep8 flake8 pipenv \
         #### Web
-        flask falcon Django tornado \
+        flask falcon Django tornado requests mechanize \
         #### Database
         mysql-connector \
         #### Templating
@@ -128,7 +128,7 @@ RUN echo \
         #### Logging/output
         colorlog prettyprinter \
         #### Misc
-        dnspython requests numpy cerberus pyyaml
+        dnspython numpy cerberus pyyaml
 
 ## Build Python variant
 FROM base AS python
@@ -168,7 +168,7 @@ RUN echo \
         #### Linting tools
         pylint autopep8 flake8 pipenv \
         #### Web
-        flask falcon Django tornado \
+        flask falcon Django tornado requests mechanize \
         #### Database
         mysql-connector \
         #### Templating
@@ -178,7 +178,7 @@ RUN echo \
         #### Logging/output
         colorlog prettyprinter \
         #### Misc
-        dnspython requests numpy cerberus pyyaml
+        dnspython numpy cerberus pyyaml
 
 ## Build Perl variant
 FROM base AS perl
