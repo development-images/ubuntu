@@ -1,7 +1,7 @@
-## Based on latest Debian image
-FROM registry.gitlab.com/development-images/debian:latest as base
+## Based on latest Ubuntu image
+FROM registry.gitlab.com/development-images/ubuntu:latest as base
 
-LABEL description="Latest Debian release with common development environment setup for VS Code"
+LABEL description="Latest Ubuntu release with common development environment setup for VS Code"
 
 ## Configure the Node repository name
 ## This will be appended to the URL like https://deb.nodesource.com/node_${NODE_VERSION}.x
@@ -22,6 +22,11 @@ RUN echo \
         screen tmux \
         #### Sudo
         sudo \
+      ### Add work around for error with sudo 1.8.31
+      ### https://github.com/sudo-project/sudo/issues/42
+      ### Without this fix, every sudo command gives this error:
+      ###   sudo: setrlimit(RLIMIT_CORE): Operation not permitted
+      && echo "Set disable_coredump false" >> /etc/sudo.conf \
       ### Cleanup temporary files
       && rm -rf \
         /tmp/* \
@@ -73,7 +78,7 @@ COPY .bash_aliases /home/vscode/.bash_aliases
 FROM base AS full
 
 ## Update tag
-LABEL description="Latest Debian release with setup for development with Perl, Python, Shell, PHP and Ruby for VS Code"
+LABEL description="Latest Ubuntu release with setup for development with Perl, Python, Shell, PHP and Ruby for VS Code"
 
 ## Install requirements
 RUN echo \
@@ -127,7 +132,7 @@ RUN echo \
 FROM base AS python
 
 ## Update tag
-LABEL description="Latest Debian release with setup for development with Python for VS Code"
+LABEL description="Latest Ubuntu release with setup for development with Python for VS Code"
 
 ## Install requirements
 RUN echo \
@@ -177,7 +182,7 @@ RUN echo \
 FROM base AS perl
 
 ## Update tag
-LABEL description="Latest Debian release with setup for development with Perl for VS Code"
+LABEL description="Latest Ubuntu release with setup for development with Perl for VS Code"
 
 ## Install requirements
 RUN echo \
@@ -198,7 +203,7 @@ RUN echo \
 FROM base AS php
 
 ## Update tag
-LABEL description="Latest Debian release with setup for development with PHP for VS Code"
+LABEL description="Latest Ubuntu release with setup for development with PHP for VS Code"
 
 ## Install requirements
 RUN echo \
@@ -219,7 +224,7 @@ RUN echo \
 FROM base AS shell
 
 ## Update tag
-LABEL description="Latest Debian release with setup for development with Shell for VS Code"
+LABEL description="Latest Ubuntu release with setup for development with Shell for VS Code"
 
 ## Install requirements
 RUN echo \

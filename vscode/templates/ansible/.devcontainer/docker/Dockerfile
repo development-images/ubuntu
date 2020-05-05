@@ -1,5 +1,5 @@
-## Use base debian Python 3 image for VS code
-FROM registry.gitlab.com/development-images/debian/vscode/lang:python
+## Use base Ubuntu Python 3 image for VS code
+FROM registry.gitlab.com/development-images/ubuntu/vscode/lang:python
 
 ## Install additional packages
 RUN echo \

@@ -1,7 +1,7 @@
 # Dockerfile tempate - Supervisor with SSHD
 
 ## Load base image
-FROM registry.gitlab.com/development-images/debian/bullseye:supervisor
+FROM registry.gitlab.com/development-images/ubuntu/eoan:supervisor
 
 ## Install sshd
 RUN echo \
