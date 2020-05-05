@@ -9,9 +9,9 @@
 		"telemetry.enableTelemetry": false,
 		// Set GitLab config
 		"gitlab.instanceUrl": "https://git.remote.sx",
-    "gitlab.showPipelineUpdateNotifications": true,
-    "gitlab.pipelineGitRemoteName": "origin",
-    "gitlab.remoteName": "origin",
+		"gitlab.showPipelineUpdateNotifications": true,
+		"gitlab.pipelineGitRemoteName": "origin",
+		"gitlab.remoteName": "origin",
 		"gitlab.enableExperimentalFeatures": true,
 		// Set JDK path for sonarlint
 		"sonarlint.ls.javaHome": "/usr/lib/jvm/java-11-openjdk-amd64"
