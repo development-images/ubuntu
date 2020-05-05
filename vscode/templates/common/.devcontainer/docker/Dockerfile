@@ -1,7 +1,7 @@
 # Dockerfile template - Multiple language
 
 ## Load base image
-FROM registry.gitlab.com/development-images/ubuntu/vscode:latest
+FROM registry.gitlab.com/development-images/debian/vscode:latest
 
 ## Run custom steps here
 

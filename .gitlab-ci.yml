@@ -9,7 +9,7 @@ stages:
   - push-vscode-lang
   - clean
 
-build-focal:
+build-buster:
   stage: build-base
   retry: 2
   only:
@@ -19,14 +19,14 @@ build-focal:
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE:latest ./focal/
     - docker build --pull -t $GITLAB_CI_REGISTRY:latest ./focal/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/focal:minimal --target minimal ./focal/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/focal:minimal --target minimal ./focal/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/focal:latest --target full ./focal/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/focal:latest --target full ./focal/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/focal:supervisor --target supervisor ./focal/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/focal:supervisor --target supervisor ./focal/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/buster:minimal --target minimal ./buster/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/buster:minimal --target minimal ./buster/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/buster:latest --target full ./buster/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/buster:latest --target full ./buster/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/buster:supervisor --target supervisor ./buster/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/buster:supervisor --target supervisor ./buster/
 
-build-eoan:
+build-bullseye:
   stage: build-base
   retry: 2
   only:
@@ -34,12 +34,42 @@ build-eoan:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:minimal --target minimal ./eoan/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:minimal --target minimal ./eoan/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:latest --target full ./eoan/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:latest --target full ./eoan/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:supervisor --target supervisor ./focal/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:supervisor --target supervisor ./focal/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/bullseye:minimal --target minimal ./bullseye/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/bullseye:minimal --target minimal ./bullseye/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/bullseye:latest --target full ./bullseye/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/bullseye:latest --target full ./bullseye/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/bullseye:supervisor --target supervisor ./bullseye/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/bullseye:supervisor --target supervisor ./bullseye/
+
+build-sid:
+  stage: build-base
+  retry: 2
+  only:
+    - production
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE/sid:minimal --target minimal ./sid/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/sid:minimal --target minimal ./sid/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/sid:latest --target full ./sid/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/sid:latest --target full ./sid/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/sid:supervisor --target supervisor ./sid/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/sid:supervisor --target supervisor ./sid/
+
+build-stretch:
+  stage: build-base
+  retry: 2
+  only:
+    - production
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE/stretch:minimal --target minimal ./stretch/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/stretch:minimal --target minimal ./stretch/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/stretch:latest --target full ./stretch/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/stretch:latest --target full ./stretch/
+    - docker build --pull -t $CI_REGISTRY_IMAGE/stretch:supervisor --target supervisor ./stretch/
+    - docker build --pull -t $GITLAB_CI_REGISTRY/stretch:supervisor --target supervisor ./stretch/
 
 build-vscode:
   stage: build-vscode
@@ -107,7 +137,7 @@ build-vscode-shell:
     - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
     - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
 
-push-focal:
+push-buster:
   stage: push-base
   retry: 2
   only:
@@ -118,12 +148,12 @@ push-focal:
   script:
     - docker push $CI_REGISTRY_IMAGE:latest
     - docker push $GITLAB_CI_REGISTRY:latest
-    - docker push $CI_REGISTRY_IMAGE/focal:minimal
-    - docker push $GITLAB_CI_REGISTRY/focal:minimal
-    - docker push $CI_REGISTRY_IMAGE/focal:latest
-    - docker push $GITLAB_CI_REGISTRY/focal:latest
+    - docker push $CI_REGISTRY_IMAGE/buster:minimal
+    - docker push $GITLAB_CI_REGISTRY/buster:minimal
+    - docker push $CI_REGISTRY_IMAGE/buster:latest
+    - docker push $GITLAB_CI_REGISTRY/buster:latest
 
-push-eoan:
+push-bullseye:
   stage: push-base
   retry: 2
   only:
@@ -132,12 +162,44 @@ push-eoan:
     - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
   script:
-    - docker push $CI_REGISTRY_IMAGE/eoan:minimal
-    - docker push $GITLAB_CI_REGISTRY/eoan:minimal
-    - docker push $CI_REGISTRY_IMAGE/eoan:latest
-    - docker push $GITLAB_CI_REGISTRY/eoan:latest
-    - docker push $CI_REGISTRY_IMAGE/eoan:supervisor
-    - docker push $GITLAB_CI_REGISTRY/eoan:supervisor
+    - docker push $CI_REGISTRY_IMAGE/bullseye:minimal
+    - docker push $GITLAB_CI_REGISTRY/bullseye:minimal
+    - docker push $CI_REGISTRY_IMAGE/bullseye:latest
+    - docker push $GITLAB_CI_REGISTRY/bullseye:latest
+    - docker push $CI_REGISTRY_IMAGE/bullseye:supervisor
+    - docker push $GITLAB_CI_REGISTRY/bullseye:supervisor
+
+push-sid:
+  stage: push-base
+  retry: 2
+  only:
+    - production
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
+  script:
+    - docker push $CI_REGISTRY_IMAGE/sid:minimal
+    - docker push $GITLAB_CI_REGISTRY/sid:minimal
+    - docker push $CI_REGISTRY_IMAGE/sid:latest
+    - docker push $GITLAB_CI_REGISTRY/sid:latest
+    - docker push $CI_REGISTRY_IMAGE/sid:supervisor
+    - docker push $GITLAB_CI_REGISTRY/sid:supervisor
+
+push-stretch:
+  stage: push-base
+  retry: 2
+  only:
+    - production
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
+  script:
+    - docker push $CI_REGISTRY_IMAGE/stretch:minimal
+    - docker push $GITLAB_CI_REGISTRY/stretch:minimal
+    - docker push $CI_REGISTRY_IMAGE/stretch:latest
+    - docker push $GITLAB_CI_REGISTRY/stretch:latest
+    - docker push $CI_REGISTRY_IMAGE/stretch:supervisor
+    - docker push $GITLAB_CI_REGISTRY/stretch:supervisor
 
 push-vscode:
   stage: push-vscode
@@ -179,18 +241,30 @@ clean:
   script:
     - docker image rm $CI_REGISTRY_IMAGE:latest
     - docker image rm $GITLAB_CI_REGISTRY:latest
-    - docker image rm $CI_REGISTRY_IMAGE/focal:minimal
-    - docker image rm $GITLAB_CI_REGISTRY/focal:minimal
-    - docker image rm $CI_REGISTRY_IMAGE/focal:latest
-    - docker image rm $GITLAB_CI_REGISTRY/focal:latest  
-    - docker image rm $CI_REGISTRY_IMAGE/focal:supervisor
-    - docker image rm $GITLAB_CI_REGISTRY/focal:supervisor
-    - docker image rm $CI_REGISTRY_IMAGE/eoan:minimal
-    - docker image rm $GITLAB_CI_REGISTRY/eoan:minimal
-    - docker image rm $CI_REGISTRY_IMAGE/eoan:latest
-    - docker image rm $GITLAB_CI_REGISTRY/eoan:latest
-    - docker image rm $CI_REGISTRY_IMAGE/eoan:supervisor
-    - docker image rm $GITLAB_CI_REGISTRY/eoan:supervisor
+    - docker image rm $CI_REGISTRY_IMAGE/buster:minimal
+    - docker image rm $GITLAB_CI_REGISTRY/buster:minimal
+    - docker image rm $CI_REGISTRY_IMAGE/buster:latest
+    - docker image rm $GITLAB_CI_REGISTRY/buster:latest  
+    - docker image rm $CI_REGISTRY_IMAGE/buster:supervisor
+    - docker image rm $GITLAB_CI_REGISTRY/buster:supervisor
+    - docker image rm $CI_REGISTRY_IMAGE/bullseye:minimal
+    - docker image rm $GITLAB_CI_REGISTRY/bullseye:minimal
+    - docker image rm $CI_REGISTRY_IMAGE/bullseye:latest
+    - docker image rm $GITLAB_CI_REGISTRY/bullseye:latest
+    - docker image rm $CI_REGISTRY_IMAGE/bullseye:supervisor
+    - docker image rm $GITLAB_CI_REGISTRY/bullseye:supervisor
+    - docker image rm $CI_REGISTRY_IMAGE/sid:minimal
+    - docker image rm $GITLAB_CI_REGISTRY/sid:minimal
+    - docker image rm $CI_REGISTRY_IMAGE/sid:latest
+    - docker image rm $GITLAB_CI_REGISTRY/sid:latest
+    - docker image rm $CI_REGISTRY_IMAGE/sid:supervisor
+    - docker image rm $GITLAB_CI_REGISTRY/sid:supervisor
+    - docker image rm $CI_REGISTRY_IMAGE/stretch:minimal
+    - docker image rm $GITLAB_CI_REGISTRY/stretch:minimal
+    - docker image rm $CI_REGISTRY_IMAGE/stretch:latest
+    - docker image rm $GITLAB_CI_REGISTRY/stretch:latest
+    - docker image rm $CI_REGISTRY_IMAGE/stretch:supervisor
+    - docker image rm $GITLAB_CI_REGISTRY/stretch:supervisor
     - docker image rm $CI_REGISTRY_IMAGE/vscode:base
     - docker image rm $GITLAB_CI_REGISTRY/vscode:base
     - docker image rm $CI_REGISTRY_IMAGE/vscode:latest

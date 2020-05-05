@@ -1,7 +1,7 @@
 # Dockerfile template - Shell language
 
 ## Load base image
-FROM registry.gitlab.com/development-images/ubuntu/vscode/lang:shell
+FROM registry.gitlab.com/development-images/debian/vscode/lang:shell
 
 ## Run custom steps here
 
