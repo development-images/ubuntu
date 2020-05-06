@@ -89,7 +89,7 @@ RUN echo \
       ### Install common language files
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         #### Perl
-        perl perl-doc libperl-critic-perl perltidy libyaml-perl \
+        perl perl-doc libperl-critic-perl perltidy \
         #### Python
         python3 python3-pip \
         #### Ruby
@@ -129,6 +129,53 @@ RUN echo \
         colorlog prettyprinter \
         #### Misc
         dnspython numpy cerberus pyyaml
+
+## Install common Perl modules with cpm and apt
+RUN echo \
+      ### Install cpm to install Perl modules not available from packages
+      ### cpm is used as it is much faster than using cpanm
+      ### See https://metacpan.org/pod/App::cpm::Tutorial for more information
+      && curl -fsSL --compressed https://git.io/cpm > /usr/local/bin/cpm \
+      && chmod +x /usr/local/bin/cpm \
+      ### Update current sources list
+      && apt-get update \
+      ### Install packaged modules
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        #### DBI
+        libdbi-perl \
+        #### Net::IP(::XS)
+        libnet-ip-xs-perl \
+        #### Log::Log4perl and Log::Dispatch::FileRotate
+        liblog-log4perl-perl liblog-dispatch-filerotate-perl \
+        #### Readonly
+        libreadonly-xs-perl \
+        #### FindBin::libs
+        libfindbin-libs-perl \
+        #### Data::Validate::IP
+        libdata-validate-ip-perl \
+        #### Data::Printer
+        libdata-printer-perl \
+      ### Install build requirements for Perl modules
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        libmariadbclient-dev libmysqlclient-dev \
+      ### Execute module installation for remaining modules with the '-g' flag for global install
+      && cpm install -g \
+        #### Modules used for configuration loading
+        Config::Validate Config::IniFiles YAML::XS \
+        #### MariaDB DBI driver - This is installed from source due to the Debian package being old
+        DBD::MariaDB DBD::mysql \
+        #### Debug/logging output
+        Devel::PrettyTrace Data::Dump::Color \
+        #### Benchmarking
+        Benchmark::Forking \
+      ### Clean up cpm build files
+      && rm -rf /root/.perl-cpm \
+      ### Cleanup temporary files
+      && rm -rf \
+        /tmp/* \
+        /var/cache/* \
+        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
+        /var/tmp/*
 
 ## Build Python variant
 FROM base AS python
@@ -193,7 +240,54 @@ RUN echo \
       ### Install common language files
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         #### Perl
-        perl perl-doc libperl-critic-perl perltidy libyaml-perl \
+        perl perl-doc libperl-critic-perl perltidy \
+      ### Cleanup temporary files
+      && rm -rf \
+        /tmp/* \
+        /var/cache/* \
+        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
+        /var/tmp/*
+
+## Install common Perl modules with cpm and apt
+RUN echo \
+      ### Install cpm to install Perl modules not available from packages
+      ### cpm is used as it is much faster than using cpanm
+      ### See https://metacpan.org/pod/App::cpm::Tutorial for more information
+      && curl -fsSL --compressed https://git.io/cpm > /usr/local/bin/cpm \
+      && chmod +x /usr/local/bin/cpm \
+      ### Update current sources list
+      && apt-get update \
+      ### Install packaged modules
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        #### DBI
+        libdbi-perl \
+        #### Net::IP(::XS)
+        libnet-ip-xs-perl \
+        #### Log::Log4perl and Log::Dispatch::FileRotate
+        liblog-log4perl-perl liblog-dispatch-filerotate-perl \
+        #### Readonly
+        libreadonly-xs-perl \
+        #### FindBin::libs
+        libfindbin-libs-perl \
+        #### Data::Validate::IP
+        libdata-validate-ip-perl \
+        #### Data::Printer
+        libdata-printer-perl \
+      ### Install build requirements for Perl modules
+      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
+        libmariadbclient-dev libmysqlclient-dev \
+      ### Execute module installation for remaining modules with the '-g' flag for global install
+      && cpm install -g \
+        #### Modules used for configuration loading
+        Config::Validate Config::IniFiles YAML::XS \
+        #### MariaDB DBI driver - This is installed from source due to the Debian package being old
+        DBD::MariaDB DBD::mysql \
+        #### Debug/logging output
+        Devel::PrettyTrace Data::Dump::Color \
+        #### Benchmarking
+        Benchmark::Forking \
+      ### Clean up cpm build files
+      && rm -rf /root/.perl-cpm \
       ### Cleanup temporary files
       && rm -rf \
         /tmp/* \
