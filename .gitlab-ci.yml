@@ -4,8 +4,8 @@ stages:
   - build
 
 ## Run build
-01-base:
-  stage: 01-base
+build:
+  stage: build
   retry: 2
   only:
     - master
