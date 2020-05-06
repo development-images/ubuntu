@@ -11,7 +11,7 @@ base-latest:
   only:
     - master
   script:
-    - docker build --pull --no-cache -t "ubuntu/latest/base:latest" "./latest/base/"
+    - docker build --pull -t "ubuntu/latest/base:latest" "./latest/base/"
     - docker tag "ubuntu/latest/base:latest" "${CI_REGISTRY_IMAGE}:latest" || exit 1
     - docker tag "ubuntu/latest/base:latest" "${GITLAB_CI_REGISTRY}:latest" || exit 1
 
@@ -21,7 +21,7 @@ base-eoan:
   only:
     - master
   script:
-    - docker build --pull --no-cache -t "ubuntu/eoan/base:latest" "./eoan/base/"
+    - docker build --pull -t "ubuntu/eoan/base:latest" "./eoan/base/"
     - docker tag "ubuntu/eoan/base:latest" "${CI_REGISTRY_IMAGE}/eoan:latest" || exit 1
     - docker tag "ubuntu/eoan/base:latest" "${GITLAB_CI_REGISTRY}/eoan:latest" || exit 1
 
@@ -31,6 +31,6 @@ base-focal:
   only:
     - master
   script:
-    - docker build --pull --no-cache -t "ubuntu/focal/base:latest" "./focal/base/"
+    - docker build --pull -t "ubuntu/focal/base:latest" "./focal/base/"
     - docker tag "ubuntu/focal/base:latest" "${CI_REGISTRY_IMAGE}/focal:latest" || exit 1
     - docker tag "ubuntu/focal/base:latest" "${GITLAB_CI_REGISTRY}/focal:latest" || exit 1
