@@ -23,7 +23,7 @@ RUN echo \
         #### Sudo
         sudo \
         #### Other useful utils
-        mlocate \
+        mlocate mariadb-client jq \
       ### Add work around for error with sudo 1.8.31
       ### https://github.com/sudo-project/sudo/issues/42
       ### Without this fix, every sudo command gives this error:
