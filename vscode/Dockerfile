@@ -142,7 +142,7 @@ RUN echo \
       ### Install packaged modules
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         #### DBI
-        libdbi-perl \
+        libdbi-perl libdbd-mysql-perl libdbd-mariadb-perl libdbd-pg-perl libdbd-sqlite3-perl libdbd-csv-perl \
         #### Net::IP(::XS)
         libnet-ip-xs-perl \
         #### Log::Log4perl and Log::Dispatch::FileRotate
@@ -155,15 +155,10 @@ RUN echo \
         libdata-validate-ip-perl \
         #### Data::Printer
         libdata-printer-perl \
-      ### Install build requirements for Perl modules
-      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
-        libmariadbclient-dev libmysqlclient-dev \
       ### Execute module installation for remaining modules with the '-g' flag for global install
       && cpm install -g \
         #### Modules used for configuration loading
         Config::Validate Config::IniFiles YAML::XS \
-        #### MariaDB DBI driver - This is installed from source due to the Debian package being old
-        DBD::MariaDB DBD::mysql \
         #### Debug/logging output
         Devel::PrettyTrace Data::Dump::Color \
         #### Benchmarking
@@ -260,7 +255,7 @@ RUN echo \
       ### Install packaged modules
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         #### DBI
-        libdbi-perl \
+        libdbi-perl libdbd-mysql-perl libdbd-mariadb-perl libdbd-pg-perl libdbd-sqlite3-perl libdbd-csv-perl \
         #### Net::IP(::XS)
         libnet-ip-xs-perl \
         #### Log::Log4perl and Log::Dispatch::FileRotate
@@ -273,15 +268,10 @@ RUN echo \
         libdata-validate-ip-perl \
         #### Data::Printer
         libdata-printer-perl \
-      ### Install build requirements for Perl modules
-      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
-        libmariadbclient-dev libmysqlclient-dev \
       ### Execute module installation for remaining modules with the '-g' flag for global install
       && cpm install -g \
         #### Modules used for configuration loading
         Config::Validate Config::IniFiles YAML::XS \
-        #### MariaDB DBI driver - This is installed from source due to the Debian package being old
-        DBD::MariaDB DBD::mysql \
         #### Debug/logging output
         Devel::PrettyTrace Data::Dump::Color \
         #### Benchmarking
