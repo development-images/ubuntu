@@ -1,205 +1,53 @@
 ---
 
 stages:
-  - build-base
-  - push-base
-  - build-vscode
-  - push-vscode
-  - build-vscode-lang
-  - push-vscode-lang
-  - clean
+  - 01-base
+  # - 02-variants
+  # - 03-vs-code
+  # - 04-push
+  # - 05-cleanup
 
-build-focal:
-  stage: build-base
+## Run base build for images that will be used for future steps
+01-base:
+  stage: 01-base
   retry: 2
   only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - master
   script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE:latest ./focal/
-    - docker build --pull -t $GITLAB_CI_REGISTRY:latest ./focal/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/focal:minimal --target minimal ./focal/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/focal:minimal --target minimal ./focal/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/focal:latest --target full ./focal/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/focal:latest --target full ./focal/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/focal:supervisor --target supervisor ./focal/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/focal:supervisor --target supervisor ./focal/
+    - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/01-base/*.sh"
 
-build-eoan:
-  stage: build-base
+## Build the variant images
+02-variants:
+  stage: 02-variants
   retry: 2
   only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - master
   script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:minimal --target minimal ./eoan/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:minimal --target minimal ./eoan/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:latest --target full ./eoan/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:latest --target full ./eoan/
-    - docker build --pull -t $CI_REGISTRY_IMAGE/eoan:supervisor --target supervisor ./eoan/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/eoan:supervisor --target supervisor ./eoan/
+    - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/02-variants/*.sh"
 
-build-vscode:
-  stage: build-vscode
+## Build the VS Code images
+03-vs-code:
+  stage: 03-vs-code
   retry: 2
   only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - master
   script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode:base --target base ./vscode/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode:base --target base ./vscode/
+    - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/03-vs-code/*.sh"
 
-build-vscode-full:
-  stage: build-vscode-lang
+## Push the built images
+04-push:
+  stage: 04-push
   retry: 2
   only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - master
   script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode:latest --target full ./vscode/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode:latest --target full ./vscode/
+    - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/04-push/*.sh"
 
-build-vscode-python:
-  stage: build-vscode-lang
+## Cleanup the image files
+05-cleanup:
+  stage: 05-cleanup
   retry: 2
   only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - master
   script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:python --target python ./vscode/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:python --target python ./vscode/
-
-build-vscode-perl:
-  stage: build-vscode-lang
-  retry: 2
-  only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:perl --target perl ./vscode/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:perl --target perl ./vscode/
-
-build-vscode-php:
-  stage: build-vscode-lang
-  retry: 2
-  only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:php --target php ./vscode/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:php --target php ./vscode/
-
-build-vscode-shell:
-  stage: build-vscode-lang
-  retry: 2
-  only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE/vscode/lang:shell --target shell ./vscode/
-    - docker build --pull -t $GITLAB_CI_REGISTRY/vscode/lang:shell --target shell ./vscode/
-
-push-focal:
-  stage: push-base
-  retry: 2
-  only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
-  script:
-    - docker push $CI_REGISTRY_IMAGE:latest
-    - docker push $GITLAB_CI_REGISTRY:latest
-    - docker push $CI_REGISTRY_IMAGE/focal:minimal
-    - docker push $GITLAB_CI_REGISTRY/focal:minimal
-    - docker push $CI_REGISTRY_IMAGE/focal:latest
-    - docker push $GITLAB_CI_REGISTRY/focal:latest
-
-push-eoan:
-  stage: push-base
-  retry: 2
-  only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
-  script:
-    - docker push $CI_REGISTRY_IMAGE/eoan:minimal
-    - docker push $GITLAB_CI_REGISTRY/eoan:minimal
-    - docker push $CI_REGISTRY_IMAGE/eoan:latest
-    - docker push $GITLAB_CI_REGISTRY/eoan:latest
-    - docker push $CI_REGISTRY_IMAGE/eoan:supervisor
-    - docker push $GITLAB_CI_REGISTRY/eoan:supervisor
-
-push-vscode:
-  stage: push-vscode
-  retry: 2
-  only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
-  script:
-    - docker push $CI_REGISTRY_IMAGE/vscode:base
-    - docker push $GITLAB_CI_REGISTRY/vscode:base
-
-push-vscode-lang:
-  stage: push-vscode-lang
-  retry: 2
-  only:
-    - production
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker login -u $GITLAB_CI_USER -p $GITLAB_CI_TOKEN $GITLAB_CI_REGISTRY
-  script:
-    - docker push $CI_REGISTRY_IMAGE/vscode:latest
-    - docker push $GITLAB_CI_REGISTRY/vscode:latest
-    - docker push $CI_REGISTRY_IMAGE/vscode/lang:python
-    - docker push $GITLAB_CI_REGISTRY/vscode/lang:python
-    - docker push $CI_REGISTRY_IMAGE/vscode/lang:perl
-    - docker push $GITLAB_CI_REGISTRY/vscode/lang:perl
-    - docker push $CI_REGISTRY_IMAGE/vscode/lang:shell
-    - docker push $GITLAB_CI_REGISTRY/vscode/lang:shell
-    - docker push $CI_REGISTRY_IMAGE/vscode/lang:php
-    - docker push $GITLAB_CI_REGISTRY/vscode/lang:php
-
-clean:
-  stage: clean
-  retry: 2
-  only:
-    - production
-  script:
-    - docker image rm $CI_REGISTRY_IMAGE:latest
-    - docker image rm $GITLAB_CI_REGISTRY:latest
-    - docker image rm $CI_REGISTRY_IMAGE/focal:minimal
-    - docker image rm $GITLAB_CI_REGISTRY/focal:minimal
-    - docker image rm $CI_REGISTRY_IMAGE/focal:latest
-    - docker image rm $GITLAB_CI_REGISTRY/focal:latest  
-    - docker image rm $CI_REGISTRY_IMAGE/focal:supervisor
-    - docker image rm $GITLAB_CI_REGISTRY/focal:supervisor
-    - docker image rm $CI_REGISTRY_IMAGE/eoan:minimal
-    - docker image rm $GITLAB_CI_REGISTRY/eoan:minimal
-    - docker image rm $CI_REGISTRY_IMAGE/eoan:latest
-    - docker image rm $GITLAB_CI_REGISTRY/eoan:latest
-    - docker image rm $CI_REGISTRY_IMAGE/eoan:supervisor
-    - docker image rm $GITLAB_CI_REGISTRY/eoan:supervisor
-    - docker image rm $CI_REGISTRY_IMAGE/vscode:base
-    - docker image rm $GITLAB_CI_REGISTRY/vscode:base
-    - docker image rm $CI_REGISTRY_IMAGE/vscode:latest
-    - docker image rm $GITLAB_CI_REGISTRY/vscode:latest
-    - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:python
-    - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:python
-    - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:perl
-    - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:perl
-    - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:shell
-    - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:shell
-    - docker image rm $CI_REGISTRY_IMAGE/vscode/lang:php
-    - docker image rm $GITLAB_CI_REGISTRY/vscode/lang:php
+    - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/05-cleanup/*.sh"

@@ -1,9 +1,9 @@
 ## Based on official Ubuntu image
-FROM ubuntu:focal AS minimal
+FROM ubuntu:eoan
 
 LABEL maintainer="Chris <mail@gbe0.com>" \
       repository="https://gitlab.com/development-images/ubuntu" \
-      description="Updated Ubuntu Focal container"
+      description="Updated Ubuntu Eoan container with common utilities installed"
 
 ## Configure the mirror to download all packages from (will be inserted to sources list)
 ARG APT_MIRROR="archive.ubuntu.com"
@@ -47,23 +47,6 @@ RUN echo \
       && apt-get update \
       ### Perform full system upgrade
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y dist-upgrade \
-      ### Cleanup temporary files
-      && rm -rf \
-        /tmp/* \
-        /var/cache/* \
-        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
-        /var/tmp/*
-
-## Create layer for common utilities
-FROM minimal AS full
-
-## Set new label
-LABEL description="Updated Ubuntu Focal container with common utilities installed"
-
-## Add standard toolset
-RUN echo \
-      ### Update package cache
-      && apt-get update \
       ### Install standard utils
       && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
         #### Editors/pager
@@ -91,32 +74,3 @@ RUN echo \
 ## Add editor configuration files
 COPY ./vimrc /root/.vimrc
 COPY ./neovimrc /root/.config/nvim/init.vim
-
-## Create layer for supervisor support
-FROM full AS supervisor
-
-## Add startup script
-ADD ./start.sh /start.sh
-
-## Add supervisor
-RUN echo \
-      ### Update package cache
-      && apt-get update \
-      ### Install pip
-      && DEBIAN_FRONTEND="noninteractive" apt-get -q -y install \
-        python3-pip \
-      ### Install supervisor
-      && pip3 install supervisor \
-      ### Create supervisor service include directory
-      && mkdir /etc/supervisord.d \
-      ### Fix startup script permissions
-      && chmod +x /start.sh \
-      ### Cleanup temporary files
-      && rm -rf \
-        /tmp/* \
-        /var/cache/* \
-        /var/lib/apt/{apt,cache,dpkg,lists,log}/* \
-        /var/tmp/*
-
-## Add the supervisor main configuration file
-ADD ./supervisord.conf /etc/supervisord.conf

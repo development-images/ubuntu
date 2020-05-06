@@ -1,4 +1,4 @@
-# Ubuntu Focal with Supervisor
+# Ubuntu Eoan with Supervisor
 
 This example Dockerfile will allow you to run an Ubuntu container with supervisor to manage services.
 
