@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+## Set release to build
+RELEASE="eoan"
+
 ## Make sure required variables are set
 if [ -z "$CI_REGISTRY_IMAGE" ]; then
   echo 'CI_REGISTRY_IMAGE environment variable must be defined'
@@ -9,9 +12,6 @@ if [ -z "$GITLAB_CI_REGISTRY" ]; then
   echo 'GITLAB_CI_REGISTRY environment variable must be defined'
   exit 2
 fi
-
-## Set release to build
-RELEASE="eoan"
 
 ## Build base Focal docker image
 docker build --pull -t "ubuntu/${RELEASE}/base:latest" "./${RELEASE}/base/" || exit 1
