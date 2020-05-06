@@ -1,14 +1,36 @@
 ---
 
 stages:
-  - 01-base
+  - base
 
+## Run base image builds
 
-## Run base build for images that will be used for future steps
-01-base:
-  stage: 01-base
+base-latest:
+  stage: base
   retry: 2
   only:
     - master
   script:
-    - "parallel --env CI_REGISTRY_IMAGE --env GITLAB_CI_REGISTRY -j${PARALLEL_TASKS:-4} ::: .build-scripts/01-base/*.sh"
+    - docker build --pull --no-cache -t "ubuntu/latest/base:latest" "./latest/base/"
+    - docker tag "ubuntu/latest/base:latest" "${CI_REGISTRY_IMAGE}:latest" || exit 1
+    - docker tag "ubuntu/latest/base:latest" "${GITLAB_CI_REGISTRY}:latest" || exit 1
+
+base-eoan:
+  stage: base
+  retry: 2
+  only:
+    - master
+  script:
+    - docker build --pull --no-cache -t "ubuntu/eoan/base:latest" "./eoan/base/"
+    - docker tag "ubuntu/eoan/base:latest" "${CI_REGISTRY_IMAGE}/eoan:latest" || exit 1
+    - docker tag "ubuntu/eoan/base:latest" "${GITLAB_CI_REGISTRY}/eoan:latest" || exit 1
+
+base-focal:
+  stage: base
+  retry: 2
+  only:
+    - master
+  script:
+    - docker build --pull --no-cache -t "ubuntu/focal/base:latest" "./focal/base/"
+    - docker tag "ubuntu/focal/base:latest" "${CI_REGISTRY_IMAGE}/focal:latest" || exit 1
+    - docker tag "ubuntu/focal/base:latest" "${GITLAB_CI_REGISTRY}/focal:latest" || exit 1
