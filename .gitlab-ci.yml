@@ -2,10 +2,7 @@
 
 stages:
   - 01-base
-  # - 02-variants
-  # - 03-vs-code
-  # - 04-push
-  # - 05-cleanup
+
 
 ## Run base build for images that will be used for future steps
 01-base:
@@ -15,39 +12,3 @@ stages:
     - master
   script:
     - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/01-base/*.sh"
-
-## Build the variant images
-02-variants:
-  stage: 02-variants
-  retry: 2
-  only:
-    - master
-  script:
-    - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/02-variants/*.sh"
-
-## Build the VS Code images
-03-vs-code:
-  stage: 03-vs-code
-  retry: 2
-  only:
-    - master
-  script:
-    - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/03-vs-code/*.sh"
-
-## Push the built images
-04-push:
-  stage: 04-push
-  retry: 2
-  only:
-    - master
-  script:
-    - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/04-push/*.sh"
-
-## Cleanup the image files
-05-cleanup:
-  stage: 05-cleanup
-  retry: 2
-  only:
-    - master
-  script:
-    - "parallel -j${PARALLEL_TASKS:-4} ::: .build-scripts/05-cleanup/*.sh"
