@@ -1,13 +1,14 @@
 ---
 
 stages:
-  - build
+  - 01-base
 
-## Run build
-build:
-  stage: build
+
+## Run base build for images that will be used for future steps
+01-base:
+  stage: 01-base
   retry: 2
   only:
     - master
   script:
-    - ./.build-scripts/build.sh
+    - "parallel --env CI_REGISTRY_IMAGE --env GITLAB_CI_REGISTRY -j${PARALLEL_TASKS:-4} ::: .build-scripts/01-base/*.sh"

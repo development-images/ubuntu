@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 ## Make sure required variables are set
-if [ -n "$CI_REGISTRY_IMAGE" ]; then
+if [ -z "$CI_REGISTRY_IMAGE" ]; then
   echo 'CI_REGISTRY_IMAGE environment variable must be defined'
   exit 2
 fi
-if [ -n "$GITLAB_CI_REGISTRY" ]; then
+if [ -z "$GITLAB_CI_REGISTRY" ]; then
   echo 'GITLAB_CI_REGISTRY environment variable must be defined'
   exit 2
 fi
