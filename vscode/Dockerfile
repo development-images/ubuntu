@@ -155,6 +155,14 @@ RUN echo \
         libdata-validate-ip-perl \
         #### Data::Printer
         libdata-printer-perl \
+        #### Testing
+        libtest-fatal-perl libtest-most-perl libtest-json-perl libtest-inline-perl libtest-pod-perl libtest-simple-perl \
+        libtest-www-mechanize-perl libtest-www-selenium-perl libtest-yaml-valid-perl \
+        #### Mechanize
+        libwww-mechanize-perl libwww-mechanize-gzip-perl libwww-mechanize-autopager-perl libwww-mechanize-formfiller-perl \
+        libwww-mechanize-shell-perl \
+        #### LWP
+        liblwp-protocol-https-perl libcrypt-ssleay-perl liblwp-protocol-http-socketunix-perl liblwp-authen-oauth2-perl \
       ### Execute module installation for remaining modules with the '-g' flag for global install
       && cpm install -g \
         #### Modules used for configuration loading
@@ -268,6 +276,14 @@ RUN echo \
         libdata-validate-ip-perl \
         #### Data::Printer
         libdata-printer-perl \
+        #### Testing
+        libtest-fatal-perl libtest-most-perl libtest-json-perl libtest-inline-perl libtest-pod-perl libtest-simple-perl \
+        libtest-www-mechanize-perl libtest-www-selenium-perl libtest-yaml-valid-perl \
+        #### Mechanize
+        libwww-mechanize-perl libwww-mechanize-gzip-perl libwww-mechanize-autopager-perl libwww-mechanize-formfiller-perl \
+        libwww-mechanize-shell-perl \
+        #### LWP
+        liblwp-protocol-https-perl libcrypt-ssleay-perl liblwp-protocol-http-socketunix-perl liblwp-authen-oauth2-perl \
       ### Execute module installation for remaining modules with the '-g' flag for global install
       && cpm install -g \
         #### Modules used for configuration loading
