@@ -1,0 +1,5 @@
+## Ignore all markdown files
+*.md
+## Ignore Dockerfiles
+Dockerfile
+Dockerfile*
