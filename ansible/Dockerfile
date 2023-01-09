@@ -24,6 +24,9 @@ RUN ansible-galaxy collection install junipernetworks.junos
 ## Switch back to vscode user
 USER vscode
 
+## Install pipx
+RUN python3 -m pip install --no-cache-dir --user pipx
+
 ## Install JSON schema
 RUN pipx install check-jsonschema \
     && pipx inject check-jsonschema 'jsonschema[format]'

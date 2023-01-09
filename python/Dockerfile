@@ -4,11 +4,12 @@
 FROM registry.remote.sx/development-images/ubuntu/base:latest
 
 ## Install pipx
-RUN python3 -m pip install --no-cache-dir --user pipx \
-    && python3 -m pipx ensurepath
+RUN python3 -m pip install --no-cache-dir --user pipx
 
 ## Install Conda
-RUN bash -c "$(curl -fsSL https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh)" \
+RUN wget -qO /tmp/miniconda-install.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && bash /tmp/miniconda-install.sh -b -p /home/vscode/conda \
+    && rm -f /tmp/miniconda-install.sh \
     ### Upgrade conda
     && /home/vscode/conda/bin/conda update conda -q -y \
     ### Setup shell
