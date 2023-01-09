@@ -29,22 +29,38 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         lsb-release \
     && rm -rf /var/lib/apt/lists/*
 
-## Install base tools
+## Install shell/shell utilities
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        bash-completion zsh zsh-syntax-highlighting \
+    && rm -rf /var/lib/apt/lists/*
+
+## Install connectivity checking and networking tools tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        iputils-ping tcptraceroute telnet dnsutils net-tools \
+    && rm -rf /var/lib/apt/lists/*
+
+## Install text editors/pagers
 RUN apt-get update && apt-get install -y --no-install-recommends \
         vim neovim less \
-        iputils-ping tcptraceroute \
-        bash-completion zsh zsh-syntax-highlighting \
-        strace \
+    && rm -rf /var/lib/apt/lists/*
+
+## Install HTTP clients
+RUN apt-get update && apt-get install -y --no-install-recommends \
         curl wget \
-        screen tmux \
-        telnet \
-        git \
-        dnsutils \
-        jq \
-        net-tools \
-        sudo \
-        plocate \
-        bsdmainutils \
+    && rm -rf /var/lib/apt/lists/*
+
+## Install development rools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        git jq \
+    && rm -rf /var/lib/apt/lists/*
+
+## Install system utilities
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        screen tmux strace sudo plocate bsdmainutils \
+    && rm -rf /var/lib/apt/lists/*
+
+## Install build tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
     && rm -rf /var/lib/apt/lists/*
 
