@@ -27,49 +27,49 @@ SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
 ## Install lsb-release
 RUN apt-get update && apt-get install -y --no-install-recommends \
         lsb-release \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install shell/shell utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
         bash-completion zsh zsh-syntax-highlighting \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install connectivity checking and networking tools tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
         iputils-ping tcptraceroute telnet dnsutils net-tools whois \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install text editors/pagers
 RUN apt-get update && apt-get install -y --no-install-recommends \
         vim neovim less \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install HTTP clients
 RUN apt-get update && apt-get install -y --no-install-recommends \
         curl wget \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install development rools
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git jq \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install system utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
         screen tmux strace sudo plocate bsdmainutils \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install build tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install language tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
         shellcheck \
         python3 python3-venv python3-pip python3-netaddr python3-dnspython \
         openjdk-11-jdk-headless \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Link "python" -> "python3"
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1
@@ -78,7 +78,7 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 RUN curl -fsSL "https://deb.nodesource.com/setup_${NODE_VERSION}.x" | bash - \
     && apt-get install -y --no-install-recommends \
         nodejs \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Create configuration directories
 RUN mkdir -p /root/.config/nvim
