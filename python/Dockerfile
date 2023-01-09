@@ -3,6 +3,26 @@
 ## Use base image
 FROM registry.remote.sx/development-images/ubuntu/base:latest
 
+## Switch to root
+USER root
+
+## Install python linting tools from Debian packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3-autopep8 python3-flake8 python3-pycodestyle pylint \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+## Install other python tools from Debian packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        python3-dnspython python3-ipython pipenv \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+## Install common Python tools from pip
+RUN python3 -m pip install --no-cache-dir \
+    black ipykernel pandas click
+
+## Switch back to vscode user
+USER vscode
+
 ## Install pipx
 RUN python3 -m pip install --no-cache-dir --user pipx
 
