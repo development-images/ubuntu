@@ -108,9 +108,6 @@ RUN groupadd --gid ${GID} vscode \
     ###   sudo: setrlimit(RLIMIT_CORE): Operation not permitted
     && echo "Set disable_coredump false" >> /etc/sudo.conf
 
-## Switch to the VS Code user
-USER vscode
-
 ## Install configuration files
 COPY .bash_aliases /home/vscode/.bash_aliases
 COPY .zshrc /home/vscode/.zshrc
@@ -118,7 +115,10 @@ COPY .tmux.conf /home/vscode/.tmux.conf
 COPY .ssh /home/vscode/.ssh
 
 ## Fix permissions
-RUN sudo chown -R /home/vscode
+RUN chown -R vscode:vscode /home/vscode
+
+## Switch to the VS Code user
+USER vscode
 
 ## Install oh-my-zsh
 RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
