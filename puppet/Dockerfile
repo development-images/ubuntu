@@ -7,7 +7,7 @@ FROM registry.remote.sx/development-images/ubuntu/base:latest
 ARG PUPPET_VERSION="puppet7"
 
 ## The release name to use for puppet
-ARG PUPPET_RELEASE="jammy"
+ARG PUPPET_RELEASE="focal"
 ARG PUPPET_TOOLS_RELEASE="focal"
 
 ## Switch to root for Puppet installation
