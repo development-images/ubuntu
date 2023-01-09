@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ## Install connectivity checking and networking tools tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        iputils-ping tcptraceroute telnet dnsutils net-tools \
+        iputils-ping tcptraceroute telnet dnsutils net-tools whois \
     && rm -rf /var/lib/apt/lists/*
 
 ## Install text editors/pagers
