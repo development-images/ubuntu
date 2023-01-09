@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ## Install shell/shell utilities
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        bash-completion zsh zsh-syntax-highlighting \
+        bash-completion zsh zsh-syntax-highlighting ssh \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install connectivity checking and networking tools tools
@@ -49,7 +49,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl wget \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
-## Install development rools
+## Install development tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git jq \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
@@ -115,6 +115,7 @@ USER vscode
 COPY .bash_aliases /home/vscode/.bash_aliases
 COPY .zshrc /home/vscode/.zshrc
 COPY .tmux.conf /home/vscode/.tmux.conf
+COPY .ssh /home/vscode/.ssh
 
 ## Install oh-my-zsh
 RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
