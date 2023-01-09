@@ -13,7 +13,7 @@ zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 90
 
 # Enable additional plugins
-plugins=(git conda-zsh-completion poetry)
+plugins=(git)
 
 # Source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -23,6 +23,12 @@ autoload -U compinit && compinit
 
 # Add pipx autocompletion
 eval "$(register-python-argcomplete pipx)"
+
+# Add encrypt function for convenience
+encrypt () {
+    ansible-vault encrypt_string "$1" 2>/dev/null
+    echo ""
+}
 
 # Aliases for common commands
 alias apt='sudo apt'

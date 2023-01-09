@@ -21,3 +21,6 @@ USER vscode
 ## Install JSON schema
 RUN pipx install check-jsonschema \
     && pipx inject check-jsonschema 'jsonschema[format]'
+
+## Update zshrc
+COPY .zshrc /home/vscode/.zshrc
