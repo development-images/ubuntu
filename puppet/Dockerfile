@@ -8,7 +8,7 @@ ARG PUPPET_VERSION="puppet7"
 
 ## The release name to use for puppet
 ARG PUPPET_RELEASE="jammy"
-ARG PUPPET_TOOLS_RELEASE="jammy"
+ARG PUPPET_TOOLS_RELEASE="focal"
 
 ## Switch to root for Puppet installation
 USER root
