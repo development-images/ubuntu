@@ -117,6 +117,9 @@ COPY .zshrc /home/vscode/.zshrc
 COPY .tmux.conf /home/vscode/.tmux.conf
 COPY .ssh /home/vscode/.ssh
 
+## Fix permissions
+RUN sudo chown -R /home/vscode
+
 ## Install oh-my-zsh
 RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
