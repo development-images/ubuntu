@@ -37,3 +37,9 @@ RUN wget -q -O /tmp/puppet-release.deb "http://apt.puppetlabs.com/${PUPPET_VERSI
 
 ## Switch back to vscode user
 USER vscode
+
+## Create PDK configuration directory
+RUN mkdir -p /home/vscode/.config/puppet
+
+## Copy PDK configuration file to disable analytics
+COPY pdk_analytics.yml /home/vscode/.config/puppet/analytics.yml
