@@ -1,5 +1,4 @@
 ## Ignore all markdown files
 *.md
-## Ignore Dockerfiles
+## Ignore Dockerfile
 Dockerfile
-Dockerfile*

@@ -20,3 +20,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Enable completion
 autoload -U compinit && compinit
+
+# Aliases for common commands
+alias apt='sudo apt'
+alias apt-get='sudo apt-get'
