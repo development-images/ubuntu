@@ -9,6 +9,9 @@ build-base:
   stage: build-base
   services:
     - docker:dind
+  rules:
+    - changes:
+      - base/**
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
   variables:
@@ -26,6 +29,10 @@ build-python:
   stage: build
   services:
     - docker:dind
+  rules:
+    - changes:
+      - base/**
+      - python/**
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
   variables:
@@ -43,6 +50,10 @@ build-ansible:
   stage: build
   services:
     - docker:dind
+  rules:
+    - changes:
+      - base/**
+      - ansible/**
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
   variables:
