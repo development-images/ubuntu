@@ -13,9 +13,9 @@ ARG PUPPET_TOOLS_RELEASE="jammy"
 ## Switch to root for Puppet installation
 USER root
 
-## Install bundler
+## Install bundler and ruby-dev
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        bundler \
+        bundler ruby-dev \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install gems that will be used
