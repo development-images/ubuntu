@@ -1,18 +1,38 @@
 # Define stages
 stages:
+  - build-base
   - build
 
 # Build base image
 build-base:
+  image: docker:latest
+  stage: build-base
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+  variables:
+    DOCKER_PATH: "./base/"
+    IMAGE_TAG: "${CI_REGISTRY_IMAGE}/base"
+  script:
+    - docker build -t "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
+    - docker tag "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
+    - docker push "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}"
+    - docker push "${IMAGE_TAG}:latest"
+
+# Build Python image
+build-python:
   image: docker:latest
   stage: build
   services:
     - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+  variables:
+    DOCKER_PATH: "./python/"
+    IMAGE_TAG: "${CI_REGISTRY_IMAGE}/python"
   script:
-    - docker build -t "${CI_REGISTRY_IMAGE}/base:${CI_COMMIT_SHORT_SHA}" "./base/"
-    - docker tag "${CI_REGISTRY_IMAGE}/base:${CI_COMMIT_SHORT_SHA}" "${CI_REGISTRY_IMAGE}/base:latest"
-    - docker push "${CI_REGISTRY_IMAGE}/base:${CI_COMMIT_SHORT_SHA}"
-    - docker push "${CI_REGISTRY_IMAGE}/base:latest"
-
+    - docker build -t "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
+    - docker tag "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
+    - docker push "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}"
+    - docker push "${IMAGE_TAG}:latest"
