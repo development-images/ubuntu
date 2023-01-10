@@ -115,7 +115,8 @@ COPY .tmux.conf /home/vscode/.tmux.conf
 COPY .ssh /home/vscode/.ssh
 
 ## Fix permissions
-RUN chown -R vscode:vscode /home/vscode
+RUN chown -R vscode:vscode /home/vscode \
+    && chmod 600 /home/vscode/.ssh/config
 
 ## Switch to the VS Code user
 USER vscode
