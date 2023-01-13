@@ -1,7 +1,8 @@
 # Define stages
 stages:
   - build-base
-  - build
+  - build-first
+  - build-second
 
 # Build base image
 build-base:
@@ -26,7 +27,7 @@ build-base:
 # Build Python image
 build-python:
   image: docker:latest
-  stage: build
+  stage: build-first
   services:
     - docker:dind
   rules:
@@ -47,7 +48,7 @@ build-python:
 # Build Ansible image
 build-ansible:
   image: docker:latest
-  stage: build
+  stage: build-first
   services:
     - docker:dind
   rules:
@@ -68,7 +69,7 @@ build-ansible:
 # Build Puppet image
 build-puppet:
   image: docker:latest
-  stage: build
+  stage: build-first
   services:
     - docker:dind
   rules:
@@ -80,6 +81,27 @@ build-puppet:
   variables:
     DOCKER_PATH: "./puppet/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/puppet"
+  script:
+    - docker build -t "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
+    - docker tag "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
+    - docker push "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}"
+    - docker push "${IMAGE_TAG}:latest"
+
+# Build Django image
+build-django:
+  image: docker:latest
+  stage: build-second
+  services:
+    - docker:dind
+  rules:
+    - changes:
+      - django/**
+      - puppet/**
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+  variables:
+    DOCKER_PATH: "./django/"
+    IMAGE_TAG: "${CI_REGISTRY_IMAGE}/django"
   script:
     - docker build -t "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
     - docker tag "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
