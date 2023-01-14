@@ -1,7 +1,10 @@
 # Define stages
 stages:
+  ## Base container
   - build-base
+  ## First level containers
   - build-first
+  ## Second level containers
   - build-second
 
 # Build base image
@@ -30,6 +33,8 @@ build-python:
   stage: build-first
   services:
     - docker:dind
+  needs:
+    - build-base
   rules:
     - changes:
       - base/**
@@ -51,6 +56,8 @@ build-ansible:
   stage: build-first
   services:
     - docker:dind
+  needs:
+    - build-base
   rules:
     - changes:
       - base/**
@@ -72,6 +79,8 @@ build-puppet:
   stage: build-first
   services:
     - docker:dind
+  needs:
+    - build-base
   rules:
     - changes:
       - base/**
@@ -93,6 +102,8 @@ build-django:
   stage: build-second
   services:
     - docker:dind
+  needs:
+    - build-python
   rules:
     - changes:
       - django/**
