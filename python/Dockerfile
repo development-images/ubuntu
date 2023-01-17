@@ -36,7 +36,10 @@ RUN wget -qO /tmp/miniconda-install.sh https://repo.anaconda.com/miniconda/Minic
     && /home/vscode/conda/bin/conda init bash \
     && /home/vscode/conda/bin/conda init zsh \
     ### Don't enable conda environment by default
-    && /home/vscode/conda/bin/conda config --set auto_activate_base false
+    && /home/vscode/conda/bin/conda config --set auto_activate_base false \
+    ### Enable pypy repository (conda-forge)
+    && /home/vscode/conda/bin/conda config --add channels conda-forge \
+    && /home/vscode/conda/bin/conda config --set channel_priority strict
 
 ## Install Conda ZSH completion
 RUN git clone --depth=1 https://github.com/esc/conda-zsh-completion /home/vscode/.oh-my-zsh/custom/plugins/conda-zsh-completion
