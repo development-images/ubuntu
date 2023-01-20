@@ -21,6 +21,12 @@ RUN python3 -m pip install --no-cache-dir \
 ## Install JunOS Ansible collection
 RUN ansible-galaxy collection install junipernetworks.junos
 
+## Update zshrc
+COPY .zshrc /home/vscode/.zshrc
+
+## Fix zsh permissions
+RUN chown -R vscode:vscode /home/vscode/.zshrc
+
 ## Switch back to vscode user
 USER vscode
 
@@ -30,6 +36,3 @@ RUN python3 -m pip install --no-cache-dir --user pipx
 ## Install JSON schema
 RUN pipx install check-jsonschema \
     && pipx inject check-jsonschema 'jsonschema[format]'
-
-## Update zshrc
-COPY .zshrc /home/vscode/.zshrc

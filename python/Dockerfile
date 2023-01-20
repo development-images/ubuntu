@@ -20,6 +20,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN python3 -m pip install --no-cache-dir \
     black ipykernel pandas click
 
+## Update zshrc
+COPY .zshrc /home/vscode/.zshrc
+
+## Fix zsh permissions
+RUN chown -R vscode:vscode /home/vscode/.zshrc
+
 ## Switch back to vscode user
 USER vscode
 
@@ -48,6 +54,3 @@ RUN curl -sSL https://install.python-poetry.org | python3 - \
 ## Install Poetry ZSH plugin
 RUN mkdir /home/vscode/.oh-my-zsh/custom/plugins/poetry \
     && poetry completions zsh > /home/vscode/.oh-my-zsh/custom/plugins/poetry/_poetry
-
-## Update zshrc
-COPY .zshrc /home/vscode/.zshrc
