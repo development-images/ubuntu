@@ -9,7 +9,14 @@ FROM registry.remote.sx/development-images/ubuntu/base/${RELEASE}:latest
 ## Switch to root for Ansible installation
 USER root
 
-## Set UTF8 locale
+## Install locales and generate UTF8 locale
+RUN RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    && apt-get update && apt-get install -y --no-install-recommends \
+        locales \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* \
+    && locale-gen en_US.UTF-8
+
+## Set UTF8 locale for Ansible
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.utf-8
 
 ## Install Ansible from PPA
