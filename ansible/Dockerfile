@@ -9,6 +9,9 @@ FROM registry.remote.sx/development-images/ubuntu/base/${RELEASE}:latest
 ## Switch to root for Ansible installation
 USER root
 
+## Set UTF8 locale
+ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en
+
 ## Install Ansible from PPA
 RUN wget -qO- "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6125e2a8c77f2818fb7bd15b93c4a3fd7bb9c367" | apt-key add - \
     && echo "deb https://ppa.launchpadcontent.net/ansible/ansible/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ansible.list \
