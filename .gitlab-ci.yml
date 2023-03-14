@@ -1,7 +1,12 @@
 ---
 
+# Set stages
+stages:
+  - build
+
 # Common build setup for all containers
 .build-common:
+  stage: build
   image: docker:latest
   services:
     - docker:dind
