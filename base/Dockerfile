@@ -1,7 +1,7 @@
 # Base development environment
 
-## Base on current Ubuntu LTS image
-FROM ubuntu:jammy
+## Set base Ubuntu image
+FROM ubuntu:${RELEASE}
 
 ## Set maintainer label
 LABEL maintainer="Chris <docker@gbe0.com>"

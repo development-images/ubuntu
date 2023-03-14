@@ -1,7 +1,7 @@
 # Django development environment
 
 ## Use Python base image
-FROM registry.remote.sx/development-images/ubuntu/python:latest
+FROM registry.remote.sx/development-images/ubuntu/python/${RELEASE}:latest
 
 ## Switch to root
 USER root

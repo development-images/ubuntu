@@ -1,7 +1,7 @@
 # Ansible development environment
 
 ## Use base image
-FROM registry.remote.sx/development-images/ubuntu/base:latest
+FROM registry.remote.sx/development-images/ubuntu/base/${RELEASE}:latest
 
 ## The puppet release to use
 ARG PUPPET_VERSION="puppet7"

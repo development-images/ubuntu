@@ -4,7 +4,7 @@
 export ZSH="/home/vscode/.oh-my-zsh"
 
 # Theme
-ZSH_THEME="robbyrussell"
+ZSH_THEME="gentoo"
 
 # Auto update if required
 zstyle ':omz:update' mode auto

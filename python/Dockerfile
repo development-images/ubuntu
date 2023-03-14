@@ -1,7 +1,7 @@
 # Python development environment
 
 ## Use base image
-FROM registry.remote.sx/development-images/ubuntu/base:latest
+FROM registry.remote.sx/development-images/ubuntu/base/${RELEASE}:latest
 
 ## Switch to root
 USER root
