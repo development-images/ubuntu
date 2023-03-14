@@ -10,7 +10,7 @@ FROM registry.remote.sx/development-images/ubuntu/base/${RELEASE}:latest
 USER root
 
 ## Install locales and generate UTF8 locale
-RUN RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
     && apt-get update && apt-get install -y --no-install-recommends \
         locales \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* \
