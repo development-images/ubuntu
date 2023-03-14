@@ -1,118 +1,117 @@
-# Define stages
-stages:
-  ## Base container
-  - build-base
-  ## First level containers
-  - build-first
-  ## Second level containers
-  - build-second
+---
 
-# Build base image
-build-base:
+# Common build setup for all containers
+.build-common:
   image: docker:latest
-  stage: build-base
   services:
     - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+  script:
+    - docker build -t "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
+    - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
+    - docker push "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}"
+    - docker push "${IMAGE_TAG}/${RELEASE}:latest"
+
+# Common build setup for base containers
+.build-base:
+  extends: .build-common
   variables:
     DOCKER_PATH: "./base/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/base"
-  script:
-    - docker build -t "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
-    - docker tag "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
-    - docker push "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}"
-    - docker push "${IMAGE_TAG}:latest"
 
-# Build Python image
-build-python:
-  image: docker:latest
-  stage: build-first
-  services:
-    - docker:dind
-  needs:
-    - build-base
-  rules:
-    - changes:
-      - base/**
-      - python/**
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+# Build base container for Ubuntu Jammy
+Build Base - Jammy:
+  extends: .build-common
+  variables:
+    RELEASE: jammy
+
+# Build base container for Ubuntu Kinetic
+Build Base - Kinetic:
+  extends: .build-common
+  variables:
+    RELEASE: kinetic
+
+# Common build setup for Python containers
+.build-python:
+  extends: .build-common
   variables:
     DOCKER_PATH: "./python/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/python"
-  script:
-    - docker build -t "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
-    - docker tag "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
-    - docker push "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}"
-    - docker push "${IMAGE_TAG}:latest"
 
-# Build Ansible image
-build-ansible:
-  image: docker:latest
-  stage: build-first
-  services:
-    - docker:dind
+# Build Python container for Ubuntu Jammy
+Build Python - Jammy:
+  extends: .build-python
   needs:
-    - build-base
-  rules:
-    - changes:
-      - base/**
-      - ansible/**
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - Build Base - Jammy
+  variables:
+    RELEASE: jammy
+
+# Build Python container for Ubuntu Kinetic
+Build Python - Kinetic:
+  extends: .build-python
+  needs:
+    - Build Base - Kinetic
+  variables:
+    RELEASE: kinetic
+
+# Common build setup for Ansible containers
+.build-ansible:
+  extends: .build-common
   variables:
     DOCKER_PATH: "./ansible/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/ansible"
-  script:
-    - docker build -t "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
-    - docker tag "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
-    - docker push "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}"
-    - docker push "${IMAGE_TAG}:latest"
 
-# Build Puppet image
-build-puppet:
-  image: docker:latest
-  stage: build-first
-  services:
-    - docker:dind
+# Build Ansible container for Ubuntu Jammy
+Build Ansible - Jammy:
+  extends: .build-ansible
   needs:
-    - build-base
-  rules:
-    - changes:
-      - base/**
-      - puppet/**
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - Build Base - Jammy
+  variables:
+    RELEASE: jammy
+
+# Build Ansible container for Ubuntu Kinetic
+Build Ansible - Kinetic:
+  extends: .build-ansible
+  needs:
+    - Build Base - Kinetic
+  variables:
+    RELEASE: kinetic
+
+# Common build setup for Puppet containers
+.build-puppet:
+  extends: .build-common
   variables:
     DOCKER_PATH: "./puppet/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/puppet"
-  script:
-    - docker build -t "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
-    - docker tag "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
-    - docker push "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}"
-    - docker push "${IMAGE_TAG}:latest"
 
-# Build Django image
-build-django:
-  image: docker:latest
-  stage: build-second
-  services:
-    - docker:dind
+# Build Puppet container for Ubuntu Jammy
+Build Puppet - Jammy:
+  extends: .build-puppet
   needs:
-    - build-python
-  rules:
-    - changes:
-      - base/**
-      - python/**
-      - django/**
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - Build Base - Jammy
+  variables:
+    RELEASE: jammy
+
+# Common build setup for Django containers
+.build-django:
+  extends: .build-common
   variables:
     DOCKER_PATH: "./django/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/django"
-  script:
-    - docker build -t "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "$DOCKER_PATH"
-    - docker tag "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
-    - docker push "${IMAGE_TAG}:${CI_COMMIT_SHORT_SHA}"
-    - docker push "${IMAGE_TAG}:latest"
+
+# Build Django container for Ubuntu Jammy
+Build Django - Jammy:
+  extends: .build-django
+  needs:
+    - Build Python - Jammy
+  variables:
+    RELEASE: jammy
+
+# Build Django container for Ubuntu Kinetic
+Build Django - Kinetic:
+  extends: .build-django
+  needs:
+    - Build Python - Kinetic
+  variables:
+    RELEASE: kinetic
