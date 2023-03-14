@@ -27,13 +27,13 @@ stages:
 
 # Build base container for Ubuntu Jammy
 Build Base - Jammy:
-  extends: .build-common
+  extends: .build-base
   variables:
     RELEASE: jammy
 
 # Build base container for Ubuntu Kinetic
 Build Base - Kinetic:
-  extends: .build-common
+  extends: .build-base
   variables:
     RELEASE: kinetic
 
