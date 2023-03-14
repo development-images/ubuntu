@@ -1,0 +1,20 @@
+---
+
+# Common build setup for base containers
+.build-base:
+  extends: .build-common
+  variables:
+    DOCKER_PATH: "./base/"
+    IMAGE_TAG: "${CI_REGISTRY_IMAGE}/base"
+
+# Build base container for Ubuntu Jammy
+Build Base - Jammy:
+  extends: .build-base
+  variables:
+    RELEASE: jammy
+
+# Build base container for Ubuntu Kinetic
+Build Base - Kinetic:
+  extends: .build-base
+  variables:
+    RELEASE: kinetic

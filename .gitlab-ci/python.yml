@@ -1,0 +1,24 @@
+---
+
+# Common build setup for Python containers
+.build-python:
+  extends: .build-common
+  variables:
+    DOCKER_PATH: "./python/"
+    IMAGE_TAG: "${CI_REGISTRY_IMAGE}/python"
+
+# Build Python container for Ubuntu Jammy
+Build Python - Jammy:
+  extends: .build-python
+  needs:
+    - Build Base - Jammy
+  variables:
+    RELEASE: jammy
+
+# Build Python container for Ubuntu Kinetic
+Build Python - Kinetic:
+  extends: .build-python
+  needs:
+    - Build Base - Kinetic
+  variables:
+    RELEASE: kinetic

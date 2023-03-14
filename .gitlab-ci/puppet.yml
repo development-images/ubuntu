@@ -1,0 +1,16 @@
+---
+
+# Common build setup for Puppet containers
+.build-puppet:
+  extends: .build-common
+  variables:
+    DOCKER_PATH: "./puppet/"
+    IMAGE_TAG: "${CI_REGISTRY_IMAGE}/puppet"
+
+# Build Puppet container for Ubuntu Jammy
+Build Puppet - Jammy:
+  extends: .build-puppet
+  needs:
+    - Build Base - Jammy
+  variables:
+    RELEASE: jammy

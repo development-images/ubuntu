@@ -1,0 +1,24 @@
+---
+
+# Common build setup for Django containers
+.build-django:
+  extends: .build-common
+  variables:
+    DOCKER_PATH: "./django/"
+    IMAGE_TAG: "${CI_REGISTRY_IMAGE}/django"
+
+# Build Django container for Ubuntu Jammy
+Build Django - Jammy:
+  extends: .build-django
+  needs:
+    - Build Python - Jammy
+  variables:
+    RELEASE: jammy
+
+# Build Django container for Ubuntu Kinetic
+Build Django - Kinetic:
+  extends: .build-django
+  needs:
+    - Build Python - Kinetic
+  variables:
+    RELEASE: kinetic
