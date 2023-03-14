@@ -1,5 +1,8 @@
 # Ansible development environment
 
+## Create arg for release
+ARG RELEASE="jammy"
+
 ## Use base image
 FROM registry.remote.sx/development-images/ubuntu/base/${RELEASE}:latest
 

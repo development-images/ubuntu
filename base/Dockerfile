@@ -1,5 +1,8 @@
 # Base development environment
 
+## Create arg for release
+ARG RELEASE="jammy"
+
 ## Set base Ubuntu image
 FROM ubuntu:${RELEASE}
 
@@ -16,7 +19,7 @@ ARG UID=1000
 ARG GID=$UID
 
 ## Configure LANG, LC_ALL and LANGUAGE environment vars to prevent various errors
-ENV LANG=C LC_ALL=C LANGUAGE=C
+ENV LANG=en_US.UTF-8 LC_ALL=C LANGUAGE=C
 
 ## Configure apt options
 ENV DEBIAN_FRONTEND="noninteractive" DEBCONF_NOWARNINGS="yes"
