@@ -14,3 +14,7 @@ Build Puppet - Jammy:
     - Build Base - Jammy
   variables:
     RELEASE: jammy
+  script:
+    - !reference [.build-common, script]
+    - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
+    - docker push "${IMAGE_TAG}:latest"
