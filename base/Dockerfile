@@ -1,7 +1,7 @@
 # Base development environment
 
 ## Create arg for release
-ARG RELEASE="jammy"
+ARG RELEASE
 
 ## Set base Ubuntu image
 FROM ubuntu:${RELEASE}

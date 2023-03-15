@@ -1,7 +1,7 @@
 # Django development environment
 
 ## Create arg for release
-ARG RELEASE="jammy"
+ARG RELEASE
 
 ## Use Python base image
 FROM registry.remote.sx/development-images/ubuntu/python/${RELEASE}:latest
