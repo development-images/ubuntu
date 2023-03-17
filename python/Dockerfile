@@ -11,7 +11,7 @@ USER root
 
 ## Install python linting tools from Debian packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        python3-autopep8 python3-flake8 python3-pycodestyle pylint \
+        python3-autopep8 python3-flake8 python3-pycodestyle pylint python3-mypy python3-mypy-extensions \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install other python tools from Debian packages
