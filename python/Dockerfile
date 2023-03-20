@@ -32,8 +32,9 @@ RUN chown -R vscode:vscode /home/vscode/.zshrc
 ## Switch back to vscode user
 USER vscode
 
-## Install pipx
-RUN python3 -m pip install --no-cache-dir --user pipx
+## Install pipx and semgrep
+RUN python3 -m pip install --no-cache-dir --user pipx \
+    && pipx install semgrep
 
 ## Install Conda
 RUN wget -qO /tmp/miniconda-install.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
