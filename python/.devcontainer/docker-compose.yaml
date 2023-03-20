@@ -5,7 +5,7 @@ version: '3.3'
 
 services:
 
-  python-development-container:
+  code:
     build:
       context: ./docker
     restart: "no"
@@ -14,11 +14,11 @@ services:
       - ..:/code
       ## Mount a volume containing the VS code extensions to prevent having to install them each rebuild
       ## A volume will be created for both VS Code and VS Code Insiders edition
-      - python-development-container-ext:/home/vscode/.vscode-server
-      - python-development-container-ext-insiders:/home/vscode/.vscode-server-insiders
+      - code-ext:/home/vscode/.vscode-server
+      - code-ext-insiders:/home/vscode/.vscode-server-insiders
     tty: true
 
 ## Define the named volumes that are used for the above services
 volumes:
-  python-development-container-ext:
-  python-development-container-ext-insiders:
+  code-ext:
+  code-ext-insiders:
