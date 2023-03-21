@@ -56,8 +56,10 @@ RUN git clone --depth=1 https://github.com/esc/conda-zsh-completion /home/vscode
 
 ### Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 - \
-    && poetry config virtualenvs.create false
-
-## Install Poetry ZSH plugin
-RUN mkdir /home/vscode/.oh-my-zsh/custom/plugins/poetry \
-    && poetry completions zsh > /home/vscode/.oh-my-zsh/custom/plugins/poetry/_poetry
+    && poetry config virtualenvs.create false \
+    ### Add ZSH plugin
+    && mkdir /home/vscode/.oh-my-zsh/custom/plugins/poetry \
+    && poetry completions zsh > /home/vscode/.oh-my-zsh/custom/plugins/poetry/_poetry \
+    ### Add work around for Poetry 1.4.1; MyPy will fail to install due to a broken wheel
+    ### https://github.com/microsoft/debugpy/issues/1246
+    && poetry config installer.modern-installation false
