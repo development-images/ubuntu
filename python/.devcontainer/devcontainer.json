@@ -66,6 +66,10 @@
         "gitlab.gitlab-workflow",
         // GitHub Co Pilot
         "GitHub.copilot",
+        // Indent rainbow
+        "oderwat.indent-rainbow",
+        // JSON Crack
+        "AykutSarac.jsoncrack-vscode",
         // Jupyter
         "ms-toolsai.jupyter",
         // Markdown All in One
@@ -123,7 +127,9 @@
         // VSC Python Indent
         "kevinrose.vsc-python-indent",
         // YAML
-        "redhat.vscode-yaml"
+        "redhat.vscode-yaml",
+        // YAML Sort
+        "PascalReitermann93.vscode-yaml-sort"
       ]
     }
   }
