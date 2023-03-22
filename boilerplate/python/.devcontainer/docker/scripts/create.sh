@@ -28,7 +28,7 @@ fi
 cd /code
 
 # Activate environment
-conda activate python3.11
+conda activate "$USE_CONDA_ENV"
 
 # Install requirements with poetry
 poetry install --no-interaction

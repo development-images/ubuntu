@@ -50,11 +50,12 @@
 
       // Install dev container extension packs
       "extensions": [
+        // API tools extension pack
+        "gbe0.gbe0-api",
+        // Common extension pack
         "gbe0.gbe0-base",
-        "gbe0.gbe0-markdown",
-        "gbe0.gbe0-python",
-        "gbe0.gbe0-python-linting",
-        "gbe0.gbe0-tools"
+        // Python specific extension pack
+        "gbe0.gbe0-python"
       ]
     }
   }
