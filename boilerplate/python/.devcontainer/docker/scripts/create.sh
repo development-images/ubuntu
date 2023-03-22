@@ -28,7 +28,7 @@ fi
 cd /code
 
 # Activate environment
-conda activate "$USE_CONDA_ENV"
+conda activate development
 
 # Install requirements with poetry
 poetry install --no-interaction
