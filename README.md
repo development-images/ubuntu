@@ -53,7 +53,7 @@ It is recommended to use the boiler plate configuration files with the container
 
 ### Python
 
-The Python dev container boilerplate is available [here](/python/.devcontainer/).
+The Python dev container boilerplate is available [here](/boilerplate/python/README.md).
 
 ## Suggestions? Ideas?
 
