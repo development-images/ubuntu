@@ -48,88 +48,13 @@
         "terminal.integrated.defaultProfile": "zsh"
       },
 
-      // Install dev container extensions
+      // Install dev container extension packs
       "extensions": [
-        // Better Comments
-        "aaron-bond.better-comments",
-        // Bookmarks
-        "alefragnani.bookmarks",
-        // Code Runner
-        "formulahendry.code-runner",
-        // Code Spell
-        "streetsidesoftware.code-spell-checker",
-        // Docker
-        "ms-azuretools.vscode-docker",
-        // GitLens
-        "eamodio.gitlens",
-        // GitLab Workflow
-        "gitlab.gitlab-workflow",
-        // GitHub Co Pilot
-        "GitHub.copilot",
-        // Indent rainbow
-        "oderwat.indent-rainbow",
-        // JSON Crack
-        "AykutSarac.jsoncrack-vscode",
-        // Jupyter
-        "ms-toolsai.jupyter",
-        // Markdown All in One
-        "yzhang.markdown-all-in-one",
-        // Markdown Preview Enhanced
-        "shd101wyy.markdown-preview-enhanced",
-        // Markdown TOC
-        "alanwalk.markdown-toc",
-        // markdownlint
-        "davidanson.vscode-markdownlint",
-        // Microsoft Intellicode
-        "visualstudioexptteam.vscodeintellicode",
-        // Magic Python
-        "magicstack.magicpython",
-        // Prettier code formatter
-        "esbenp.prettier-vscode",
-        // Python
-        "ms-python.python",
-        // Python autodocstring
-        "njpwerner.autodocstring",
-        // Python environments
-        "donjayamanne.python-environment-manager",
-        // Python MyPy
-        "matangover.mypy",
-        // Python Pylance
-        "ms-python.vscode-pylance",
-        // Python PyLint
-        "ms-python.pylint",
-        // Python isort
-        "ms-python.isort",
-        // Python flake8
-        "ms-python.flake8",
-        // Rainbow CSV
-        "mechatroner.rainbow-csv",
-        // REST API Client
-        "humao.rest-client",
-        // Shellcheck
-        "timonwong.shellcheck",
-        // Shell format
-        "foxundermoon.shell-format",
-        // Sonarlint
-        "sonarsource.sonarlint-vscode",
-        // Table Formatter
-        "shuworks.vscode-table-formatter",
-        // Thunder Client for sending HTTP requests
-        "rangav.vscode-thunder-client",
-        // Todo Tree
-        "gruntfuggly.todo-tree",
-        // TOML
-        "be5invis.toml",
-        // Trailing spaces
-        "shardulm94.trailing-spaces",
-        // VSC Jupyter Notebook Previewer
-        "jithurjacob.nbpreviewer",
-        // VSC Python Indent
-        "kevinrose.vsc-python-indent",
-        // YAML
-        "redhat.vscode-yaml",
-        // YAML Sort
-        "PascalReitermann93.vscode-yaml-sort"
+        "gbe0.gbe0-base",
+        "gbe0.gbe0-markdown",
+        "gbe0.gbe0-python",
+        "gbe0.gbe0-python-linting",
+        "gbe0.gbe0-tools"
       ]
     }
   }
