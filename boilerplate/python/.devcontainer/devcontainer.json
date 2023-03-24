@@ -55,7 +55,9 @@
         // Common extension pack
         "gbe0.gbe0-base",
         // Python specific extension pack
-        "gbe0.gbe0-python"
+        "gbe0.gbe0-python",
+        // Python linting extension pack
+        "gbe0.gbe0-python-lint"
       ]
     }
   }
