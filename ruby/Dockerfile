@@ -23,5 +23,8 @@ RUN apt-get update \
 ## Install rubocop from gem
 RUN gem install rubocop
 
+## Add user ruby bin to $PATH
+ENV PATH="/home/ruby/.gem/ruby/3.0.0/bin:${PATH}"
+
 ## Switch back to vscode user
 USER vscode
