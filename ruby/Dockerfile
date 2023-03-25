@@ -25,9 +25,3 @@ RUN gem install rubocop
 
 ## Switch back to vscode user
 USER vscode
-
-## Set local path for gems
-RUN bundle config set --local path '/home/vscode/.gem'
-
-## Add user ruby bin to $PATH
-ENV PATH="/home/ruby/.gem/ruby/3.0.0/bin:${PATH}"
