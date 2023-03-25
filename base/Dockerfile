@@ -27,51 +27,29 @@ ENV DEBIAN_FRONTEND="noninteractive" DEBCONF_NOWARNINGS="yes"
 ## Set shell options
 SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
 
-## Install lsb-release
+## Install the various utilities and tools that are used in the development environment
 RUN apt-get update && apt-get install -y --no-install-recommends \
+        ## lsb-release for getting distribution information
         lsb-release \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-## Install shell/shell utilities
-RUN apt-get update && apt-get install -y --no-install-recommends \
+        ## Shell and shell utilities
         bash-completion zsh zsh-syntax-highlighting ssh \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-## Install connectivity checking and networking tools tools
-RUN apt-get update && apt-get install -y --no-install-recommends \
+        ## Connectivity checking and networking tools
         iputils-ping tcptraceroute telnet dnsutils net-tools whois \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-## Install text editors/pagers
-RUN apt-get update && apt-get install -y --no-install-recommends \
+        ## Text editors/pagers
         vim neovim less \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-## Install HTTP clients
-RUN apt-get update && apt-get install -y --no-install-recommends \
+        ## HTTP clients
         curl wget \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-## Install development tools
-RUN apt-get update && apt-get install -y --no-install-recommends \
+        ## Development tools
         git jq \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-## Install system utilities
-RUN apt-get update && apt-get install -y --no-install-recommends \
+        ## System utilities
         screen tmux strace sudo plocate bsdmainutils \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-## Install build tools
-RUN apt-get update && apt-get install -y --no-install-recommends \
+        ## Build tools
         build-essential \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
-## Install language tools
-RUN apt-get update && apt-get install -y --no-install-recommends \
+        ## Language tools
         shellcheck \
         python3 python3-venv python3-pip python3-netaddr python3-dnspython \
         openjdk-11-jdk-headless \
+    ## Clean up
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Link "python" -> "python3"
