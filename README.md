@@ -21,14 +21,14 @@ The following container images are available:
 | Base    | Base container that all images inherit from. Not very useful by itself. | `registry.gitlab.com/development-images/ubuntu/base:latest`    |
 | Ansible | Container with Ansible installed.                                       | `registry.gitlab.com/development-images/ubuntu/ansible:latest` |
 | Python  | Container with Python, Conda and Poetry installed.                      | `registry.gitlab.com/development-images/ubuntu/python:latest`  |
-| Ruby    | Container with Python, Conda and Poetry installed.                      | `registry.gitlab.com/development-images/ubuntu/ruby:latest`    |
+| Ruby    | Container with Ruby and bundler installed.                              | `registry.gitlab.com/development-images/ubuntu/ruby:latest`    |
 
 Additionally, the following containers are build based on the above containers:
 
-| Name   | Base                                                            | Description                                                                | Container                                                     |
-| ------ | --------------------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| Django | Python                                                          | Container for use with Django (comes with MySQL and PostgreSQL libraries). | `registry.gitlab.com/development-images/ubuntu/django:latest` |
-| Puppet | Container with Puppet and the Puppet development kit installed. | `registry.gitlab.com/development-images/ubuntu/puppet:latest`              |
+| Name   | Base   | Description                                                                | Container                                                     |
+| ------ | ------ | -------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Django | Python | Container for use with Django (comes with MySQL and PostgreSQL libraries). | `registry.gitlab.com/development-images/ubuntu/django:latest` |
+| Puppet | Ruby   | Container for Ruby development.                                            | `registry.gitlab.com/development-images/ubuntu/puppet:latest` |
 
 These tags will always point to the current Ubuntu release (LTS or not).
 
@@ -44,7 +44,7 @@ Additional tags are available for each container that are pinned to a specific U
 | Base    | `registry.gitlab.com/development-images/ubuntu/base/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/base/lunar:latest`    |
 | Ansible | `registry.gitlab.com/development-images/ubuntu/ansible/jammy:latest` | `registry.gitlab.com/development-images/ubuntu/ansible/lunar:latest` |
 | Django  | `registry.gitlab.com/development-images/ubuntu/django/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/django/lunar:latest`  |
-| Puppet  | `registry.gitlab.com/development-images/ubuntu/puppet/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/puppet/lunar:latest`  |
+| Puppet  | `registry.gitlab.com/development-images/ubuntu/puppet/jammy:latest`  | **N/A** - Not supported                                              |
 | Python  | `registry.gitlab.com/development-images/ubuntu/python/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/python/lunar:latest`  |
 | Ruby    | `registry.gitlab.com/development-images/ubuntu/ruby/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/ruby/lunar:latest`    |
 
