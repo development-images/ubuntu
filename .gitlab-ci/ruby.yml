@@ -1,0 +1,28 @@
+---
+
+# Common build setup for Ruby containers
+.build-ruby:
+  extends: .build-common
+  variables:
+    DOCKER_PATH: "./ruby/"
+    IMAGE_TAG: "${CI_REGISTRY_IMAGE}/ruby"
+
+# Build Ruby container for Ubuntu Jammy
+Build Ruby - Jammy:
+  extends: .build-ruby
+  needs:
+    - Build Base - Jammy
+  variables:
+    RELEASE: jammy
+
+# Build Ruby container for Ubuntu Kinetic
+Build Ruby - Kinetic:
+  extends: .build-ruby
+  needs:
+    - Build Base - Kinetic
+  variables:
+    RELEASE: kinetic
+  script:
+    - !reference [.build-common, script]
+    - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
+    - docker push "${IMAGE_TAG}:latest"

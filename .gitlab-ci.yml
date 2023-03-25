@@ -20,8 +20,9 @@ stages:
 
 # Include CI for each container to build
 include:
-  - local: '/.gitlab-ci/base.yml'
   - local: '/.gitlab-ci/ansible.yml'
+  - local: '/.gitlab-ci/base.yml'
   - local: '/.gitlab-ci/django.yml'
   - local: '/.gitlab-ci/puppet.yml'
   - local: '/.gitlab-ci/python.yml'
+  - local: '/.gitlab-ci/ruby.yml'
