@@ -4,7 +4,7 @@
 ARG RELEASE
 
 ## Use base image
-FROM registry.remote.sx/development-images/ubuntu/base/${RELEASE}:latest
+FROM registry.remote.sx/development-images/ubuntu/ruby/${RELEASE}:latest
 
 ## The puppet release to use
 ARG PUPPET_VERSION="puppet7"
@@ -16,13 +16,7 @@ ARG PUPPET_TOOLS_RELEASE="focal"
 ## Switch to root for Puppet installation
 USER root
 
-## Install bundler and ruby-dev
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        bundler ruby-dev \
-    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
-
 ## Install gems that will be used
-RUN gem install rubocop
 RUN gem install r10k
 RUN gem install solargraph
 RUN gem install puppet-debugger

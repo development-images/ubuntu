@@ -11,7 +11,7 @@
 Build Puppet - Jammy:
   extends: .build-puppet
   needs:
-    - Build Base - Jammy
+    - Build Ruby - Jammy
   variables:
     RELEASE: jammy
   script:
