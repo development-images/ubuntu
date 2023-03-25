@@ -14,8 +14,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         bundler ruby-dev \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
+## Add common development headers for building gems
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libyaml-dev libssl-dev libffi-dev zlib1g-dev libreadline-dev \
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
 ## Install rubocop from gem
 RUN gem install rubocop
 
 ## Switch back to vscode user
 USER vscode
+
+## Set local path for gems
+RUN bundle config set --local path '/home/vscode/.gem'
+
+## Add user ruby bin to $PATH
+ENV PATH="/home/ruby/.gem/ruby/3.0.0/bin:${PATH}"
