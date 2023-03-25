@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ## Development tools
         git jq \
         ## System utilities
-        screen tmux strace sudo plocate bsdmainutils \
+        screen tmux strace sudo plocate bsdmainutils pigz \
         ## Build tools
         build-essential \
         ## Language tools
