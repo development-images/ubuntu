@@ -1,4 +1,4 @@
-# Ansible development environment
+# Puppet development environment
 
 ## Create arg for release
 ARG RELEASE
