@@ -9,6 +9,7 @@ The containers are built on schedule every 4 days.
     - [Additional Tags](#additional-tags)
   - [Dev Container Configurations](#dev-container-configurations)
     - [Python](#python)
+    - [Ruby](#ruby)
   - [Suggestions? Ideas?](#suggestions-ideas)
 
 ## Containers
@@ -42,9 +43,9 @@ Additional tags are available for each container that are pinned to a specific U
 | ------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | Base    | `registry.gitlab.com/development-images/ubuntu/base/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/base/lunar:latest`    |
 | Ansible | `registry.gitlab.com/development-images/ubuntu/ansible/jammy:latest` | `registry.gitlab.com/development-images/ubuntu/ansible/lunar:latest` |
+| Django  | `registry.gitlab.com/development-images/ubuntu/django/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/django/lunar:latest`  |
 | Puppet  | `registry.gitlab.com/development-images/ubuntu/puppet/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/puppet/lunar:latest`  |
 | Python  | `registry.gitlab.com/development-images/ubuntu/python/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/python/lunar:latest`  |
-| Django  | `registry.gitlab.com/development-images/ubuntu/django/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/django/lunar:latest`  |
 | Ruby    | `registry.gitlab.com/development-images/ubuntu/ruby/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/ruby/lunar:latest`    |
 
 ## Dev Container Configurations
@@ -56,6 +57,10 @@ It is recommended to use the boiler plate configuration files with the container
 ### Python
 
 The Python dev container boilerplate is available [here](/boilerplate/python/README.md).
+
+### Ruby
+
+The Ruby ddev container boilerplate is available [here](/boilerplate/ruby/README.md).
 
 ## Suggestions? Ideas?
 
