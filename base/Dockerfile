@@ -61,6 +61,10 @@ RUN curl -fsSL "https://deb.nodesource.com/setup_${NODE_VERSION}.x" | bash - \
         nodejs \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
+## Add hadolint to container
+ADD https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64 /usr/local/bin/hadolint
+RUN chmod +x /usr/local/bin/hadolint
+
 ## Create configuration directories
 RUN mkdir -p /root/.config/nvim
 
