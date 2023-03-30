@@ -5,32 +5,11 @@
 		}
 	],
 	"settings": {
-		"python.formatting.provider": "black",
 		"editor.tabSize": 4,
 		"gitlens.remotes": [
 			{ "domain": "git.remote.sx", "type": "GitLab" }
 		],
 		"gitlab.showPipelineUpdateNotifications": true,
-		"gitlab.pipelineGitRemoteName": "origin",
-		"python.defaultInterpreterPath": "/home/vscode/conda/envs/development/bin/python3",
-		"pylint.args": [
-			"--max-line-length=120"
-		],
-		"flake8.args": [
-			"--max-line-length=120"
-		],
-		"notebook.output.textLineLimit": 200
-	},
-	"launch": {
-		"version": "0.2.0",
-		"configurations": [
-			{
-				"name": "Python (Default): Current File",
-				"type": "python",
-				"request": "launch",
-				"program": "${file}",
-				"console": "integratedTerminal"
-			}
-		]
+		"gitlab.pipelineGitRemoteName": "origin"
 	}
 }
