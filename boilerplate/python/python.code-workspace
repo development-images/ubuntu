@@ -19,7 +19,9 @@
 		"flake8.args": [
 			"--max-line-length=120"
 		],
-		"notebook.output.textLineLimit": 200
+		"notebook.output.textLineLimit": 200,
+		"python.analysis.diagnosticMode": "workspace",
+		"python.analysis.typeCheckingMode": "basic"
 	},
 	"launch": {
 		"version": "0.2.0",
