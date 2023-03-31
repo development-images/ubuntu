@@ -8,6 +8,7 @@ The containers are built on schedule every 4 days.
   - [Containers](#containers)
     - [Additional Tags](#additional-tags)
   - [Dev Container Configurations](#dev-container-configurations)
+    - [Ansible](#ansible)
     - [Python](#python)
     - [Ruby](#ruby)
   - [Suggestions? Ideas?](#suggestions-ideas)
@@ -53,6 +54,10 @@ Additional tags are available for each container that are pinned to a specific U
 Boiler plate dev container configuration files are available for some of the development containers. **You should review the relevant files before use.**
 
 It is recommended to use the boiler plate configuration files with the containers as they will install relevant VS Code extensions.
+
+### Ansible
+
+The Ansible dev container boilerplate is available [here](/boilerplate/ansible/README.md).
 
 ### Python
 
