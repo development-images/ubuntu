@@ -8,9 +8,6 @@ The containers are built on schedule every 4 days.
   - [Containers](#containers)
     - [Additional Tags](#additional-tags)
   - [Dev Container Configurations](#dev-container-configurations)
-    - [Ansible](#ansible)
-    - [Python](#python)
-    - [Ruby](#ruby)
   - [Suggestions? Ideas?](#suggestions-ideas)
 
 ## Containers
@@ -55,17 +52,11 @@ Boiler plate dev container configuration files are available for some of the dev
 
 It is recommended to use the boiler plate configuration files with the containers as they will install relevant VS Code extensions.
 
-### Ansible
-
-The Ansible dev container boilerplate is available [here](/boilerplate/ansible/README.md).
-
-### Python
-
-The Python dev container boilerplate is available [here](/boilerplate/python/README.md).
-
-### Ruby
-
-The Ruby dev container boilerplate is available [here](/boilerplate/ruby/README.md).
+| Base Container |                  README                  |                                           Description                                            |
+| -------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Ansible        | [README](/boilerplate/ansible/README.md) | Boiler plate files for an Ansible project. Includes Ansible configuration default configuration. |
+| Python         | [README](/boilerplate/python/README.md)  | Python development container. Various linting tools included in dev container extensions.        |
+| Ruby           | [README](/boilerplate/ruby/README.md)    | Ruby development container.                                                                      |
 
 ## Suggestions? Ideas?
 
