@@ -5,11 +5,11 @@
     }
   ],
   "settings": {
-    "redhat.telemetry.enabled": false,
-    "terminal.integrated.scrollback": 50000,
     "editor.tabSize": 4,
-    "gitlens.remotes": [{ "domain": "git.remote.sx", "type": "GitLab" }],
+    "gitlab.pipelineGitRemoteName": "origin",
     "gitlab.showPipelineUpdateNotifications": true,
-    "gitlab.pipelineGitRemoteName": "origin"
+    "gitlens.remotes": [{ "domain": "git.remote.sx", "type": "GitLab" }],
+    "redhat.telemetry.enabled": false,
+    "terminal.integrated.scrollback": 50000
   }
 }
