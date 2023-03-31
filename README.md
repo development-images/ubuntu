@@ -60,7 +60,7 @@ The Python dev container boilerplate is available [here](/boilerplate/python/REA
 
 ### Ruby
 
-The Ruby ddev container boilerplate is available [here](/boilerplate/ruby/README.md).
+The Ruby dev container boilerplate is available [here](/boilerplate/ruby/README.md).
 
 ## Suggestions? Ideas?
 
