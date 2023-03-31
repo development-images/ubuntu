@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.tabSize": 4,
+    "gitlab.pipelineGitRemoteName": "origin",
+    "gitlab.showPipelineUpdateNotifications": true,
+    "gitlens.remotes": [{ "domain": "git.remote.sx", "type": "GitLab" }],
+    "redhat.telemetry.enabled": false,
+    "terminal.integrated.scrollback": 50000,
+    "yaml.customTags": ["!vault"]
+  }
+}
