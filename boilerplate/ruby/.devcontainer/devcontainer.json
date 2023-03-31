@@ -26,12 +26,6 @@
     "vscode": {
       // Define settings
       "settings": {
-        // Disable RedHat YAML extension telemetry
-        "redhat.telemetry.enabled": false,
-
-        // Raise terminal scrollback buffer size
-        "terminal.integrated.scrollback": 50000,
-
         // Create terminal profiles
         "terminal.integrated.profiles.linux": {
           "zsh": {
@@ -46,7 +40,6 @@
             "icon": "terminal-tmux"
           }
         },
-
         // Set default profile as ZSH
         "terminal.integrated.defaultProfile": "zsh"
       },

@@ -1,15 +1,15 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"editor.tabSize": 4,
-		"gitlens.remotes": [
-			{ "domain": "git.remote.sx", "type": "GitLab" }
-		],
-		"gitlab.showPipelineUpdateNotifications": true,
-		"gitlab.pipelineGitRemoteName": "origin"
-	}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "redhat.telemetry.enabled": false,
+    "terminal.integrated.scrollback": 50000,
+    "editor.tabSize": 4,
+    "gitlens.remotes": [{ "domain": "git.remote.sx", "type": "GitLab" }],
+    "gitlab.showPipelineUpdateNotifications": true,
+    "gitlab.pipelineGitRemoteName": "origin"
+  }
 }
