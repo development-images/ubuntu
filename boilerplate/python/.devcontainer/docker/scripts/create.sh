@@ -31,7 +31,7 @@ cd /code
 conda activate development
 
 # Install requirements with poetry
-poetry install --no-interaction
+poetry install --no-interaction --all-extras
 
 echo "----------------------------------------------------------------------------"
 echo "Python requirements installed"

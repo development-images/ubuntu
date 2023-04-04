@@ -1,0 +1,113 @@
+[tool.poetry]
+name = "My Python Package"
+description = "Example Python Package"
+authors = ["Me <me@example.com>"]
+version = "1.0.0"
+readme = "README.md"
+homepage = "https://example.com"
+repository = "https://github.com/example/example"
+
+[tool.poetry.dependencies]
+# Python version required
+python = "^3.10"
+
+# Common libraries
+pydantic = "^1.10.7"
+pyyaml = "^6.0"
+tabulate = "^0.9.0"
+
+# Comon libraries for CLI scripts
+click = {version = "^8.1.3", optional = true}
+loguru = {version = "^0.6.0", optional = true}
+
+# Optional requirements for development purposes
+autopep8 = {version = "^2.0.1", optional = true}
+black = {version = "^23.1.0", optional = true}
+Cython = {version = "^0.29.33", optional = true}
+devtools = {extras = ["pygments"], version = "^0.10.0", optional = true}
+flake8 = {version = "^6.0.0", optional = true}
+ipython = {version = "^8.8.0", optional = true}
+Markdown = {version = "^3.4.2", optional = true}
+pipenv = {version = "^2023.2.18", optional = true}
+pycodestyle = {version = "^2.10.0", optional = true}
+Pygments = {version = "^2.14", optional = true}
+pylint = {version = "^2.17.1", optional = true}
+rich = {version = "^13.3.3", optional = true}
+
+# Optional requirements for type checking
+mypy = {version = "^1.1.1", optional = true}
+types-pyyaml = {version = "^6.0.12.8", optional = true}
+types-tabulate = {version = "^0.9.0.1", optional = true}
+
+# For Jupyter
+ipykernel = {version = "^6.20.2", optional = true}
+pandas = { version = "^1.5.2", optional = true, markers = "python_version >= '3.8'"}
+
+[tool.poetry.dev-dependencies]
+colorama = "^0.4.5"
+ipy = "^1.1"
+pytest = "^7.2.1"
+pytest-html = "^3.1.1"
+semgrep = "^1.16.0"
+
+[tool.poetry.extras]
+
+# Install extras when using CLI scripts
+cli = [
+  "click",
+  "loguru",
+]
+
+# Jupyter notebook support for VS Code
+jupyter = [
+  "ipykernel",
+  "pandas",
+]
+
+# Formatting and linting tools
+formatting = [
+  "autopep8",
+  "black",
+  "flake8",
+  "pycodestyle",
+  "pylint",
+]
+
+# General tools to install in VS Code container
+vscode = [
+  "Cython",
+  "devtools",
+  "ipython",
+  "Markdown",
+  "pipenv",
+  "Pygments",
+  "rich",
+]
+
+# Typing tools
+typing = [
+  "mypy",
+  "types-pyyaml",
+  "types-tabulate",
+]
+
+[tool.poetry.scripts]
+
+# To define a CLI script, uncomment the following line
+#example = 'example.cli:cli'
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
+
+[tool.autopep8]
+# Raise default maximum line length
+max_line_length = 120
+
+[flake8]
+# Raise default maximum line length
+max-line-length = 120
+
+[tool.pylint.'MESSAGES CONTROL']
+max-line-length = 120
+extension-pkg-whitelist = "pydantic"
