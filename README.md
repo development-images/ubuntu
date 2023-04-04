@@ -52,11 +52,12 @@ Boiler plate dev container configuration files are available for some of the dev
 
 It is recommended to use the boiler plate configuration files with the containers as they will install relevant VS Code extensions.
 
-| Base Container |                  README                  |                                           Description                                            |
-| -------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Ansible        | [README](/boilerplate/ansible/README.md) | Boiler plate files for an Ansible project. Includes Ansible configuration default configuration. |
-| Python         | [README](/boilerplate/python/README.md)  | Python development container. Various linting tools included in dev container extensions.        |
-| Ruby           | [README](/boilerplate/ruby/README.md)    | Ruby development container.                                                                      |
+| Base Container |                  README                  |                                            Description                                             |
+| -------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Ansible        | [README](/boilerplate/ansible/README.md) | Boiler plate files for an Ansible project. Includes Ansible configuration default configuration.   |
+| Python         | [README](/boilerplate/python/README.md)  | Python development container. Various linting tools included in dev container extensions.          |
+| Python (PyPy)  | [README](/boilerplate/pypy/README.md)    | Same as the Python container except using the [PyPy](https://www.pypy.org/) Python implementation. |
+| Ruby           | [README](/boilerplate/ruby/README.md)    | Ruby development container.                                                                        |
 
 ## Suggestions? Ideas?
 

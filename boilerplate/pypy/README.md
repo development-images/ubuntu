@@ -1,6 +1,6 @@
-# Python Development Container
+# Python (PyPy) Development Container
 
-This development container boilerplate is suitable for Python projects.
+This development container boilerplate is suitable for Python projects using the [PyPy](https://www.pypy.org/) Python implementation.
 
 ## Usage
 
