@@ -4,7 +4,7 @@
   "name": "Python Development Environment",
 
   // Install python requirements:
-  "onCreateCommand": ["/usr/local/scripts/create.sh"],
+  "onCreateCommand": ["/home/vscode/create.sh"],
 
   // Load the docker-compose file to bring the services up
   "dockerComposeFile": [
