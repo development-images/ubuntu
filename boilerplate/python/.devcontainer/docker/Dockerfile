@@ -1,5 +1,5 @@
 ## Base on Python dev container
-FROM registry.remote.sx/development-images/ubuntu/python:latest
+FROM registry.gitlab.com/development-images/ubuntu/python:latest
 
 ## Set the Conda Python version to install
 ENV USE_PYTHON_VERSION=3.11
