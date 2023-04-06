@@ -14,7 +14,8 @@ RUN /home/vscode/conda/bin/conda create -q -y -n development "python=${USE_PYTHO
 COPY scripts/create.sh /home/vscode/create.sh
 
 ## Use the development conda environment for shell sessions by default
-RUN echo "\n\nconda activate development" >> /home/vscode/.zshrc
+RUN echo "" >> /home/vscode/.zshrc \
+    && echo "conda activate development" >> /home/vscode/.zshrc
 
 ## Set the work directory
 WORKDIR /code
