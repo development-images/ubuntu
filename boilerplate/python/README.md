@@ -10,4 +10,6 @@ This development container boilerplate is suitable for Python projects.
 
 ## Poetry/pyproject.toml
 
-An [example pyproject.toml](pyproject.toml.example) file has been included. To use the template, rename the file to `pyproject.toml` and update the required values as needed. The default template includes various tools that VS Code will use.
+An [example pyproject.toml](pyproject.toml) file has been included. The file should be edited to add the requirements for your project/define the other configuration.
+
+When the container is created for the first time the [create.sh](.devcontainer/docker/scripts/create.sh) script will be executed which will install the various requirements for you.

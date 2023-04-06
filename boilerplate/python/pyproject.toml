@@ -9,11 +9,14 @@ repository = "https://github.com/example/example"
 
 [tool.poetry.dependencies]
 # Python version required
-python = "^3.9"
+python = "^3.10"
 
 # Common libraries
+dnspython = "^2.3.0"
+httpx = "^0.23.3"
 pydantic = "^1.10.7"
 pyyaml = "^6.0"
+requests = "^2.28.2"
 tabulate = "^0.9.0"
 
 # Common libraries for CLI scripts
@@ -41,6 +44,7 @@ types-tabulate = {version = "^0.9.0.1", optional = true}
 
 # For Jupyter
 ipykernel = {version = "^6.20.2", optional = true}
+pandas = { version = "^1.5.2", optional = true, markers = "python_version >= '3.8'"}
 
 [tool.poetry.dev-dependencies]
 colorama = "^0.4.5"
@@ -60,6 +64,7 @@ cli = [
 # Jupyter notebook support for VS Code
 jupyter = [
   "ipykernel",
+  "pandas",
 ]
 
 # Formatting and linting tools
