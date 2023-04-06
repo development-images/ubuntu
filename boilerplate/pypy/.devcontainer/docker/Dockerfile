@@ -15,5 +15,8 @@ RUN /home/vscode/conda/envs/development/bin/python3 -m ensurepip \
 ## Copy create script to install Python requirements
 COPY scripts/create.sh /home/vscode/create.sh
 
+## Use the development conda environment for shell sessions by default
+RUN echo "conda activate development" >> /home/vscode/.zshrc
+
 ## Set the work directory
 WORKDIR /code
