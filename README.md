@@ -55,6 +55,7 @@ It is recommended to use the boiler plate configuration files with the container
 | Base Container |                  README                  |                                            Description                                             |
 | -------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Ansible        | [README](/boilerplate/ansible/README.md) | Boiler plate files for an Ansible project. Includes Ansible configuration default configuration.   |
+| Django         | [README](/boilerplate/django/README.md ) | Boiler plate files for a Django project. A Postgres container will also be started.                |
 | Python         | [README](/boilerplate/python/README.md)  | Python development container. Various linting tools included in dev container extensions.          |
 | Python (PyPy)  | [README](/boilerplate/pypy/README.md)    | Same as the Python container except using the [PyPy](https://www.pypy.org/) Python implementation. |
 | Ruby           | [README](/boilerplate/ruby/README.md)    | Ruby development container.                                                                        |
