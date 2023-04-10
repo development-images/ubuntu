@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ## Install common Python tools from pip
 RUN python3 -m pip install --no-cache-dir \
-    black ipykernel pandas click
+    black ipykernel pandas ruff
 
 ## Update zshrc
 COPY .zshrc /home/vscode/.zshrc
