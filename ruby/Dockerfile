@@ -20,8 +20,8 @@ RUN apt-get update \
         libyaml-dev libssl-dev libffi-dev zlib1g-dev libreadline-dev \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
-## Install rubocop from gem
-RUN gem install rubocop
+## Install rubocop and solargraph from gem
+RUN gem install rubocop solargraph
 
 ## Add user ruby bin to $PATH
 ENV PATH="/home/ruby/.gem/ruby/3.0.0/bin:${PATH}"
