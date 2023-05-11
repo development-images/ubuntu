@@ -8,6 +8,9 @@ The containers are built on schedule every 4 days.
   - [Containers](#containers)
     - [Additional Tags](#additional-tags)
   - [Dev Container Configurations](#dev-container-configurations)
+  - [Docker in Docker](#docker-in-docker)
+    - [Installing Docker](#installing-docker)
+    - [Docker Compose Modification](#docker-compose-modification)
   - [Suggestions? Ideas?](#suggestions-ideas)
 
 ## Containers
@@ -56,9 +59,83 @@ It is recommended to use the boiler plate configuration files with the container
 | -------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Ansible        | [README](/boilerplate/ansible/README.md) | Boiler plate files for an Ansible project. Includes Ansible configuration default configuration.   |
 | Django         | [README](/boilerplate/django/README.md ) | Boiler plate files for a Django project. A Postgres container will also be started.                |
+| Node           | [README](/boilerplate/node/README.md)    | Boiler plate files for a Node.js project.                                                          |
 | Python         | [README](/boilerplate/python/README.md)  | Python development container. Various linting tools included in dev container extensions.          |
 | Python (PyPy)  | [README](/boilerplate/pypy/README.md)    | Same as the Python container except using the [PyPy](https://www.pypy.org/) Python implementation. |
 | Ruby           | [README](/boilerplate/ruby/README.md)    | Ruby development container.                                                                        |
+
+## Docker in Docker
+
+If developing an application with Docker and you would like to use Docker inside the development container (Docker in Docker) you will need to modify the `Dockerfile` for the development container as well as the `docker-compose.yaml` file.
+
+### Installing Docker
+
+An example `Dockerfile` (located in `.devcontainer/docker/Dockerfile`) which will install Docker and the Compose plugin:
+
+```dockerfile
+## Base on base dev container which already includes node
+FROM registry.gitlab.com/development-images/ubuntu/base:latest
+
+## A mirror of the container is available at this alternative registry:
+#FROM mirror.remote.sx/development-images/ubuntu/base:latest
+
+## Switch to root user
+USER root
+
+## Install Docker
+RUN apt-get update && apt-get install -y \
+        ca-certificates curl gnupg lsb-release \
+    && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg \
+    && echo \
+        "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null \
+    && apt update \
+    && apt -y install \
+        docker-ce docker-ce-cli containerd.io docker-compose-plugin \
+    ## Clean up
+    && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/* \
+    ## Add vscode user to docker group
+    && usermod -aG docker vscode
+
+## Switch back to vscode user
+USER vscode
+
+## Set the work directory
+WORKDIR /code
+```
+
+### Docker Compose Modification
+
+The Docker socket needs to be mounted in the development container. Modify the volumes in `.devcontainer/docker-compose.yaml` to include a mount for `/var/run/docker.sock` (mounted to the same path). As an example:
+
+```yaml
+---
+
+# Docker compose VS Code development file
+version: '3.8'
+
+services:
+
+  code:
+    build:
+      context: ./docker
+    restart: "no"
+    volumes:
+      ## Mount the development container to /code
+      - ..:/code
+      ## Mount a volume containing the VS code extensions to prevent having to install them each rebuild
+      ## A volume will be created for both VS Code and VS Code Insiders edition
+      - code-ext:/home/vscode/.vscode-server
+      - code-ext-insiders:/home/vscode/.vscode-server-insiders
+      ## Mount docker socket for docker in docker
+      - /var/run/docker.sock:/var/run/docker.sock
+    tty: true
+
+## Define the named volumes that are used for the above services
+volumes:
+  code-ext:
+  code-ext-insiders:
+```
 
 ## Suggestions? Ideas?
 
