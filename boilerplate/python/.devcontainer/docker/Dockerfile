@@ -2,7 +2,7 @@
 FROM registry.gitlab.com/development-images/ubuntu/python:latest
 
 ## A mirror of the container is available at this alternative registry:
-#FROM mirror.remote.sx/development-images/ubuntu/python:latest
+#FROM registry.remote.sx/development-images/ubuntu/python:latest
 
 ## Set the Conda Python version to install
 ENV USE_PYTHON_VERSION=3.11
