@@ -17,10 +17,8 @@ ARG PUPPET_TOOLS_RELEASE="focal"
 USER root
 
 ## Install gems that will be used
-RUN gem install r10k
-RUN gem install solargraph
-RUN gem install puppet-debugger
-RUN gem install hiera-eyaml
+RUN gem install \
+    r10k solargraph puppet-debugger hiera-eyaml
 
 ## Add apt repository and install puppet
 RUN wget -q -O /tmp/puppet-release.deb "http://apt.puppetlabs.com/${PUPPET_VERSION}-release-${PUPPET_RELEASE}.deb" \
