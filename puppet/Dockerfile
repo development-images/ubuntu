@@ -7,7 +7,7 @@ ARG RELEASE
 FROM registry.remote.sx/development-images/ubuntu/ruby/${RELEASE}:latest
 
 ## The puppet release to use
-ARG PUPPET_VERSION="puppet7"
+ARG PUPPET_VERSION="puppet8"
 
 ## The release name to use for puppet
 ARG PUPPET_RELEASE="focal"
