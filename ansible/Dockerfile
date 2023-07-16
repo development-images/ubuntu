@@ -29,7 +29,7 @@ RUN wget -qO- "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6125e2a8c
 
 ## Install related utilities for Ansible from pip
 RUN python3 -m pip install --no-cache-dir \
-        ansible-pylibssh ansible-lint ansible-navigator redis yq ncclient
+        ansible-pylibssh ansible-lint ansible-navigator redis yq ncclient molecule
 
 ## Install JunOS Ansible collection
 RUN ansible-galaxy collection install junipernetworks.junos
