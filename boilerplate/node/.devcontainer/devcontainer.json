@@ -50,6 +50,8 @@
         "gbe0.gbe0-api",
         // Common extension pack
         "gbe0.gbe0-base",
+        // GitHub extension pack
+        "gbe0.gbe0-github",
         // Node extension pack
         "gbe0.gbe0-node"
       ]

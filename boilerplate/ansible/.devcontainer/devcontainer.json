@@ -50,6 +50,8 @@
         "gbe0.gbe0-ansible",
         // Common extension pack
         "gbe0.gbe0-base",
+        // GitHub extension pack
+        "gbe0.gbe0-github",
         // Python specific extension pack
         "gbe0.gbe0-python"
       ]

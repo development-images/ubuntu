@@ -53,6 +53,8 @@
         "gbe0.gbe0-api",
         // Common extension pack
         "gbe0.gbe0-base",
+        // GitHub extension pack
+        "gbe0.gbe0-github",
         // Python specific extension pack
         "gbe0.gbe0-python",
         // Python linting extension pack

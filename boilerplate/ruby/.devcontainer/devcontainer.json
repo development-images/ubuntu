@@ -48,6 +48,8 @@
       "extensions": [
         // Common extension pack
         "gbe0.gbe0-base",
+        // GitHub extension pack
+        "gbe0.gbe0-github",
         // Ruby extension pack
         "gbe0.gbe0-ruby"
       ]
