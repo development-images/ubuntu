@@ -10,8 +10,8 @@ FROM registry.remote.sx/development-images/ubuntu/ruby/${RELEASE}:latest
 ARG PUPPET_VERSION="puppet8"
 
 ## The release name to use for puppet
-ARG PUPPET_RELEASE="focal"
-ARG PUPPET_TOOLS_RELEASE="focal"
+ARG PUPPET_RELEASE="$RELEASE"
+ARG PUPPET_TOOLS_RELEASE="$RELEASE"
 
 ## Switch to root for Puppet installation
 USER root
