@@ -28,7 +28,7 @@ RUN wget -qO- "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6125e2a8c
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install related utilities for Ansible from pip
-RUN python3 -m pip install --no-cache-dir \
+RUN python3 -m pip install --no-cache-dir --break-system-packages \
         ansible-pylibssh ansible-lint ansible-navigator redis yq ncclient molecule
 
 ## Install JunOS Ansible collection

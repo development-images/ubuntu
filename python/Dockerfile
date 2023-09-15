@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install common Python tools from pip
-RUN python3 -m pip install --no-cache-dir \
+RUN python3 -m pip install --no-cache-dir --break-system-packages \
     black ipykernel pandas ruff
 
 ## Update zshrc
@@ -33,7 +33,7 @@ RUN chown -R vscode:vscode /home/vscode/.zshrc
 USER vscode
 
 ## Install pipx and semgrep
-RUN python3 -m pip install --no-cache-dir --user pipx \
+RUN python3 -m pip install --no-cache-dir --break-system-packages --user pipx \
     && pipx install semgrep
 
 ## Install Conda

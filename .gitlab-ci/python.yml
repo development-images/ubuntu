@@ -7,13 +7,13 @@
     DOCKER_PATH: "./python/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/python"
 
-# Build Python container for Ubuntu Jammy
-Build Python - Jammy:
-  extends: .build-python
-  needs:
-    - Build Base - Jammy
-  variables:
-    RELEASE: jammy
+# # Build Python container for Ubuntu Jammy
+# Build Python - Jammy:
+#   extends: .build-python
+#   needs:
+#     - Build Base - Jammy
+#   variables:
+#     RELEASE: jammy
 
 # Build Python container for Ubuntu Lunar
 Build Python - Lunar:
