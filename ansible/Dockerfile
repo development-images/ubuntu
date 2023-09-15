@@ -3,9 +3,6 @@
 ## Create arg for release
 ARG RELEASE
 
-## Create arg for pip install options
-ARG PIP_OPTIONS=""
-
 ## Use base image
 FROM registry.remote.sx/development-images/ubuntu/base/${RELEASE}:latest
 
@@ -31,7 +28,7 @@ RUN wget -qO- "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x6125e2a8c
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install related utilities for Ansible from pip
-RUN python3 -m pip install --no-cache-dir "$PIP_OPTIONS" \
+RUN python3 -m pip install --no-cache-dir \
         ansible-pylibssh ansible-lint ansible-navigator redis yq ncclient molecule
 
 ## Install JunOS Ansible collection
@@ -47,8 +44,7 @@ RUN chown -R vscode:vscode /home/vscode/.zshrc
 USER vscode
 
 ## Install pipx
-RUN python3 -m pip install --no-cache-dir "$PIP_OPTIONS" --user \
-        pipx
+RUN python3 -m pip install --no-cache-dir --user pipx
 
 ## Install JSON schema
 RUN pipx install check-jsonschema \

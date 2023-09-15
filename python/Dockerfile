@@ -3,9 +3,6 @@
 ## Create arg for release
 ARG RELEASE
 
-## Create arg for pip install options
-ARG PIP_OPTIONS=""
-
 ## Use base image
 FROM registry.remote.sx/development-images/ubuntu/base/${RELEASE}:latest
 
@@ -23,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install common Python tools from pip
-RUN python3 -m pip install --no-cache-dir "$PIP_OPTIONS" \
+RUN python3 -m pip install --no-cache-dir \
     black ipykernel pandas ruff
 
 ## Update zshrc
@@ -36,8 +33,7 @@ RUN chown -R vscode:vscode /home/vscode/.zshrc
 USER vscode
 
 ## Install pipx and semgrep
-RUN python3 -m pip install --no-cache-dir "$PIP_OPTIONS" --user \
-        pipx \
+RUN python3 -m pip install --no-cache-dir --user pipx \
     && pipx install semgrep
 
 ## Install Conda
