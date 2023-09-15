@@ -38,16 +38,16 @@ These tags will always point to the current Ubuntu release (LTS or not).
 Additional tags are available for each container that are pinned to a specific Ubuntu release. There are two tags available:
 
 - The current LTS release (Jammy)
-- The current short term release (Lunar)
+- The current short term release (Mantic)
 
-| Name    | Jammy                                                                | Lunar                                                                |
+| Name    | Jammy                                                                | Mantic                                                                |
 | ------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Base    | `registry.gitlab.com/development-images/ubuntu/base/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/base/lunar:latest`    |
-| Ansible | `registry.gitlab.com/development-images/ubuntu/ansible/jammy:latest` | `registry.gitlab.com/development-images/ubuntu/ansible/lunar:latest` |
-| Django  | `registry.gitlab.com/development-images/ubuntu/django/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/django/lunar:latest`  |
+| Base    | `registry.gitlab.com/development-images/ubuntu/base/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/base/mantic:latest`    |
+| Ansible | `registry.gitlab.com/development-images/ubuntu/ansible/jammy:latest` | `registry.gitlab.com/development-images/ubuntu/ansible/mantic:latest` |
+| Django  | `registry.gitlab.com/development-images/ubuntu/django/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/django/mantic:latest`  |
 | Puppet  | `registry.gitlab.com/development-images/ubuntu/puppet/jammy:latest`  | **N/A** - Not supported                                              |
-| Python  | `registry.gitlab.com/development-images/ubuntu/python/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/python/lunar:latest`  |
-| Ruby    | `registry.gitlab.com/development-images/ubuntu/ruby/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/ruby/lunar:latest`    |
+| Python  | `registry.gitlab.com/development-images/ubuntu/python/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/python/mantic:latest`  |
+| Ruby    | `registry.gitlab.com/development-images/ubuntu/ruby/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/ruby/mantic:latest`    |
 
 ## Dev Container Configurations
 
@@ -77,7 +77,7 @@ An example `Dockerfile` (located in `.devcontainer/docker/Dockerfile`) which wil
 FROM registry.gitlab.com/development-images/ubuntu/base:latest
 
 ## A mirror of the container is available at this alternative registry:
-#FROM mirror.remote.sx/development-images/ubuntu/base:latest
+#FROM registry.remote.sx/development-images/ubuntu/base:latest
 
 ## Switch to root user
 USER root
