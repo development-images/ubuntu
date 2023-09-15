@@ -76,7 +76,10 @@ COPY neovimrc /root/.config/nvim/init.vim
 COPY .tmux.conf /root/.tmux.conf
 
 ## Configure the user that VS Code will run as
-RUN groupadd --gid ${GID} vscode \
+RUN if [ -d "/home/ubuntu" ]; then \
+        userdel -r ubuntu; \
+    fi \
+    && groupadd --gid ${GID} vscode \
     && useradd --uid ${UID} --gid ${GID} -s /bin/zsh -m vscode \
     ### Create directories for extensions that are installed by VS Code
     && mkdir -p /home/vscode/.vscode-server /home/vscode/.vscode-server-insiders \
