@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ## Install other python tools from Debian packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        python3-dnspython python3-ipython pipenv \
+        python3-dnspython python3-ipython pipenv pipx \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install common Python tools from pip
@@ -32,9 +32,8 @@ RUN chown -R vscode:vscode /home/vscode/.zshrc
 ## Switch back to vscode user
 USER vscode
 
-## Install pipx and semgrep
-RUN python3 -m pip install --no-cache-dir --break-system-packages --user pipx \
-    && pipx install semgrep
+## Install semgrep
+RUN pipx install semgrep
 
 ## Install Conda
 RUN wget -qO /tmp/miniconda-install.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
