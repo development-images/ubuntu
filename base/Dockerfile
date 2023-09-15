@@ -40,7 +40,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ## HTTP clients
         curl wget \
         ## Development tools
-        git jq \
+        git git-lfs jq \
         ## System utilities
         screen tmux strace sudo plocate bsdmainutils pigz xxd \
         ## Build tools
