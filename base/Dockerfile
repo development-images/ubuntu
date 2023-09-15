@@ -12,7 +12,7 @@ LABEL maintainer="Chris <docker@gbe0.com>"
 ## Configure the Node repository name
 ## This will be appended to the URL like https://deb.nodesource.com/node_${NODE_VERSION}.x
 ## As an example for Node 15.x the URL will look like this: https://deb.nodesource.com/node_15.x/
-ARG NODE_VERSION="18"
+ARG NODE_VERSION="20"
 
 ## Configure default user ID and group ID that will be used for VS Code
 ARG UID=1000
