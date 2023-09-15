@@ -64,6 +64,9 @@ RUN curl -fsSL "https://deb.nodesource.com/setup_${NODE_VERSION}.x" | bash - \
 ## Add hadolint to container
 ADD --chmod=755 https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64 /usr/local/bin/hadolint
 
+## Add transcrypt to container
+ADD --chmod=755 https://raw.githubusercontent.com/elasticdog/transcrypt/main/transcrypt /usr/local/bin/transcrypt
+
 ## Create configuration directories
 RUN mkdir -p /root/.config/nvim
 
