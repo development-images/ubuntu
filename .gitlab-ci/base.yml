@@ -13,11 +13,11 @@ Build Base - Jammy:
   variables:
     RELEASE: jammy
 
-# Build base container for Ubuntu Mantic
-Build Base - Mantic:
+# Build base container for Ubuntu Lunar
+Build Base - Lunar:
   extends: .build-base
   variables:
-    RELEASE: mantic
+    RELEASE: lunar
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"

@@ -15,13 +15,13 @@ Build Python - Jammy:
   variables:
     RELEASE: jammy
 
-# Build Python container for Ubuntu Mantic
-Build Python - Mantic:
+# Build Python container for Ubuntu Lunar
+Build Python - Lunar:
   extends: .build-python
   needs:
-    - Build Base - Mantic
+    - Build Base - Lunar
   variables:
-    RELEASE: mantic
+    RELEASE: lunar
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"

@@ -15,13 +15,13 @@ Build Django - Jammy:
   variables:
     RELEASE: jammy
 
-# Build Django container for Ubuntu Mantic
-Build Django - Mantic:
+# Build Django container for Ubuntu Lunar
+Build Django - Lunar:
   extends: .build-django
   needs:
-    - Build Python - Mantic
+    - Build Python - Lunar
   variables:
-    RELEASE: mantic
+    RELEASE: lunar
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
