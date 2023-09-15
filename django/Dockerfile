@@ -11,7 +11,7 @@ USER root
 
 ## Install development headers for database extensions
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        libmariadb-dev-compat postgresql-client postgresql-server-dev-14 \
+        libmariadb-dev-compat postgresql-client postgresql-server-dev-15 \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install watchman
