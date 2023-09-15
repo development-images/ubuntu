@@ -15,13 +15,13 @@ Build Ansible - Jammy:
   variables:
     RELEASE: jammy
 
-# Build Ansible container for Ubuntu Kinetic
-Build Ansible - Kinetic:
+# Build Ansible container for Ubuntu Mantic
+Build Ansible - Mantic:
   extends: .build-ansible
   needs:
-    - Build Base - Kinetic
+    - Build Base - Mantic
   variables:
-    RELEASE: kinetic
+    RELEASE: mantic
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"

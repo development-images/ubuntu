@@ -15,13 +15,13 @@ Build Django - Jammy:
   variables:
     RELEASE: jammy
 
-# Build Django container for Ubuntu Kinetic
-Build Django - Kinetic:
+# Build Django container for Ubuntu Mantic
+Build Django - Mantic:
   extends: .build-django
   needs:
-    - Build Python - Kinetic
+    - Build Python - Mantic
   variables:
-    RELEASE: kinetic
+    RELEASE: mantic
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"

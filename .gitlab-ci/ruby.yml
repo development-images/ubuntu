@@ -15,13 +15,13 @@ Build Ruby - Jammy:
   variables:
     RELEASE: jammy
 
-# Build Ruby container for Ubuntu Kinetic
-Build Ruby - Kinetic:
+# Build Ruby container for Ubuntu Mantic
+Build Ruby - Mantic:
   extends: .build-ruby
   needs:
-    - Build Base - Kinetic
+    - Build Base - Mantic
   variables:
-    RELEASE: kinetic
+    RELEASE: mantic
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"

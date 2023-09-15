@@ -15,13 +15,13 @@ Build Python - Jammy:
   variables:
     RELEASE: jammy
 
-# Build Python container for Ubuntu Kinetic
-Build Python - Kinetic:
+# Build Python container for Ubuntu Mantic
+Build Python - Mantic:
   extends: .build-python
   needs:
-    - Build Base - Kinetic
+    - Build Base - Mantic
   variables:
-    RELEASE: kinetic
+    RELEASE: mantic
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
