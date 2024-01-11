@@ -5,7 +5,7 @@ FROM registry.gitlab.com/development-images/ubuntu/python:latest
 #FROM registry.remote.sx/development-images/ubuntu/python:latest
 
 ## Set the Conda Python version to install
-ENV USE_PYTHON_VERSION=3.11
+ENV USE_PYTHON_VERSION=3.12
 
 ## Create the Conda environment
 RUN /home/vscode/conda/bin/conda create -q -y -n development "python=${USE_PYTHON_VERSION}"

@@ -19,7 +19,7 @@ services:
     tty: true
 
   postgres:
-    image: bitnami/postgresql:15
+    image: bitnami/postgresql:16
     restart: "no"
     environment:
       POSTGRESQL_USERNAME: django
