@@ -4,7 +4,10 @@
   "name": "Django Development Environment",
 
   // Install python requirements:
-  "onCreateCommand": ["/home/vscode/create.sh"],
+  "onCreateCommand": "/usr/local/scripts/create.sh",
+
+  // Run database migrations/load sample data on start
+  //"postStartCommand": "/usr/local/scripts/startup.sh",
 
   // Load the docker-compose file to bring the services up
   "dockerComposeFile": [
@@ -16,7 +19,10 @@
   "service": "code",
 
   // List of containers to run
-  "runServices": ["code", "postgres"],
+  "runServices": [
+    "code",
+    "postgres"
+  ],
 
   // Update shutdown action as vs code does not appear to be stopping contains otherwise
   "shutdownAction": "stopCompose",
@@ -53,6 +59,8 @@
         "gbe0.gbe0-api",
         // Common extension pack
         "gbe0.gbe0-base",
+        // Django extension pack
+        "gbe0.gbe0-django",
         // GitHub extension pack
         "gbe0.gbe0-github",
         // Markdown extension pack
@@ -60,9 +68,7 @@
         // Python specific extension pack
         "gbe0.gbe0-python",
         // Python linting extension pack
-        "gbe0.gbe0-python-lint",
-        // VS Code Django
-        "batisteo.vscode-django"
+        "gbe0.gbe0-python-lint"
       ]
     }
   }

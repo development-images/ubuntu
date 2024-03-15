@@ -6,118 +6,138 @@ version = "1.0.0"
 readme = "README.md"
 homepage = "https://example.com"
 repository = "https://github.com/example/example"
+package-mode = false
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
 
 [tool.poetry.dependencies]
 # Python version required
 python = "^3.12"
 
 # Django core
-Django = "^5.0.1"
+Django = "^5.0.3"
 
 # Django requirements
 asgiref = "^3.7.2"
-pytz = "^2023.3"
+pytz = "^2024.1"
 sqlparse = "^0.4.4"
 uritemplate = "^4.1.1"
 whitenoise = "^6.6.0"
 
 # Django common extensions
-django-environ = "^0.11.2"
-django-filter = "^23.5"
+django-filter = "^24.1"
 django-guardian = "^2.4.0"
 django-netfields = "^1.3.2"
+django-taggit = "^5.0.1"
+
+# Redis connectivity
+django-redis = "^5.4.0"
 
 # Django Ninja for API support
 django-ninja = "^1.1.0"
+
+# Configuration loading from environment files/variables
+environs = {version ="^11.0.0", extras = ["django"]}
 
 # Password hashers
 argon2-cffi = "^23.1.0"
 bcrypt = "^4.1.2"
 
 # Django development tools
-django-debug-toolbar = "^4.2.0"
+django-debug-toolbar = "^4.3.0"
 django-extensions = "^3.2.3"
 Faker = "^22.1.0"
 
-# Postgres database driver
-psycopg2-binary = "^2.9.9"
+# Postgres database driver (compiled C version)
+psycopg = {version = "^3.1.18", extras = ["c","pool"]}
+# If required, you can switch to the pre-compiled binary version
+# psycopg = {version = "^3.1.18", extras = ["binary","pool"]}
 
 # Optional tools for Django
 jsmin = "^3.0.1"
 orjson = "^3.9.10"
 
 # Web server
-twisted = {extras = ["http2", "tls"], version = "^23.10.0"}
-daphne = "^4.0.0"
+hypercorn = {version ="^0.16.0", extras = ["h3"]}
+werkzeug = "^3.0.1"
 
-# Optional requirements for development purposes in VS Code
-autopep8 = {version = "^2.0.4", optional = true}
-black = {version = "^23.12.1", optional = true}
-Cython = {version = "^3.0.8", optional = true}
-devtools = {extras = ["pygments"], version = "^0.12.2", optional = true}
-flake8 = {version = "^7.0.0", optional = true}
-ipython = {version = "^8.20.0", optional = true}
-Markdown = {version = "^3.5.1", optional = true}
-pipenv = {version = "^2023.11.15", optional = true}
-pycodestyle = {version = "^2.11.0", optional = true}
-Pygments = {version = "^2.17.2", optional = true}
-pylint = {version = "^3.0.3", optional = true}
-pylint-django = {version = "^2.5.5", optional = true}
-rich = {version = "^13.7.0", optional = true}
-
-# Optional requirements for type checking
-mypy = {version = "^1.8.0", optional = true}
-
-[tool.poetry.dev-dependencies]
-colorama = "^0.4.6"
-ipy = "^1.01"
-pytest = "^7.4.4"
-pytest-django = "^4.7.0"
-pytest-html = "^4.1.1"
-pywatchman = "^1.4.1"
-semgrep = "^1.56.0"
+# APM
+sentry-sdk = {version = "^1.42.0", optional = true}
 
 [tool.poetry.extras]
-# Formatting and linting tools
-formatting = [
-  "autopep8",
-  "black",
-  "flake8",
-  "pycodestyle",
-  "pylint",
-  "pylit-django",
+sentry = [
+  "sentry-sdk",
+]
+full = [
+  "sentry-sdk",
 ]
 
-# General tools to install in VS Code container
-vscode = [
-  "Cython",
-  "devtools",
-  "ipython",
-  "Markdown",
-  "pipenv",
-  "Pygments",
-  "rich",
-]
+# Declare the below groups as optional
+[tool.poetry.group.dev]
+optional = true
 
-# Typing tools
-typing = [
-  "mypy",
-]
+[tool.poetry.group.format]
+optional = true
 
-[build-system]
-build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core>=1.0.0"]
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.typing]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+# Packages for linting
+pycodestyle = "^2.11.1"
+pylint = "^3.0.3"
+pylint-django = "^2.5.5"
+pylint-pydantic = "^0.3.2"
+ruff = "^0.1.15"
+semgrep = "^1.59.1"
+
+# Misc other development tools
+Cython = "^3.0.8"
+devtools = {extras = ["pygments"], version = "^0.12.2"}
+ipython = "^8.21.0"
+Markdown = "^3.5.2"
+pipenv = "^2023.12.1"
+rich = "^13.7.0"
+pywatchman = "^1.4.1"
+
+# Define the packages for the optional groups
+[tool.poetry.group.format.dependencies]
+# Packages for code formatting
+autopep8 = "^2.0.4"
+black = "^24.1.1"
+flake8 = "^7.0.0"
+
+[tool.poetry.group.test.dependencies]
+# Packages for testing
+hypothesis = {extras = ["cli"], version = "^6.98.2"}
+pytest = "^8.0.0"
+pytest-django = "^4.8.0"
+pytest-html = "^4.1.1"
+
+[tool.poetry.group.typing.dependencies]
+# Packages for type checking
+mypy = "^1.8.0"
+pyre-check = "^0.9.19"
+
+# Extensions for type checking
+django-stubs = {extras = ["compatible-mypy"], git = "https://github.com/typeddjango/django-stubs.git", branch = "master"}
+django-stubs-ext = {git = "https://github.com/typeddjango/django-stubs.git", subdirectory = "ext", branch = "master"}
+types-pyyaml = "^6.0.12.12"
+types-requests = "^2.31.0.20240125"
+types-tabulate = "^0.9.0"
 
 [tool.autopep8]
 # Raise default maximum line length
 max_line_length = 120
 
-[flake8]
+[tool.flake8]
 # Raise default maximum line length
 max-line-length = 120
-
-[tool.black]
-exclude = "/example-project/.*/migrations/"
 
 [tool.pylint.MASTER]
 ignore = [
@@ -128,7 +148,23 @@ load-plugins = [
 ]
 
 [tool.pylint.'MESSAGES CONTROL']
-max-line-length = 120
 disable = [
   "consider-using-f-string"
+]
+extension-pkg-whitelist = "pydantic"
+max-line-length = 120
+
+[tool.ruff]
+line-length = 120
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "my-project.settings"
+
+[tool.pyright]
+# Ignore Django migrations
+exclude = [
+  "**/migrations"
 ]

@@ -7,11 +7,17 @@ FROM registry.gitlab.com/development-images/ubuntu/django:latest
 ## Set the Conda Python version to install
 ENV USE_PYTHON_VERSION=3.12
 
+## Switch to root
+USER root
+
+## Copy startup scripts to container
+COPY scripts /usr/local/scripts
+
+## Switch to the VS Code user
+USER vscode
+
 ## Create the Conda environment
 RUN /home/vscode/conda/bin/conda create -q -y -n development "python=${USE_PYTHON_VERSION}"
-
-## Copy create script to install Python requirements
-COPY scripts/create.sh /home/vscode/create.sh
 
 ## Use the development conda environment for shell sessions by default
 RUN echo "" >> /home/vscode/.zshrc \
