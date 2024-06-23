@@ -10,8 +10,8 @@ FROM registry.remote.sx/development-images/ubuntu/ruby/${RELEASE}:latest
 ARG PUPPET_VERSION="puppet8"
 
 ## The release name to use for puppet
-ARG PUPPET_RELEASE="jammy"
-ARG PUPPET_TOOLS_RELEASE="jammy"
+ARG PUPPET_RELEASE="noble"
+ARG PUPPET_TOOLS_RELEASE="noble"
 
 ## Switch to root for Puppet installation
 USER root
