@@ -23,7 +23,7 @@ RUN gem install \
 ## Add apt repository and install puppet
 RUN wget -q -O /tmp/puppet-release.deb "http://apt.puppetlabs.com/${PUPPET_VERSION}-release-${PUPPET_RELEASE}.deb" \
     && wget -q -O /tmp/puppet-tools.deb "http://apt.puppetlabs.com/puppet-tools-release-${PUPPET_TOOLS_RELEASE}.deb" \
-    && dpkg -i /tmp/puppet-release.deb /tmp/puppet-tools.deb \
+    && dpkg -i --force-overwrite /tmp/puppet-release.deb /tmp/puppet-tools.deb \
     && rm -f /tmp/puppet-release.deb /tmp/puppet-tools.deb \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
