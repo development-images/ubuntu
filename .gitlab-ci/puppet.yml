@@ -7,13 +7,13 @@
     DOCKER_PATH: "./puppet/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/puppet"
 
-# Build Puppet container for Ubuntu Jammy
-Build Puppet - Jammy:
+# Build Puppet container for Ubuntu Noble
+Build Puppet - Noble:
   extends: .build-puppet
   needs:
-    - Build Ruby - Jammy
+    - Build Ruby - Noble
   variables:
-    RELEASE: jammy
+    RELEASE: noble
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"

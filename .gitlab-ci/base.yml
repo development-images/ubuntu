@@ -7,17 +7,11 @@
     DOCKER_PATH: "./base/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/base"
 
-# Build base container for Ubuntu Jammy
-Build Base - Jammy:
+# Build base container for Ubuntu Noble
+Build Base - Noble:
   extends: .build-base
   variables:
-    RELEASE: jammy
-
-# Build base container for Ubuntu Lunar
-Build Base - Lunar:
-  extends: .build-base
-  variables:
-    RELEASE: lunar
+    RELEASE: noble
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"

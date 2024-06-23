@@ -7,21 +7,13 @@
     DOCKER_PATH: "./django/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/django"
 
-# # Build Django container for Ubuntu Jammy
-# Build Django - Jammy:
-#   extends: .build-django
-#   needs:
-#     - Build Python - Jammy
-#   variables:
-#     RELEASE: jammy
-
-# Build Django container for Ubuntu Lunar
-Build Django - Lunar:
+# Build Django container for Ubuntu Noble
+Build Django - Noble:
   extends: .build-django
   needs:
-    - Build Python - Lunar
+    - Build Python - Noble
   variables:
-    RELEASE: lunar
+    RELEASE: noble
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"

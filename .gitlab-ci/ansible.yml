@@ -7,21 +7,13 @@
     DOCKER_PATH: "./ansible/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/ansible"
 
-# # Build Ansible container for Ubuntu Jammy
-# Build Ansible - Jammy:
-#   extends: .build-ansible
-#   needs:
-#     - Build Base - Jammy
-#   variables:
-#     RELEASE: jammy
-
-# Build Ansible container for Ubuntu Lunar
-Build Ansible - Lunar:
+# Build Ansible container for Ubuntu Noble
+Build Ansible - Noble:
   extends: .build-ansible
   needs:
-    - Build Base - Lunar
+    - Build Base - Noble
   variables:
-    RELEASE: lunar
+    RELEASE: noble
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"

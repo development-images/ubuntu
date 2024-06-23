@@ -35,19 +35,18 @@ These tags will always point to the current Ubuntu release (LTS or not).
 
 ### Additional Tags
 
-Additional tags are available for each container that are pinned to a specific Ubuntu release. There are two tags available:
+Additional tags are available for each container that are pinned to a specific Ubuntu release. There is one tag available:
 
-- The current LTS release (Jammy)
-- The current short term release (Lunar)
+- The current LTS release (Noble)
 
-| Name    | Jammy                                                                | Lunar                                                                |
-| ------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Base    | `registry.gitlab.com/development-images/ubuntu/base/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/base/lunar:latest`    |
-| Ansible | `registry.gitlab.com/development-images/ubuntu/ansible/jammy:latest` | `registry.gitlab.com/development-images/ubuntu/ansible/lunar:latest` |
-| Django  | `registry.gitlab.com/development-images/ubuntu/django/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/django/lunar:latest`  |
-| Puppet  | `registry.gitlab.com/development-images/ubuntu/puppet/jammy:latest`  | **N/A** - Not supported                                              |
-| Python  | `registry.gitlab.com/development-images/ubuntu/python/jammy:latest`  | `registry.gitlab.com/development-images/ubuntu/python/lunar:latest`  |
-| Ruby    | `registry.gitlab.com/development-images/ubuntu/ruby/jammy:latest`    | `registry.gitlab.com/development-images/ubuntu/ruby/lunar:latest`    |
+| Name    | Noble                                                                |
+| ------- | -------------------------------------------------------------------- |
+| Base    | `registry.gitlab.com/development-images/ubuntu/base/noble:latest`    |
+| Ansible | `registry.gitlab.com/development-images/ubuntu/ansible/noble:latest` |
+| Django  | `registry.gitlab.com/development-images/ubuntu/django/noble:latest`  |
+| Puppet  | `registry.gitlab.com/development-images/ubuntu/puppet/noble:latest`  |
+| Python  | `registry.gitlab.com/development-images/ubuntu/python/noble:latest`  |
+| Ruby    | `registry.gitlab.com/development-images/ubuntu/ruby/noble:latest`    |
 
 ## Dev Container Configurations
 

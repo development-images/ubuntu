@@ -7,21 +7,13 @@
     DOCKER_PATH: "./ruby/"
     IMAGE_TAG: "${CI_REGISTRY_IMAGE}/ruby"
 
-# Build Ruby container for Ubuntu Jammy
-Build Ruby - Jammy:
+# Build Ruby container for Ubuntu Noble
+Build Ruby - Noble:
   extends: .build-ruby
   needs:
-    - Build Base - Jammy
+    - Build Base - Noble
   variables:
-    RELEASE: jammy
-
-# Build Ruby container for Ubuntu Lunar
-Build Ruby - Lunar:
-  extends: .build-ruby
-  needs:
-    - Build Base - Lunar
-  variables:
-    RELEASE: lunar
+    RELEASE: noble
   script:
     - !reference [.build-common, script]
     - docker tag "${IMAGE_TAG}/${RELEASE}:${CI_COMMIT_SHORT_SHA}" "${IMAGE_TAG}:latest"
