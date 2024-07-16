@@ -4,5 +4,9 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"yaml.customTags": [
+			"!reference sequence",
+		],
+	}
 }
