@@ -1,4 +1,5 @@
 # Base development environment
+# hadolint global ignore=DL3008
 
 ## Create arg for release
 ARG RELEASE

@@ -1,10 +1,15 @@
 # Puppet development environment
+# hadolint global ignore=DL3008
 
 ## Create arg for release
 ARG RELEASE
 
+## Create default arg for the registry path to pull base image from
+ARG REGISTRY_PATH="registry.remote.sx/development-images/ubuntu"
+
 ## Use base image
-FROM registry.remote.sx/development-images/ubuntu/ruby/${RELEASE}:latest
+# hadolint ignore=DL3007
+FROM ${REGISTRY_PATH}/ruby/${RELEASE}:latest
 
 ## The puppet release to use
 ARG PUPPET_VERSION="puppet8"

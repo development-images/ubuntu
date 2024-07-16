@@ -1,10 +1,15 @@
 # Django development environment
+# hadolint global ignore=DL3008
 
 ## Create arg for release
 ARG RELEASE
 
+## Create default arg for the registry path to pull base image from
+ARG REGISTRY_PATH="registry.remote.sx/development-images/ubuntu"
+
 ## Use Python base image
-FROM registry.remote.sx/development-images/ubuntu/python/${RELEASE}:latest
+# hadolint ignore=DL3007
+FROM ${REGISTRY_PATH}/python/${RELEASE}:latest
 
 ## Switch to root
 USER root
