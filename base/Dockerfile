@@ -14,6 +14,9 @@ LABEL maintainer="Chris <docker@gbe0.com>"
 ## As an example for Node 15.x the URL will look like this: https://deb.nodesource.com/node_15.x/
 ARG NODE_VERSION="20"
 
+## Configure the asdf-vm branch to install from
+ARG ASDF_BRANCH="v0.14.0"
+
 ## Configure default user ID and group ID that will be used for VS Code
 ARG UID=1000
 ARG GID=$UID
@@ -119,3 +122,6 @@ ENV GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyCheckin
 
 ## Update $PATH to work with locally installed binaries
 ENV PATH="/home/vscode/.local/bin:${PATH}"
+
+## Clone asdf-vm
+RUN git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0

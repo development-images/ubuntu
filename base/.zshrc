@@ -13,7 +13,7 @@ zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 90
 
 # Enable additional plugins
-plugins=(git)
+plugins=(git asdf)
 
 # Source oh-my-zsh
 source $ZSH/oh-my-zsh.sh
