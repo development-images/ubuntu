@@ -22,15 +22,15 @@ ARG PUPPET_TOOLS_RELEASE="noble"
 USER root
 
 ## Install gems that will be used
+# hadolint ignore=DL3028
 RUN gem install \
     r10k solargraph puppet-debugger hiera-eyaml
 
-## Add apt repository and install puppet
-RUN wget -q -O /tmp/puppet-release.deb "http://apt.puppetlabs.com/${PUPPET_VERSION}-release-${PUPPET_RELEASE}.deb" \
-    && wget -q -O /tmp/puppet-tools.deb "http://apt.puppetlabs.com/puppet-tools-release-${PUPPET_TOOLS_RELEASE}.deb" \
-    && dpkg -i --force-overwrite /tmp/puppet-release.deb /tmp/puppet-tools.deb \
-    && rm -f /tmp/puppet-release.deb /tmp/puppet-tools.deb \
-    && apt-get update \
+## Add the package sources file
+COPY ./puppet.sources /etc/apt/sources.list.d/puppet.sources
+
+## Update package sources and install puppet packages
+RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         puppet-agent pdk puppet-lint puppetserver puppet-bolt \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
