@@ -25,6 +25,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install common Python tools from pip
+# hadolint ignore=DL3013
 RUN python3 -m pip install --no-cache-dir --break-system-packages \
     black ipykernel pandas ruff
 
@@ -38,6 +39,7 @@ RUN chown -R vscode:vscode /home/vscode/.zshrc
 USER vscode
 
 ## Install semgrep
+# hadolint ignore=DL3013
 RUN pipx install semgrep
 
 ## Install Conda
@@ -58,7 +60,8 @@ RUN wget -qO /tmp/miniconda-install.sh https://repo.anaconda.com/miniconda/Minic
 ## Install Conda ZSH completion
 RUN git clone --depth=1 https://github.com/esc/conda-zsh-completion /home/vscode/.oh-my-zsh/custom/plugins/conda-zsh-completion
 
-### Install Poetry
+## Install Poetry
+# hadolint ignore=DL4001,DL4006
 RUN curl -sSL https://install.python-poetry.org | python3 - \
     && poetry config virtualenvs.create false \
     ### Add ZSH plugin

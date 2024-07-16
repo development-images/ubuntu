@@ -26,6 +26,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 ## Install rubocop and solargraph from gem
+# hadolint global ignore=DL3028
 RUN gem install rubocop solargraph
 
 ## Add user ruby bin to $PATH
