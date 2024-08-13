@@ -108,6 +108,11 @@ COPY .zshrc /home/vscode/.zshrc
 COPY .tmux.conf /home/vscode/.tmux.conf
 COPY .ssh /home/vscode/.ssh
 
+## Install vimplug
+RUN curl https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
+    --create-dirs \
+    -fLo /home/vscode/.local/share/nvim/site/autoload/plug.vim
+
 ## Fix permissions
 RUN chown -R vscode:vscode /home/vscode \
     && chmod 600 /home/vscode/.ssh/config
