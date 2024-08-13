@@ -66,4 +66,6 @@ RUN curl -sSL https://install.python-poetry.org | python3 - \
     && poetry config virtualenvs.create false \
     ### Add ZSH plugin
     && mkdir /home/vscode/.oh-my-zsh/custom/plugins/poetry \
-    && poetry completions zsh > /home/vscode/.oh-my-zsh/custom/plugins/poetry/_poetry
+    && poetry completions zsh > /home/vscode/.oh-my-zsh/custom/plugins/poetry/_poetry \
+    ### Add "poetry up" plugin
+    && poetry self add poetry-plugin-up
