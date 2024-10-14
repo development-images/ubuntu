@@ -24,6 +24,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-dnspython python3-ipython pipenv pipx \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
+## Install rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
 ## Install common Python tools from pip
 # hadolint ignore=DL3013
 RUN python3 -m pip install --no-cache-dir --break-system-packages \
