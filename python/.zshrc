@@ -13,7 +13,7 @@ zstyle ':omz:update' mode auto
 zstyle ':omz:update' frequency 90
 
 # Enable additional plugins
-plugins=(git conda-zsh-completion poetry)
+plugins=(git conda-zsh-completion poetry uv)
 
 # Source oh-my-zsh
 source $ZSH/oh-my-zsh.sh

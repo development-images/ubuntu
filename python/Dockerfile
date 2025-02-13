@@ -72,3 +72,10 @@ RUN curl -sSL https://install.python-poetry.org | python3 - \
     && poetry completions zsh > /home/vscode/.oh-my-zsh/custom/plugins/poetry/_poetry \
     ### Add "poetry up" plugin
     && poetry self add poetry-plugin-up
+
+## Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh - \
+    ### Add ZSH plugin
+    && mkdir /home/vscode/.oh-my-zsh/custom/plugins/uv \
+    && uv generate-shell-completion zsh > /home/vscode/.oh-my-zsh/custom/plugins/uv/_uv \
+    && uvx --generate-shell-completion zsh > /home/vscode/.oh-my-zsh/custom/plugins/uv/_uvx
